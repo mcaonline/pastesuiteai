@@ -1078,6 +1078,13 @@
   <!-- ==================== Scroll Reveal ==================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Platform-aware hotkey display
+      if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+        document.querySelectorAll('.showcase-card-hotkey').forEach(el => {
+          el.textContent = el.textContent.replace(/Win/g, 'Cmd').replace(/Alt/g, 'Option');
+        });
+      }
+
       const reveals = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
