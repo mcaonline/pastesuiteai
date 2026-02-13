@@ -712,6 +712,59 @@
       .showcase-card:nth-child(odd) { text-align: left; align-items: flex-start; }
     }
 
+    /* ========== Platform Download Buttons ========== */
+    .download-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .download-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-platform {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      font-family: var(--font-family);
+    }
+    .btn-platform:hover { background: var(--color-accent-hover); transform: scale(1.02); text-decoration: none; color: #fff; }
+
+    .btn-platform--mac {
+      background: transparent;
+      border: 1.5px solid var(--color-accent);
+      color: var(--color-accent);
+    }
+    .btn-platform--mac:hover { background: var(--color-accent); color: #fff; }
+
+    .platform-note {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 767px) {
+      .download-row { flex-direction: column; }
+      .btn-platform { width: 100%; max-width: 280px; justify-content: center; }
+    }
+
     /* ========== Scroll Reveal ========== */
     .reveal {
       opacity: 0;
@@ -737,7 +790,7 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://github.com" class="nav-cta">Download</a></li>
+        <li><a href="#download" class="nav-cta">Download</a></li>
       </ul>
       <button class="nav-mobile-toggle" aria-label="Menu" onclick="this.classList.toggle('open')">
         <span></span>
@@ -758,14 +811,19 @@
         Paste plain text, transcribe speech, and transform any text with AI — all from a single hotkey.
         Configure custom actions with OpenAI, Anthropic, Google, and more.
       </p>
-      <div class="hero-actions">
-        <a href="PasteSuiteAI_0.3.0_x64-setup.exe" class="btn-primary" download>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10m0 0l-3.5-3.5M9 12l3.5-3.5M3 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download
-        </a>
-
+      <div class="download-buttons">
+        <div class="download-row">
+          <a href="PasteSuiteAI_0.3.0_x64-setup.exe" class="btn-platform" download>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10m0 0l-3.5-3.5M9 12l3.5-3.5M3 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download for Windows
+          </a>
+          <a href="PasteSuiteAI_0.3.0_aarch64.dmg" class="btn-platform btn-platform--mac" download>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M13.35 9.46c-.02-1.8 1.47-2.67 1.54-2.71-.84-1.23-2.15-1.4-2.61-1.42-.1-.01-.21-.02-.31-.02-.87 0-1.63.42-2.08.42-.47 0-1.14-.41-1.9-.4-.14 0-.28.01-.42.03-1.25.15-2.36.95-2.89 2.15-1.25 2.16-.32 5.35.88 7.1.6.86 1.3 1.82 2.22 1.79.9-.04 1.23-.57 2.31-.57 1.07 0 1.37.57 2.31.55.96-.02 1.56-.86 2.14-1.72.44-.63.77-1.31.98-2.03-2.09-.81-2.17-3.36-2.17-3.37zM11.41 4c.5-.6.83-1.43.74-2.26-.72.03-1.56.48-2.06 1.06-.45.52-.85 1.37-.74 2.17.8.06 1.57-.4 2.06-0.97z" fill="currentColor"/></svg>
+            Download for macOS
+          </a>
+        </div>
+        <p class="platform-note">v0.3.0 &middot; Windows 10+ &middot; macOS (Apple Silicon)</p>
       </div>
-      <p class="hero-version">v0.3.0 &middot; Windows 10+</p>
     </div>
   </section>
 
@@ -781,9 +839,9 @@
             <line x1="9" y1="16" x2="13" y2="16"/>
           </svg>
         </div>
-        <div class="showcase-card-title">Paste Plain Text</div>
+        <div class="showcase-card-title">Paste as Plain Text</div>
         <div class="showcase-card-desc">Strip all formatting and paste clean, unstyled text into any application with a single hotkey.</div>
-        <span class="showcase-card-hotkey">Ctrl + Shift + V</span>
+        <span class="showcase-card-hotkey">Win + Ctrl + Alt + P</span>
       </div>
       <div class="showcase-card">
         <div class="showcase-card-icon">
@@ -792,9 +850,9 @@
             <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
           </svg>
         </div>
-        <div class="showcase-card-title">Fix Grammar</div>
-        <div class="showcase-card-desc">AI-powered grammar and spelling correction. Select text, press a key, and get polished results instantly.</div>
-        <span class="showcase-card-hotkey">Ctrl + Shift + G</span>
+        <div class="showcase-card-title">Diplomatic Rewrite Prompt</div>
+        <div class="showcase-card-desc">Paste a ready-made diplomatic rewrite prompt into any AI chat. Shorten and soften text without losing content. No AI key needed.</div>
+        <span class="showcase-card-hotkey">Win + Ctrl + Alt + R</span>
       </div>
       <div class="showcase-card">
         <div class="showcase-card-icon">
@@ -804,22 +862,26 @@
             <line x1="12" y1="19" x2="12" y2="22"/>
           </svg>
         </div>
-        <div class="showcase-card-title">Transcribe Speech</div>
+        <div class="showcase-card-title">Microphone to Text</div>
         <div class="showcase-card-desc">Record audio and transcribe to text instantly. Speak in one language, get output in another.</div>
-        <span class="showcase-card-hotkey">Ctrl + Shift + T</span>
+        <span class="showcase-card-hotkey">Win + Ctrl + Alt + S</span>
       </div>
       <div class="showcase-card">
         <div class="showcase-card-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" y1="6" x2="20" y2="6"/>
-            <line x1="4" y1="10" x2="20" y2="10"/>
-            <line x1="4" y1="14" x2="16" y2="14"/>
-            <line x1="4" y1="18" x2="12" y2="18"/>
+            <path d="M5 8l6 6"/>
+            <path d="M4 14l6-6 2-3"/>
+            <path d="M2 5h12"/>
+            <path d="M7 2h1"/>
+            <path d="M14 14l-1.5 5L14 18l1.5 1-1.5-5z"/>
+            <path d="M14 14l6 6"/>
+            <path d="M16 18h6"/>
+            <path d="M19 15v6"/>
           </svg>
         </div>
-        <div class="showcase-card-title">Summarize Text</div>
-        <div class="showcase-card-desc">Get concise summaries powered by any LLM. Condense long content into clear, actionable takeaways.</div>
-        <span class="showcase-card-hotkey">Ctrl + Shift + S</span>
+        <div class="showcase-card-title">Rewrite &amp; Correct to English</div>
+        <div class="showcase-card-desc">AI-powered professional rewrite into English. Select text, press a key, and get polished results pasted back instantly.</div>
+        <span class="showcase-card-hotkey">Win + Ctrl + Alt + E</span>
       </div>
     </div>
   </div>
@@ -873,7 +935,7 @@
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M9 21V7a2 2 0 012-2h6a2 2 0 012 2v14" stroke="#5ac8fa" stroke-width="2"/><path d="M5 21h18" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round"/><path d="M12 11h4M12 15h4" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <h3 class="feature-title">Secure by Design</h3>
-          <p class="feature-desc">API keys stored in Windows Credential Manager. No PasteSuiteAI server, no telemetry. Data goes only to your chosen AI provider.</p>
+          <p class="feature-desc">API keys stored in your OS keychain (Windows Credential Manager / macOS Keychain). No PasteSuiteAI server, no telemetry. Data goes only to your chosen AI provider.</p>
         </div>
       </div>
     </div>
@@ -939,7 +1001,7 @@
             <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="faq-answer">
-            <p>PasteSuiteAI never sees, stores, or touches your content. No server in the middle, no telemetry, no analytics. Text goes directly from your machine to your provider. API keys live in Windows Credential Manager, never in plaintext. Your privacy is fully in your hands.</p>
+            <p>PasteSuiteAI never sees, stores, or touches your content. No server in the middle, no telemetry, no analytics. Text goes directly from your machine to your provider. API keys live in your OS keychain (Windows Credential Manager / macOS Keychain), never in plaintext. Your privacy is fully in your hands.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -948,7 +1010,7 @@
             <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Windows 10+ (64-bit). Built with Tauri 2 and Rust — under 15 MB installed, minimal memory footprint.</p>
+            <p>Windows 10+ (64-bit) or macOS (Apple Silicon). Built with Tauri 2 and Rust — under 15 MB installed, minimal memory footprint.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -974,21 +1036,29 @@
   </section>
 
   <!-- ==================== CTA ==================== -->
-  <section class="cta-section">
+  <section id="download" class="cta-section">
     <div class="section section-padded reveal" style="text-align: center;">
       <h2 class="section-title">Ready to supercharge your clipboard?</h2>
       <p class="section-subtitle" style="margin: 0 auto 32px;">
         Download PasteSuiteAI and start transforming text with AI in seconds. Start your free trial — your data stays between you and your AI provider. Fast, private, and built to stay.
       </p>
-      <div class="hero-actions">
-        <a href="PasteSuiteAI_0.3.0_x64-setup.exe" class="btn-primary" download>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10m0 0l-3.5-3.5M9 12l3.5-3.5M3 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download for Windows
-        </a>
-        <a href="https://github.com/mcaonline/pastesuiteai" class="btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 3.31 2.15 6.12 5.13 7.12.37.07.51-.16.51-.36v-1.3c-2.09.45-2.53-1.01-2.53-1.01-.34-.87-.83-1.1-.83-1.1-.68-.46.05-.45.05-.45.75.05 1.15.77 1.15.77.67 1.14 1.75.81 2.17.62.07-.48.26-.81.47-.99-1.67-.19-3.42-.83-3.42-3.71 0-.82.29-1.49.77-2.01-.08-.19-.33-.95.07-1.99 0 0 .63-.2 2.06.77a7.18 7.18 0 013.76 0c1.43-.97 2.06-.77 2.06-.77.4 1.04.15 1.8.07 1.99.48.52.77 1.19.77 2.01 0 2.89-1.76 3.52-3.43 3.71.27.23.51.69.51 1.39v2.07c0 .2.14.43.51.36A7.5 7.5 0 0016.5 9c0-4.14-3.36-7.5-7.5-7.5z" fill="currentColor"/></svg>
-          View on GitHub
-        </a>
+      <div class="download-buttons">
+        <div class="download-row">
+          <a href="PasteSuiteAI_0.3.0_x64-setup.exe" class="btn-platform" download>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10m0 0l-3.5-3.5M9 12l3.5-3.5M3 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download for Windows
+          </a>
+          <a href="PasteSuiteAI_0.3.0_aarch64.dmg" class="btn-platform btn-platform--mac" download>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M13.35 9.46c-.02-1.8 1.47-2.67 1.54-2.71-.84-1.23-2.15-1.4-2.61-1.42-.1-.01-.21-.02-.31-.02-.87 0-1.63.42-2.08.42-.47 0-1.14-.41-1.9-.4-.14 0-.28.01-.42.03-1.25.15-2.36.95-2.89 2.15-1.25 2.16-.32 5.35.88 7.1.6.86 1.3 1.82 2.22 1.79.9-.04 1.23-.57 2.31-.57 1.07 0 1.37.57 2.31.55.96-.02 1.56-.86 2.14-1.72.44-.63.77-1.31.98-2.03-2.09-.81-2.17-3.36-2.17-3.37zM11.41 4c.5-.6.83-1.43.74-2.26-.72.03-1.56.48-2.06 1.06-.45.52-.85 1.37-.74 2.17.8.06 1.57-.4 2.06-0.97z" fill="currentColor"/></svg>
+            Download for macOS
+          </a>
+        </div>
+        <div class="download-row" style="margin-top: 4px;">
+          <a href="https://pastesuiteai.com" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 3.31 2.15 6.12 5.13 7.12.37.07.51-.16.51-.36v-1.3c-2.09.45-2.53-1.01-2.53-1.01-.34-.87-.83-1.1-.83-1.1-.68-.46.05-.45.05-.45.75.05 1.15.77 1.15.77.67 1.14 1.75.81 2.17.62.07-.48.26-.81.47-.99-1.67-.19-3.42-.83-3.42-3.71 0-.82.29-1.49.77-2.01-.08-.19-.33-.95.07-1.99 0 0 .63-.2 2.06.77a7.18 7.18 0 013.76 0c1.43-.97 2.06-.77 2.06-.77.4 1.04.15 1.8.07 1.99.48.52.77 1.19.77 2.01 0 2.89-1.76 3.52-3.43 3.71.27.23.51.69.51 1.39v2.07c0 .2.14.43.51.36A7.5 7.5 0 0016.5 9c0-4.14-3.36-7.5-7.5-7.5z" fill="currentColor"/></svg>
+            View on GitHub
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -998,7 +1068,7 @@
     <div class="footer-inner">
       <p class="footer-text">Copyright &copy; 2026 Christian Motz. PasteSuiteAI&trade; is a trademark of Christian Motz.</p>
       <div class="footer-links">
-        <a href="https://github.com/mcaonline/pastesuiteai">GitHub</a>
+        <a href="https://pastesuiteai.com">GitHub</a>
         <a href="#features">Features</a>
         <a href="#faq">FAQ</a>
       </div>
