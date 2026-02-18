@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "api_key",
+      "source": "vault",
+      "default_value": null,
+      "description": "Anthropic API Key"
+    },
+    {
+      "name": "model",
+      "source": "config",
+      "default_value": "claude-sonnet-4-5-20250929",
+      "description": "Model ID (e.g. claude-sonnet-4-5-20250929, claude-3-5-haiku-20241022)"
+    },
+    {
+      "name": "max_tokens",
+      "source": "config",
+      "default_value": "4096",
+      "description": "Maximum tokens in response"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Messages",
+      "method": "POST",
+      "url": "https://api.anthropic.com/v1/messages",
+      "auth": {
+        "auth_type": { "api_key_header": { "header_name": "x-api-key" } },
+        "credential": "{{api_key}}"
+      },
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "anthropic-version", "value": "2023-06-01" }
+      ],
+      "body": "{\n  \"model\": \"{{model}}\",\n  \"max_tokens\": {{max_tokens}},\n  \"system\": \"{{system_prompt}}\",\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"{{prompt}}\"}\n  ]\n}",
+      "body_content_type": "application/json",
+      "extract": [
+        {
+          "variable_name": "result",
+          "source": "body",
+          "path": "content[0].text"
+        }
+      ],
+      "stream_path": null
+    }
+  ],
+  "result_from": "steps.1.result"
+}

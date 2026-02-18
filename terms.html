@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &mdash; PasteSuiteAI</title>
+  <meta name="description" content="Terms of Service, disclaimer, and limitation of liability for PasteSuiteAI.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f5f5f7;
+      --color-text-primary: #1d1d1f;
+      --color-text-secondary: #424245;
+      --color-text-tertiary: #6e6e73;
+      --color-accent: #0071e3;
+      --color-separator: #d2d2d7;
+      --color-nav-bg: rgba(251, 251, 253, 0.72);
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-width: 720px;
+      --nav-height: 52px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-bg-secondary: #1c1c1e;
+        --color-text-primary: #f5f5f7;
+        --color-text-secondary: #a1a1a6;
+        --color-text-tertiary: #86868b;
+        --color-separator: #38383a;
+        --color-nav-bg: rgba(22, 22, 23, 0.72);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-separator);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+    }
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav a:hover { color: var(--color-accent); }
+
+    /* ========== Content ========== */
+    .legal-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 22px 80px;
+    }
+
+    .legal-content h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .legal-content .subtitle {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    .legal-content p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul, .legal-content ol {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ol {
+      counter-reset: item;
+    }
+
+    .legal-content ol li::before {
+      counter-increment: item;
+      content: counter(item) ".";
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-right: 8px;
+    }
+
+    .legal-content ul li, .legal-content ol li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-separator);
+    }
+
+    .legal-content ul li:last-child, .legal-content ol li:last-child { border-bottom: none; }
+
+    .legal-content ul li strong, .legal-content ol li strong {
+      color: var(--color-text-primary);
+    }
+
+    .legal-content .note {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+
+    .legal-content .highlight-box {
+      background: var(--color-bg-secondary);
+      border-left: 3px solid var(--color-accent);
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .legal-content .highlight-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-separator);
+      padding: 24px 22px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-text {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      letter-spacing: -0.01em;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html">&larr; Back to PasteSuiteAI</a>
+  </nav>
+
+  <main class="legal-content">
+    <h1>Terms of Service</h1>
+    <p class="subtitle">Last updated: February 2026</p>
+
+    <p>Please read these Terms of Service (&ldquo;Terms&rdquo;) carefully before using PasteSuiteAI (&ldquo;the Software&rdquo;), developed and published by Keystroke Labs (&ldquo;the Author&rdquo;). By installing, running, or otherwise using the Software, you agree to be bound by these Terms. If you do not agree, do not use the Software.</p>
+
+    <!-- ===== 1 ===== -->
+    <h2>1. Nature of the Software</h2>
+
+    <p>PasteSuiteAI is a desktop application that sends user-provided text to third-party AI providers (e.g. OpenAI, Anthropic, Google, or any OpenAI-compatible endpoint) via the user&rsquo;s own API keys. The Software does not include, host, or resell AI model access. All API calls are made directly from the user&rsquo;s device to the configured provider.</p>
+
+    <!-- ===== 2 ===== -->
+    <h2>2. Bring-Your-Own-API-Key Model</h2>
+
+    <p>You are solely responsible for:</p>
+    <ul>
+      <li><strong>Obtaining and managing your API keys</strong> &mdash; You must create and maintain accounts with your chosen AI providers and comply with their respective terms of service.</li>
+      <li><strong>All costs incurred through API usage</strong> &mdash; Every API call made by the Software is charged by your provider to your account. The Author has no control over, visibility into, or responsibility for any charges on your provider account.</li>
+      <li><strong>Setting spending limits and usage alerts</strong> &mdash; Most providers offer spending caps, usage alerts, and rate limits. You are strongly encouraged to configure these safeguards in your provider&rsquo;s dashboard.</li>
+    </ul>
+
+    <!-- ===== 3 ===== -->
+    <h2>3. User Responsibility for Configuration</h2>
+
+    <p>PasteSuiteAI allows extensive customization of actions, prompts, hotkeys, and action chains. You are fully responsible for any configuration you create or modify. This includes, without limitation:</p>
+
+    <ul>
+      <li><strong>Action chains and loops</strong> &mdash; The Software supports chaining actions (one action feeding its output into another). Misconfigured chains may result in repeated or rapid API calls. While the Software enforces a maximum chain depth, it is your responsibility to ensure that your configurations do not produce unintended call patterns.</li>
+      <li><strong>Prompt design</strong> &mdash; The content and behavior of prompts is entirely user-defined. The Author is not responsible for unintended, inaccurate, or harmful AI outputs resulting from user-provided prompts.</li>
+      <li><strong>Hotkey conflicts and unintended triggers</strong> &mdash; Assigning hotkeys that conflict with other applications or trigger actions unintentionally is the user&rsquo;s responsibility.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p><strong>Important:</strong> If a misconfiguration causes excessive or looping API calls, you &mdash; not the Author &mdash; bear the full financial and operational responsibility. Always test new configurations with low-cost models or small inputs before deploying them in production workflows. After any reconfiguration or update &mdash; and at regular intervals &mdash; continue to monitor your API usage on your provider&rsquo;s dashboard and ensure you have hard spending caps in place to protect yourself from unexpected financial impact.</p>
+    </div>
+
+    <!-- ===== 4 ===== -->
+    <h2>4. Disclaimer of Warranties</h2>
+
+    <p>The Software is provided <strong>&ldquo;as is&rdquo;</strong> and <strong>&ldquo;as available&rdquo;</strong>, without warranty of any kind, express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+
+    <p>The Author does not warrant that:</p>
+    <ul>
+      <li>The Software will be uninterrupted, error-free, or free of defects.</li>
+      <li>AI outputs will be accurate, complete, appropriate, or fit for any particular purpose.</li>
+      <li>The Software will be compatible with all third-party providers, APIs, or systems, now or in the future.</li>
+      <li>Any particular result or outcome will be achieved through the use of the Software.</li>
+    </ul>
+
+    <!-- ===== 5 ===== -->
+    <h2>5. Limitation of Liability</h2>
+
+    <p>To the maximum extent permitted by applicable law, the Author shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+
+    <ul>
+      <li><strong>Financial loss</strong> from API overuse, misconfiguration, loops, or excessive calls to third-party providers.</li>
+      <li><strong>Data loss or corruption</strong> resulting from the use or inability to use the Software.</li>
+      <li><strong>Business interruption</strong> or lost profits arising from reliance on AI-generated outputs.</li>
+      <li><strong>Third-party claims</strong> arising from content processed through the Software.</li>
+    </ul>
+
+    <p>In no event shall the Author&rsquo;s total aggregate liability exceed the amount you paid for the Software in the twelve (12) months preceding the claim, or fifty euros (EUR&nbsp;50), whichever is greater.</p>
+
+    <!-- ===== 6 ===== -->
+    <h2>6. Third-Party Services</h2>
+
+    <p>The Software integrates with third-party AI providers. These providers have their own terms of service, privacy policies, and usage restrictions. The Author is not a party to your agreement with any provider and assumes no responsibility for:</p>
+
+    <ul>
+      <li>The availability, performance, or pricing of third-party APIs.</li>
+      <li>Changes to third-party API formats, endpoints, or authentication mechanisms.</li>
+      <li>Data handling practices of third-party providers.</li>
+      <li>Content generated by third-party AI models.</li>
+    </ul>
+
+    <p>You should review and comply with the terms of service of each AI provider you use with the Software.</p>
+
+    <!-- ===== 7 ===== -->
+    <h2>7. User Obligations</h2>
+
+    <p>By using the Software, you agree to:</p>
+
+    <ol>
+      <li>Monitor your own API usage and costs through your provider&rsquo;s dashboard.</li>
+      <li>Configure appropriate spending limits and rate controls with your provider.</li>
+      <li>Test action chains and custom configurations before using them in production.</li>
+      <li>Not use the Software for any unlawful purpose or to process content that violates applicable law.</li>
+      <li>Not attempt to circumvent any technical limitations, licensing restrictions, or security measures of the Software.</li>
+      <li>Keep your API keys and license keys confidential and secure.</li>
+    </ol>
+
+    <!-- ===== 8 ===== -->
+    <h2>8. Indemnification</h2>
+
+    <p>You agree to indemnify and hold harmless the Author from and against any claims, damages, losses, liabilities, and expenses (including reasonable legal fees) arising from your use of the Software, your violation of these Terms, or your violation of any third-party rights.</p>
+
+    <!-- ===== 9 ===== -->
+    <h2>9. Modifications to the Terms</h2>
+
+    <p>The Author reserves the right to update these Terms at any time. The &ldquo;Last updated&rdquo; date at the top reflects the most recent revision. Continued use of the Software after changes constitutes acceptance of the updated Terms. Material changes will be communicated through the application&rsquo;s changelog or website.</p>
+
+    <!-- ===== 10 ===== -->
+    <h2>10. Governing Law &amp; Jurisdiction</h2>
+
+    <p>These Terms are governed by the laws of the Federal Republic of Germany. Any disputes shall be subject to the exclusive jurisdiction of the courts of Germany, unless mandatory consumer protection laws of your country of residence provide otherwise.</p>
+
+    <p>If you are a consumer within the European Union, you retain any mandatory rights granted by the consumer protection laws of your member state of residence, including rights under Directive 2011/83/EU (Consumer Rights Directive) and Regulation (EU) 2019/1150 where applicable.</p>
+
+    <!-- ===== 11 ===== -->
+    <h2>11. Severability</h2>
+
+    <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+
+    <!-- ===== 12 ===== -->
+    <h2>12. Contact</h2>
+
+    <p>For questions about these Terms, contact: <strong>pastesuiteai@gmail.com</strong></p>
+
+    <p class="note">See also: <a href="legal.html" style="color: var(--color-accent);">Legal &amp; Licensing</a> &middot; <a href="privacy.html" style="color: var(--color-accent);">Privacy Policy</a></p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text">Copyright &copy; 2026 Keystroke Labs. All rights reserved. PasteSuiteAI&trade; is proprietary software and a trademark of Keystroke Labs.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="legal.html">Legal</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
