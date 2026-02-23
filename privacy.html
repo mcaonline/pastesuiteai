@@ -175,18 +175,18 @@
 
     <h2>Data Controller</h2>
 
-    <p>Keystroke Labs is the data controller for PasteSuiteAI within the meaning of the EU General Data Protection Regulation (GDPR). For privacy inquiries, contact: <strong>privacy@pastesuiteai.com</strong></p>
+    <p>Keynaptic GmbH is the data controller for PasteSuiteAI within the meaning of the EU General Data Protection Regulation (GDPR). For privacy inquiries, contact: <strong>privacy@pastesuiteai.com</strong></p>
 
     <h2>Data Stored on Your Device</h2>
 
-    <p>PasteSuiteAI stores the following data locally in your user directory (<code>~/.pastesuiteai/</code>):</p>
+    <p>PasteSuiteAI stores the following data locally in a dedicated application data folder on your device:</p>
 
     <ul>
-      <li><strong>Settings</strong> &mdash; Your preferences, action configurations, and prompt library entries. Stored in <code>settings.json</code>.</li>
-      <li><strong>Action definitions</strong> &mdash; Your custom and built-in action configurations. Stored in <code>actions.json</code>.</li>
-      <li><strong>Usage data</strong> &mdash; Timestamps of AI actions for license enforcement (rolling 24-hour window). Stored in <code>usage.json</code>. No content is recorded.</li>
-      <li><strong>Application log</strong> &mdash; Diagnostic log for troubleshooting. Stored in <code>app.log</code>. Contains no clipboard content or AI responses.</li>
-      <li><strong>API keys</strong> &mdash; Stored in your operating system's secure credential store (Windows Credential Manager / macOS Keychain). Never in plaintext files.</li>
+      <li><strong>Settings</strong> &mdash; Your preferences, action configurations, and prompt library entries.</li>
+      <li><strong>Action definitions</strong> &mdash; Your custom and built-in action configurations.</li>
+      <li><strong>Usage data</strong> &mdash; Timestamps of AI actions for license enforcement. No content is recorded.</li>
+      <li><strong>Application log</strong> &mdash; Diagnostic log for troubleshooting. Contains no user content or AI responses.</li>
+      <li><strong>API keys</strong> &mdash; Stored in your operating system's secure credential store. Never in plaintext files.</li>
       <li><strong>License key</strong> &mdash; Stored in your operating system's secure credential store. Verified offline via cryptographic signature.</li>
     </ul>
 
@@ -195,7 +195,7 @@
     <p>PasteSuiteAI sends data to external services <strong>only</strong> when you manually trigger an AI action. Specifically:</p>
 
     <ul>
-      <li><strong>What is sent:</strong> The text you selected or copied (clipboard content), combined with the action's prompt template and any additional input you typed.</li>
+      <li><strong>What is sent:</strong> The text you selected or copied, combined with the action's prompt template and any additional input you typed.</li>
       <li><strong>When:</strong> Only when you press a hotkey or click an action. Never automatically, never in the background.</li>
       <li><strong>Where:</strong> To the AI provider you configured (e.g. OpenAI, Azure OpenAI, Anthropic, or a local model). The connection is direct from your device to the provider &mdash; there is no PasteSuiteAI server in between.</li>
       <li><strong>Authentication:</strong> Using the API key you provided, stored in your OS credential store.</li>
@@ -244,7 +244,7 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <p class="footer-text">Copyright &copy; 2026 Keystroke Labs. All rights reserved. PasteSuiteAI&trade; is proprietary software and a trademark of Keystroke Labs.</p>
+      <p class="footer-text" data-trademark></p>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="legal.html">Legal</a>
@@ -252,6 +252,7 @@
       </div>
     </div>
   </footer>
+  <script src="footer.js"></script>
 
 </body>
 </html>
