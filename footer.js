@@ -1,6 +1,6 @@
 /* SSoT for website footer copyright — edit ONLY here. */
 (function () {
-  var C = 'Keynaptic GmbH';
+  var C = 'Pastesuite AI Limited';
   var P = 'PasteSuiteAI';
   var Y = '2026';
   var el = document.querySelector('.footer-text');
