@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Settings</h1>
+      <p class="subtitle">Configure app behavior, appearance, hotkeys, and more</p>
+
+      <p>Settings control everything from how PasteSuiteAI looks and starts up, to how the PromptBar behaves and what safety limits are applied to AI calls. Open settings by clicking the <strong>gear icon</strong> in the title bar.</p>
+
+      <img class="docs-screenshot" src="img/settings-general.png" alt="General settings overview">
+
+      <!-- ============================== -->
+      <h2>Overview</h2>
+
+      <p>Settings are organised into tabs:</p>
+
+      <ul>
+        <li><strong>General</strong> &mdash; hotkey, startup, window behavior, appearance, logging, data, safety</li>
+        <li><strong>Actions</strong> &mdash; manage and configure <a href="actions.html">actions</a></li>
+        <li><strong>Connections</strong> &mdash; manage AI provider <a href="connections.html">connections</a></li>
+        <li><strong>Quick Prompts</strong> &mdash; manage quick prompt buttons on the <a href="promptbar.html">PromptBar</a></li>
+        <li><strong>History</strong> &mdash; clipboard <a href="history.html">history</a> settings</li>
+        <li><strong>License</strong> &mdash; view and activate a <a href="licensing.html">license key</a></li>
+      </ul>
+
+      <p>This page covers the <strong>General</strong> tab. All changes in the General tab take effect immediately.</p>
+
+      <!-- ============================== -->
+      <h2>Restore Defaults</h2>
+
+      <p>The <strong>Restore Defaults</strong> button at the top of the General tab resets app settings, actions, and quick prompts to their factory defaults. Connections are <em>not</em> affected &mdash; your API keys and provider configurations are preserved.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Restore defaults button"
+             style="aspect-ratio: 530/60; object-fit: cover; object-position: 0 0%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Restore Defaults</td>
+            <td>Button</td>
+            <td>Resets all app settings, actions, and quick prompts to factory defaults. Connections are not affected.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-warning">
+        Restore Defaults overwrites your current action list and quick prompts. Any custom actions or quick prompts you have created will be replaced by the defaults. Export your data first if you want to keep them.
+      </div>
+
+      <!-- ============================== -->
+      <h2>PromptBar Configuration</h2>
+
+      <p>These settings control how the <a href="promptbar.html">PromptBar</a> behaves when you submit a prompt. See the <a href="promptbar.html">PromptBar</a> doc for a full explanation of each execution mode.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="PromptBar configuration"
+             style="aspect-ratio: 530/180; object-fit: cover; object-position: 0 5%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Auto-Enter</td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Automatically presses <kbd>Enter</kbd> in the target application after delivering the AI result. Useful for chat apps where you want to send the message immediately.</td>
+          </tr>
+          <tr>
+            <td>Execution Mode</td>
+            <td>Dropdown</td>
+            <td>Overlay</td>
+            <td>What happens when you press Enter in the PromptBar:
+              <ul>
+                <li><strong>Paste</strong> &mdash; types the result directly into the active application</li>
+                <li><strong>Clipboard</strong> &mdash; copies the result to the clipboard only</li>
+                <li><strong>Paste + Clipboard</strong> &mdash; pastes the result and also copies it to the clipboard</li>
+                <li><strong>Overlay</strong> &mdash; shows the result in a floating overlay window</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Overlay Mode</td>
+            <td>Mode Toggle</td>
+            <td>Overlay Button</td>
+            <td>Controls when the result overlay appears (only relevant when Execution Mode is Overlay):
+              <ul>
+                <li><strong>Overlay Button</strong> &mdash; overlay appears only when the dedicated overlay button is clicked</li>
+                <li><strong>Always</strong> &mdash; overlay always appears after execution</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Overlay Position</td>
+            <td>Dropdown</td>
+            <td>Cursor</td>
+            <td>Where the result overlay appears: at the cursor position, or pinned to one of the four screen corners (upper/lower left/right).</td>
+          </tr>
+          <tr>
+            <td>Overlay Duration</td>
+            <td>Number Input</td>
+            <td>20</td>
+            <td>How many seconds the result overlay stays visible before automatically dismissing. Set to 0 for the overlay to stay until manually dismissed.</td>
+          </tr>
+          <tr>
+            <td>LLM Connection</td>
+            <td>Dropdown</td>
+            <td>Default routing</td>
+            <td>Overrides the default LLM connection specifically for PromptBar AI Paste. Leave at "Default routing" to use the starred LLM connection. Useful when you want a faster or cheaper model for quick PromptBar queries.</td>
+          </tr>
+          <tr>
+            <td>Chain Action</td>
+            <td>Dropdown</td>
+            <td>None</td>
+            <td>Feeds the PromptBar result into another action as its input. The chained action runs immediately after the PromptBar AI response. Select "None" to disable chaining.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Main Hotkey</h2>
+
+      <p>The main hotkey is the global keyboard shortcut that activates PasteSuiteAI from any application. The default is <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd>.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Hotkey chord selector"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 22%;">
+      </div>
+
+      <p>You can configure the hotkey as a single combination or as a chord (a two-key sequence). For example, <kbd>Ctrl</kbd>+<kbd>K</kbd> followed by <kbd>Ctrl</kbd>+<kbd>V</kbd>. A double-tap option is also available for some combinations.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chord Selector</td>
+            <td>Key Capture</td>
+            <td>Click the capture field and press your desired key combination. The chord selector supports two-key sequences for the main hotkey. Conflicts with action hotkeys are detected and flagged.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        For a full list of all hotkeys and how conflicts are resolved, see <a href="keyboard-shortcuts.html">Keyboard Shortcuts</a>.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Startup &amp; Updates</h2>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Startup and updates"
+             style="aspect-ratio: 530/100; object-fit: cover; object-position: 0 30%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Launch on Windows Startup</td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Registers PasteSuiteAI in the Windows startup registry so it launches automatically when you log in.</td>
+          </tr>
+          <tr>
+            <td>Auto-Update</td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Checks for new versions when the app launches. If an update is found, you are prompted to install it.</td>
+          </tr>
+          <tr>
+            <td>Unattended Update</td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Installs updates silently in the background without showing a prompt. Only visible when Auto-Update is enabled.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Window Behavior</h2>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Window behavior settings"
+             style="aspect-ratio: 530/120; object-fit: cover; object-position: 0 40%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Window Mode</td>
+            <td>Dropdown</td>
+            <td>Always Tray</td>
+            <td>Controls when the app appears in the taskbar vs. the system tray:
+              <ul>
+                <li><strong>Always Tray</strong> (default) &mdash; no taskbar entry, tray icon only. Cleanest experience.</li>
+                <li><strong>Usually Tray</strong> &mdash; taskbar entry while the window is open; during actions the taskbar flashes briefly as feedback, then hides to tray when done.</li>
+                <li><strong>Always Taskbar</strong> &mdash; permanent taskbar entry, traditional desktop app behavior.</li>
+              </ul>
+              See <a href="main-window.html#window-modes">Window Modes</a> for a detailed comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>Close on X</td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>When off (default), clicking the X button minimizes the window instead of closing the app. When on, clicking X exits the application.</td>
+          </tr>
+          <tr>
+            <td>Show Help Button</td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Shows or hides the Help button in the main panel footer. The Help button launches an interactive guided tour of the interface.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Appearance</h2>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Appearance settings"
+             style="aspect-ratio: 530/200; object-fit: cover; object-position: 0 52%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Window Decorations</td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>When on, shows the native Windows title bar with standard minimize/maximize/close buttons. When off (default), uses the custom frameless window design.</td>
+          </tr>
+          <tr>
+            <td>Window Transparency</td>
+            <td>Slider</td>
+            <td>0%</td>
+            <td>Sets the window transparency level. Slide right to make the window more transparent. Displayed as a transparency percentage (0% = fully opaque).</td>
+          </tr>
+          <tr>
+            <td>Auto-Resize</td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Automatically adjusts the window height to fit the content. When off, the window stays at a fixed height and scrolls internally.</td>
+          </tr>
+          <tr>
+            <td>UI Scale</td>
+            <td>Slider</td>
+            <td>140%</td>
+            <td>Sets the zoom level for the main application window. Range: 100%&ndash;300% in 10% steps. Changes apply immediately. Use this to make the interface larger on high-DPI displays.</td>
+          </tr>
+          <tr>
+            <td>Prompt Library Overlay Scale</td>
+            <td>Slider</td>
+            <td>140%</td>
+            <td>Sets the zoom level for the floating <a href="prompt-library.html">Prompt Library</a> overlay window. This is independent from the main UI Scale.</td>
+          </tr>
+          <tr>
+            <td>PL Show Edit/Delete</td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Shows Edit and Delete buttons on prompt entries in the Prompt Library overlay. When off, the overlay is read-only for faster access.</td>
+          </tr>
+          <tr>
+            <td>Result Overlay Scale</td>
+            <td>Slider</td>
+            <td>140%</td>
+            <td>Sets the zoom level for the floating <a href="result-overlay.html">result overlay</a> that displays action output. Independent from both the main UI Scale and Prompt Library Overlay Scale.</td>
+          </tr>
+          <tr>
+            <td>Background Color</td>
+            <td>Color Picker</td>
+            <td>#0D1219</td>
+            <td>The main window background color.</td>
+          </tr>
+          <tr>
+            <td>Text Color</td>
+            <td>Color Picker</td>
+            <td>#FAF9F6</td>
+            <td>The primary text color throughout the interface.</td>
+          </tr>
+          <tr>
+            <td>Box Color</td>
+            <td>Color Picker</td>
+            <td>#0f172a</td>
+            <td>The background color for input boxes, cards, and elevated surfaces.</td>
+          </tr>
+          <tr>
+            <td>Gradient Color 1</td>
+            <td>Color Picker</td>
+            <td>#FAF9F6</td>
+            <td>The start color of the gradient used for the app title and accent text.</td>
+          </tr>
+          <tr>
+            <td>Gradient Color 2</td>
+            <td>Color Picker</td>
+            <td>#3b82f6</td>
+            <td>The end color of the gradient used for the app title and accent text.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        UI Scale, Prompt Library Overlay Scale, and Result Overlay Scale are all independent. You can set each to a different value to match the relative size you want for each surface.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Logging</h2>
+
+      <p>PasteSuiteAI writes a log file to its application data folder. The log is truncated (not appended) on each launch, so it only ever contains the current session.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Enable File Logging</td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Enables writing diagnostic output to a log file. Disable this if you are concerned about disk writes or do not need logs.</td>
+          </tr>
+          <tr>
+            <td>Max Lines</td>
+            <td>Number Input</td>
+            <td>2000</td>
+            <td>The maximum number of log lines kept per session. When the limit is reached, older lines are rotated out. Valid range: 100&ndash;99,999. Only visible when logging is enabled.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        Changes to the logging settings take effect on the next application launch, not immediately.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Data Management</h2>
+
+      <p>Back up and restore all your PasteSuiteAI data, or permanently delete everything to start fresh.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Data management section"
+             style="aspect-ratio: 530/120; object-fit: cover; object-position: 0 76%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Export Data</td>
+            <td>Button</td>
+            <td>Exports all data &mdash; actions, user prompts, connections, quick prompts, and settings &mdash; to a JSON file. The file is named <code>pastesuiteai-backup-YYYY-MM-DD.json</code>. Use this to back up your configuration or transfer it to another machine.</td>
+          </tr>
+          <tr>
+            <td>Import Data</td>
+            <td>Button</td>
+            <td>Restores data from a previously exported JSON file. Actions and user prompts are imported using an upsert merge (existing items are updated, new items are added). Connection references that no longer exist are cleared. A summary of what was imported is shown after completion.</td>
+          </tr>
+          <tr>
+            <td>Delete All Data</td>
+            <td>Button + Confirmation</td>
+            <td>Permanently deletes all user data including settings, actions, connections, prompts, and usage history, then exits the app. To confirm, type <code>DELETE</code> in the confirmation input and click the Confirm button. Click Cancel to abort.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-warning">
+        Delete All Data is irreversible. Export your data first if you may want to restore it later.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Safety</h2>
+
+      <p>The Safety section provides a daily API call limit to prevent runaway costs from misconfigured actions or unintended usage.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-general.png" alt="Safety settings"
+             style="aspect-ratio: 530/100; object-fit: cover; object-position: 0 88%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Daily API Call Limit</td>
+            <td>Number Input</td>
+            <td>500</td>
+            <td>The maximum number of AI API calls allowed per calendar day (UTC). Once the limit is reached, all AI actions are blocked until midnight UTC. Non-AI actions (such as Paste as Plain Text) are never blocked. Valid range: 10&ndash;100,000.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The current usage count (<em>API calls today / limit</em>) is displayed below the input field when a license is active.</p>
+
+      <div class="docs-tip">
+        The daily limit is a safety guard, not a billing tool. It does not affect how your provider bills you &mdash; that depends on your agreement with the provider directly.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Related Topics</h2>
+
+      <ul>
+        <li><a href="connections.html">Connections</a> &mdash; Manage AI providers, API keys, and models</li>
+        <li><a href="actions.html">Actions</a> &mdash; Configure hotkeys and AI transforms</li>
+        <li><a href="keyboard-shortcuts.html">Keyboard Shortcuts</a> &mdash; Full list of all hotkeys and how to configure them</li>
+        <li><a href="promptbar.html">PromptBar</a> &mdash; Inline AI text input and quick prompts</li>
+        <li><a href="prompt-library.html">Prompt Library</a> &mdash; Save and reuse system prompts</li>
+        <li><a href="result-overlay.html">Result Overlay</a> &mdash; Floating output window configuration</li>
+        <li><a href="history.html">History</a> &mdash; Clipboard history settings</li>
+        <li><a href="licensing.html">Licensing</a> &mdash; Trial, free tier, and license key activation</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

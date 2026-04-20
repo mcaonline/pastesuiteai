@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result Pop-Up Window &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Result Pop-Up Window</h1>
+      <p class="subtitle">Display AI results in a floating window near your cursor</p>
+
+      <img class="docs-screenshot" src="img/result-overlay.png" alt="Result overlay showing AI output">
+
+      <h2>Overview</h2>
+      <p>
+        The Result Pop-Up Window shows the output of an action in a small floating window. It
+        appears near your cursor (or at a fixed screen position) and auto-dismisses after a
+        configurable duration. This lets you see AI results without switching windows or
+        interrupting your current work.
+      </p>
+      <p>
+        The window is non-focusable by design: it never steals keyboard focus from the application
+        you are working in. You can continue typing immediately after a result appears. Token usage
+        and response time are shown in the bottom-right corner when available.
+      </p>
+
+      <h2>Overlay Modes</h2>
+      <p>
+        Each action has an overlay mode setting that controls when the Result Pop-Up Window appears.
+        This is configured per-action in <a href="settings.html">Settings &gt; Actions</a> on each
+        action card.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Behavior</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Off</strong> (default)</td>
+            <td>
+              No pop-up window. Results are delivered by paste, copy, or clipboard as normal.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Always</strong></td>
+            <td>
+              Show the pop-up window on every execution, whether triggered from the panel or
+              via hotkey.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Hotkey Only</strong></td>
+            <td>
+              Show the pop-up window only when the action is triggered by a keyboard hotkey or
+              mouse trigger. Panel executions do not show the window. Useful when you run an
+              action both from the panel (where you can already see results) and via hotkey in
+              other applications.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        <strong>Hotkey Only</strong> is a practical choice for most actions. You get the pop-up
+        when working away from PasteSuiteAI, and avoid a redundant window when you are already
+        looking at the panel.
+      </div>
+
+      <h2>Position Options</h2>
+      <p>
+        You can choose where the pop-up window appears. Fixed corner positions use the primary
+        monitor. Cursor mode uses the monitor that contains the mouse pointer at the time the
+        action completes.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cursor</strong> (default)</td>
+            <td>
+              Near the mouse cursor position. Placement is window-aware: if the foreground
+              application is not maximized, the overlay is placed in free screen space beside or
+              below that window. Falls back to cursor-offset placement with edge clamping when the
+              foreground window is maximized or cannot be detected.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Upper Left</strong></td>
+            <td>Top-left corner of the primary monitor, 20px from the edges.</td>
+          </tr>
+          <tr>
+            <td><strong>Upper Right</strong></td>
+            <td>Top-right corner of the primary monitor.</td>
+          </tr>
+          <tr>
+            <td><strong>Lower Left</strong></td>
+            <td>Bottom-left corner of the primary monitor.</td>
+          </tr>
+          <tr>
+            <td><strong>Lower Right</strong></td>
+            <td>Bottom-right corner of the primary monitor.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Duration</h2>
+      <p>
+        The duration setting controls how long the pop-up stays visible before it auto-dismisses.
+      </p>
+      <ul>
+        <li><strong>Default</strong>: 20 seconds.</li>
+        <li><strong>Maximum</strong>: 999 seconds.</li>
+        <li><strong>Set to 0</strong>: The window stays open indefinitely until you close it manually.</li>
+      </ul>
+      <p>
+        While the auto-dismiss timer is active, a <strong>pause button</strong> appears in the
+        top bar. Click it to cancel the timer and keep the window visible. The pause button is
+        hidden when duration is set to 0, because there is no timer to pause.
+      </p>
+      <p>
+        The window also dismisses automatically when a new action starts executing, so a stale
+        result is cleared before the next one arrives.
+      </p>
+      <p>
+        Press <kbd>Escape</kbd> to dismiss the overlay immediately at any time.
+      </p>
+
+      <h2>Appearance</h2>
+      <p>
+        The Result Pop-Up Window is a glass-effect floating window with the following
+        characteristics:
+      </p>
+      <ul>
+        <li>
+          <strong>Background</strong>: Semi-transparent dark background (92% opacity) with a 12px
+          border radius and a subtle white border.
+        </li>
+        <li>
+          <strong>Text</strong>: White text, pre-wrap formatted, scrollable if the content exceeds
+          the window height.
+        </li>
+        <li>
+          <strong>Size</strong>: Estimated from text content. Min: 200&times;60 logical pixels.
+          Max: 500&times;400 logical pixels (both before scaling). Long lines wrap and grow the
+          window height rather than extending width past the maximum.
+        </li>
+        <li>
+          <strong>Non-focusable</strong>: Uses <code>WS_EX_NOACTIVATE</code> so the window never
+          takes keyboard focus from your active application.
+        </li>
+        <li>
+          <strong>Always on top</strong>: Stays above other windows until dismissed.
+        </li>
+        <li>
+          <strong>Click to copy</strong>: Click anywhere on the result text to copy it to the
+          clipboard. A brief "Copied" toast confirms the action.
+        </li>
+        <li>
+          <strong>Drag to reposition</strong>: Click and drag the window body to move it freely.
+          A 5px movement threshold distinguishes a drag from a click-to-copy.
+        </li>
+        <li>
+          <strong>Token usage</strong>: When available, the bottom-right corner shows prompt
+          tokens, completion tokens, total tokens, and response time (for example:
+          <code>1.2s &middot; 45+128=173 tok</code>).
+        </li>
+      </ul>
+      <div class="docs-warning">
+        The pop-up window cannot receive keyboard focus by design, so you cannot select text
+        inside it. Use click-to-copy to get the full result onto your clipboard.
+      </div>
+
+      <h2>Configuration</h2>
+      <p>
+        Per-action settings are on each action card in <a href="settings.html">Settings &gt;
+        Actions</a>:
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Overlay Mode</td>
+            <td>Off</td>
+            <td>Three-segment toggle: Off / Always / Hotkey Only.</td>
+          </tr>
+          <tr>
+            <td>Position</td>
+            <td>Cursor</td>
+            <td>
+              Dropdown: Cursor, Upper Left, Upper Right, Lower Left, Lower Right.
+            </td>
+          </tr>
+          <tr>
+            <td>Duration (seconds)</td>
+            <td>20</td>
+            <td>
+              How long the window stays visible before auto-dismissing. Set to 0 to disable
+              auto-dismiss. Maximum: 999.
+            </td>
+          </tr>
+          <tr>
+            <td>Result Overlay Scale</td>
+            <td>1.4&times;</td>
+            <td>
+              Zoom level of the pop-up window. Range: 1.0&times;&ndash;3.0&times;. Configured in
+              Settings &gt; General. Independent from the main panel UI scale and the Prompt
+              Library overlay scale.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>PromptBar Overlay</h2>
+      <p>
+        The <a href="main-window.html">PromptBar</a> also supports the Result Pop-Up Window for
+        AI Paste results. Its overlay settings are configured separately in
+        <a href="settings.html">Settings &gt; General</a> under the PromptBar section:
+      </p>
+      <ul>
+        <li><strong>Overlay Mode</strong>: Off / Always / Hotkey Only.</li>
+        <li><strong>Position</strong>: Same five options as per-action settings.</li>
+        <li><strong>Duration</strong>: Configurable independently from per-action durations.</li>
+      </ul>
+      <div class="docs-tip">
+        The PromptBar default execution mode is overlay, so PromptBar AI Paste results show in
+        the pop-up window by default.
+      </div>
+
+      <h2>Related</h2>
+      <ul>
+        <li><a href="actions.html">Actions</a> &mdash; Configure overlay mode, position, and duration per action.</li>
+        <li><a href="main-window.html">Main Window</a> &mdash; The PromptBar, which has its own overlay settings.</li>
+        <li><a href="prompt-library.html">Prompt Library</a> &mdash; Execute prompts directly to the pop-up window from the library overlay.</li>
+        <li><a href="settings.html">Settings</a> &mdash; Adjust the Result Pop-Up Window scale in General settings.</li>
+        <li><a href="keyboard-shortcuts.html">Keyboard Shortcuts</a> &mdash; Press <kbd>Escape</kbd> to dismiss the overlay.</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

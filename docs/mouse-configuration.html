@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Configuration &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Mouse Configuration</h1>
+      <p class="subtitle">Use your mouse buttons to trigger PasteSuiteAI actions &mdash; no keyboard needed</p>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>How Mouse Triggers Work</h2>
+      <p>
+        PasteSuiteAI can detect mouse button clicks system-wide, just like keyboard hotkeys.
+        Select text in any application, click the assigned mouse button, and the action runs
+        instantly. You can also combine mouse buttons with <kbd>Ctrl</kbd>, <kbd>Alt</kbd>,
+        or <kbd>Shift</kbd> for more combinations.
+      </p>
+      <p>
+        There are two ways to trigger actions with your mouse:
+      </p>
+      <ol>
+        <li><strong>Mouse signals</strong> &mdash; buttons that Windows recognizes natively
+          (Middle, Back, Forward). PasteSuiteAI detects these directly.</li>
+        <li><strong>Keyboard shortcuts via mouse driver</strong> &mdash; buttons that only your
+          mouse software understands (gesture buttons, scroll wheel tilts, etc.). You assign a
+          keyboard shortcut to them in your mouse software, and PasteSuiteAI picks it up as a
+          regular hotkey.</li>
+      </ol>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Which Mouse Buttons Can PasteSuiteAI Detect?</h2>
+      <p>
+        Windows supports 5 standard mouse buttons. PasteSuiteAI can detect all of them.
+        Anything beyond these 5 requires your mouse driver software to translate the button
+        into something Windows understands.
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Button</th>
+            <th>Windows Signal</th>
+            <th>Detected?</th>
+            <th>Usable as Trigger?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Left click</td>
+            <td>WM_LBUTTONDOWN</td>
+            <td>Yes</td>
+            <td>Only with modifier (Ctrl/Alt/Shift)</td>
+          </tr>
+          <tr>
+            <td>Right click</td>
+            <td>WM_RBUTTONDOWN</td>
+            <td>Yes</td>
+            <td>No (reserved for context menus)</td>
+          </tr>
+          <tr>
+            <td>Middle click (scroll wheel)</td>
+            <td>WM_MBUTTONDOWN</td>
+            <td>Yes</td>
+            <td>Yes &mdash; <code>middle</code></td>
+          </tr>
+          <tr>
+            <td>Back / X1</td>
+            <td>XBUTTON1</td>
+            <td>Yes</td>
+            <td>Yes &mdash; <code>x1</code></td>
+          </tr>
+          <tr>
+            <td>Forward / X2</td>
+            <td>XBUTTON2</td>
+            <td>Yes</td>
+            <td>Yes &mdash; <code>x2</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        <strong>Key concept:</strong> It does not matter which physical button on your mouse you
+        press. What matters is the <em>logical signal</em> that the button sends. If your mouse
+        software assigns "Forward" to any button, PasteSuiteAI receives it as <code>x2</code>,
+        regardless of where the button is located on the mouse.
+      </div>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Mice with Extra Buttons (6+ Buttons)</h2>
+      <p>
+        Many ergonomic and gaming mice have more than 5 buttons. Examples include the
+        Logitech MX Master series (7 clickable buttons + scroll tilts + thumb wheel),
+        Razer DeathAdder, Corsair Scimitar, and others.
+      </p>
+      <p>
+        Windows can only see 5 standard mouse buttons. Everything beyond that is handled
+        by the mouse manufacturer's driver software. Here is what this means for a typical
+        multi-button mouse:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Button</th>
+            <th>Detected by PasteSuiteAI?</th>
+            <th>How to Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Left click</td>
+            <td>Yes</td>
+            <td>Only with modifier key</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Right click</td>
+            <td>Yes</td>
+            <td>Not usable (system reserved)</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Scroll wheel click</td>
+            <td>Yes, directly</td>
+            <td>Assign as mouse trigger (<code>middle</code>)</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Scroll wheel tilt left</td>
+            <td>No (scroll event only)</td>
+            <td>Assign a keyboard shortcut in mouse software</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Scroll wheel tilt right</td>
+            <td>No (scroll event only)</td>
+            <td>Assign a keyboard shortcut in mouse software</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Mode-shift / top button</td>
+            <td>No (firmware only)</td>
+            <td>Assign a keyboard shortcut in mouse software</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Forward (thumb)</td>
+            <td>Yes, directly</td>
+            <td>Assign as mouse trigger (<code>x2</code>)</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Back (thumb)</td>
+            <td>Yes, directly</td>
+            <td>Assign as mouse trigger (<code>x1</code>)</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Gesture / extra thumb button</td>
+            <td>No (vendor-specific)</td>
+            <td>Assign a keyboard shortcut in mouse software</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Horizontal thumb wheel</td>
+            <td>No (scroll event only)</td>
+            <td>Assign a keyboard shortcut in mouse software</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>DPI switch (bottom)</td>
+            <td>No</td>
+            <td>Usually not configurable</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Summary:</strong> Buttons 3, 7, and 8 (Middle, Forward, Back) work directly.
+        Buttons 4, 5, 6, 9, and 10 need a keyboard shortcut assigned in your mouse software.
+        Buttons 1, 2 and 11 are not practical as triggers.
+      </p>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>The Keyboard Shortcut Trick</h2>
+      <p>
+        For buttons that PasteSuiteAI cannot detect directly, there is a simple workaround:
+      </p>
+      <ol>
+        <li>Open your mouse driver software (e.g., Logitech Options+, Razer Synapse,
+          Corsair iCUE, SteelSeries GG).</li>
+        <li>Find the button you want to use.</li>
+        <li>Set its action to <strong>"Keyboard shortcut"</strong>.</li>
+        <li>Enter a key combination that matches a PasteSuiteAI hotkey
+          (e.g., <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>).</li>
+      </ol>
+      <p>
+        Now, when you press that mouse button, your mouse software sends the keyboard
+        shortcut to Windows, and PasteSuiteAI triggers the assigned action. The mouse
+        button effectively becomes a hotkey button.
+      </p>
+
+      <div class="docs-warning">
+        <strong>Important:</strong> If your mouse software assigns its own function to a
+        button (e.g., "Browser Back"), it may consume the button event before PasteSuiteAI
+        can see it. To use that button as a PasteSuiteAI trigger, set it to
+        <strong>"Forward"</strong>, <strong>"Back"</strong>, or a <strong>"Keyboard shortcut"</strong>
+        in your mouse software. Setting it to "No action" or "Default" also works for
+        the standard Back/Forward signals.
+      </div>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Default Mouse Triggers</h2>
+      <p>
+        PasteSuiteAI comes with these mouse triggers pre-configured out of the box:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Mouse Trigger</th>
+            <th>Button</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prompt Library</td>
+            <td><code>middle</code></td>
+            <td>Scroll wheel click</td>
+          </tr>
+          <tr>
+            <td>Repaste Last Result</td>
+            <td><code>x1</code></td>
+            <td>Back / thumb button</td>
+          </tr>
+          <tr>
+            <td>Audio to Text</td>
+            <td><code>x2</code></td>
+            <td>Forward / thumb button</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        All other actions use keyboard hotkeys by default. You can change or add mouse
+        triggers for any action in <a href="keyboard-shortcuts.html">Settings &rarr; Action card &rarr; Mouse Trigger</a>.
+      </p>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Example: Full Mouse Configuration</h2>
+      <p>
+        Here is an example of how to set up a multi-button mouse for maximum productivity.
+        This configuration uses all available buttons to cover the most common actions
+        without ever touching the keyboard.
+      </p>
+
+      <img src="img/mouse-config.svg" alt="Mouse button configuration diagram showing all buttons with their assigned PasteSuiteAI functions" style="width:100%;max-width:800px;display:block;margin:1.5rem auto;border-radius:8px;">
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mouse Button</th>
+            <th>Trigger Type</th>
+            <th>Value</th>
+            <th>PasteSuiteAI Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Scroll wheel click</td>
+            <td>Mouse signal</td>
+            <td><code>middle</code></td>
+            <td>Prompt Library</td>
+          </tr>
+          <tr>
+            <td>Back (thumb)</td>
+            <td>Mouse signal</td>
+            <td><code>x1</code></td>
+            <td>Repaste Last Result</td>
+          </tr>
+          <tr>
+            <td>Forward (thumb)</td>
+            <td>Mouse signal</td>
+            <td><code>x2</code></td>
+            <td>Audio to Text</td>
+          </tr>
+          <tr>
+            <td>Gesture / thumb button</td>
+            <td>Keyboard shortcut</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></td>
+            <td>Rewrite English</td>
+          </tr>
+          <tr>
+            <td>Top button (behind wheel)</td>
+            <td>Keyboard shortcut</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td>
+            <td>Diplomatic Rewrite</td>
+          </tr>
+          <tr>
+            <td>Scroll wheel tilt left/right</td>
+            <td>Keyboard shortcut</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></td>
+            <td>Main Trigger (open UI)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        In this setup, the 3 most-used actions (Prompt Library, Repaste, Audio to Text) are on
+        directly detected mouse buttons for instant response. The remaining actions use keyboard
+        shortcuts routed through the mouse software. You never need to take your hand off the mouse.
+      </div>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Step-by-Step Setup</h2>
+
+      <h3>Step 1: Configure the Direct Mouse Triggers</h3>
+      <p>
+        These work out of the box with the default configuration. If you changed them,
+        go to Settings in PasteSuiteAI and set:
+      </p>
+      <ul>
+        <li>On the <strong>Audio to Text</strong> action card &rarr; Mouse Trigger &rarr; click with the Forward button &rarr; Save</li>
+        <li>On the <strong>General</strong> tab &rarr; Repaste hotkey section &rarr; Mouse Trigger &rarr; click with the Back button &rarr; Save</li>
+        <li>On the <strong>General</strong> tab &rarr; Prompt Library section &rarr; Mouse Trigger &rarr; click with the scroll wheel &rarr; Save</li>
+      </ul>
+
+      <h3>Step 2: Configure the Keyboard Shortcuts in Your Mouse Software</h3>
+      <p>
+        For buttons that PasteSuiteAI cannot detect directly, open your mouse driver software
+        and assign keyboard shortcuts:
+      </p>
+      <ol>
+        <li>Open your mouse configuration software (e.g., Logitech Options+).</li>
+        <li>Select the button you want to configure.</li>
+        <li>Set the action to <strong>"Keyboard shortcut"</strong>.</li>
+        <li>Record the matching PasteSuiteAI hotkey:
+          <ul>
+            <li>Gesture button &rarr; <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> (Rewrite English)</li>
+            <li>Top button &rarr; <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> (Diplomatic Rewrite)</li>
+            <li>Scroll tilt left &rarr; <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> (Main Trigger)</li>
+            <li>Scroll tilt right &rarr; <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> (Main Trigger)</li>
+          </ul>
+        </li>
+        <li>Save your mouse configuration.</li>
+      </ol>
+
+      <div class="docs-tip">
+        You can assign any PasteSuiteAI hotkey to any mouse button. The example above is just
+        one way to set things up. Customize it to match your workflow.
+      </div>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Troubleshooting</h2>
+
+      <h3>Mouse button does not trigger anything</h3>
+      <ul>
+        <li><strong>Check your mouse software.</strong> If your mouse driver (Logitech Options+,
+          Razer Synapse, etc.) assigns its own action to the button, it may consume the event
+          before PasteSuiteAI sees it. Set the button to "Forward", "Back", "Middle", or a
+          keyboard shortcut.</li>
+        <li><strong>Verify the trigger in PasteSuiteAI.</strong> Open Settings, find the action card,
+          and check that the mouse trigger is correctly assigned.</li>
+        <li><strong>Check for conflicts.</strong> Two actions cannot share the same mouse trigger.
+          PasteSuiteAI warns you about conflicts when saving.</li>
+      </ul>
+
+      <h3>Back or Forward button not detected</h3>
+      <ul>
+        <li>Some mouse software intercepts X1/X2 (Back/Forward) for its own features like
+          "Browser Back" or "Smart Actions". Change the button assignment to "Default" or
+          "No action" in your mouse software to let the signal pass through to PasteSuiteAI.</li>
+        <li>If your mouse has no Back/Forward buttons, you can use <code>middle</code> with
+          modifiers instead (e.g., <code>ctrl+middle</code>, <code>shift+middle</code>).</li>
+      </ul>
+
+      <h3>Keyboard shortcut from mouse software does not work</h3>
+      <ul>
+        <li>Make sure the keyboard shortcut you assigned in your mouse software
+          <strong>exactly matches</strong> the hotkey configured in PasteSuiteAI. Modifier
+          order does not matter &mdash; PasteSuiteAI normalizes it automatically.</li>
+        <li>Some mouse software adds a small delay or sends modifier keys in an unexpected
+          order. If a shortcut does not trigger reliably, try a different key combination.</li>
+      </ul>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Available Trigger Combinations</h2>
+      <p>
+        With 3 directly detected buttons and 3 modifier keys, you have many possible
+        combinations:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Button</th>
+            <th>No Modifier</th>
+            <th>+ Ctrl</th>
+            <th>+ Alt</th>
+            <th>+ Shift</th>
+            <th>+ Ctrl+Alt</th>
+            <th>+ Ctrl+Shift</th>
+            <th>+ Alt+Shift</th>
+            <th>+ All 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>middle</code></td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+          </tr>
+          <tr>
+            <td><code>x1</code></td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+          </tr>
+          <tr>
+            <td><code>x2</code></td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+            <td>&check;</td><td>&check;</td><td>&check;</td><td>&check;</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        That is <strong>24 unique mouse triggers</strong> &mdash; plus any number of additional
+        triggers from keyboard shortcuts routed through your mouse driver software.
+      </p>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <h2>Related</h2>
+      <div class="docs-grid">
+        <a class="docs-card" href="keyboard-shortcuts.html">
+          <strong>Keyboard Shortcuts</strong>
+          <span>Hotkey format, chord sequences, and trigger editor details.</span>
+        </a>
+        <a class="docs-card" href="actions.html">
+          <strong>Actions</strong>
+          <span>Configure what each trigger does and set execution modes.</span>
+        </a>
+        <a class="docs-card" href="speech-to-text.html">
+          <strong>Speech to Text</strong>
+          <span>Use a mouse button to start and stop voice recording.</span>
+        </a>
+      </div>
+
+      <!-- ────────────────────────────────────────────────────── -->
+      <p class="docs-disclaimer">
+        Logitech, Logi, Options+, and MX Master are trademarks or registered trademarks of
+        Logitech International S.A. Razer and Razer Synapse are trademarks of Razer Inc.
+        Corsair and iCUE are trademarks of Corsair Gaming, Inc. SteelSeries and SteelSeries GG
+        are trademarks of SteelSeries ApS. PasteSuiteAI is not affiliated with, endorsed by,
+        or sponsored by any of these companies. All third-party names are used solely for
+        identification purposes.
+      </p>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

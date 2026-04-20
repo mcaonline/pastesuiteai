@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" width="800" height="540">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <style>
+    text { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; }
+  </style>
+
+  <!-- ═══ Background ═══ -->
+  <rect width="800" height="540" fill="#161616"/>
+
+  <!-- ═══ Title ═══ -->
+  <text x="400" y="35" text-anchor="middle" font-size="16" font-weight="600" fill="#d4d4d4">Example: Mouse Button Configuration for PasteSuiteAI</text>
+
+  <!-- ═══ Mouse body ═══ -->
+  <g filter="url(#shadow)">
+    <g transform="translate(260,52) scale(3.2) translate(0,-179.26022)">
+      <!-- Body right contour -->
+      <path fill="#3a3a3a" stroke="#555" stroke-width="0.265"
+        d="m 5.567273,261.80953 c 0.495603,2.47055 0.05624,2.90335 2.737786,5.27746 7.226984,6.39842 20.922373,15.82494 27.651587,18.97447 1.860288,0.69493 2.586899,1.04147 4.03219,1.4621 1.219514,0.35493 3.109592,0.58727 5.663267,0.8765 4.324449,0.48982 9.010042,-0.72431 11.943602,-2.20498 12.628976,-6.07933 17.127334,-17.28594 17.071843,-30.20085 -0.11693,-5.69619 -0.785099,-13.64745 -1.41987,-18.67546 -0.63476,-5.02801 -1.269523,-7.684 -1.269523,-7.684"/>
+      <!-- Main body -->
+      <path fill="#444" stroke="#555" stroke-width="0.265" stroke-linejoin="round"
+        d="m 22.335412,218.56928 c -0.336586,1.90479 -0.172158,3.72734 -2.83009,5.46029 -3.20098,2.08702 -5.622775,2.52499 -7.695255,4.03901 -1.801028,1.31571 -3.1823428,4.732 -3.349388,5.76767 -0.1670418,1.03567 -1.8780079,9.80438 -2.278912,14.78228 -0.284337,3.66752 -0.701173,6.70632 -0.59227,13.16814 2.64502,1.86753 23.365875,17.15892 26.821202,18.86279 4.720124,2.32755 7.903038,4.59165 15.61554,4.98584 7.974624,-0.0299 16.227282,-4.18855 20.4907,-11.15593 4.077177,-6.66302 5.556685,-15.42841 5.153165,-25.61985 -0.367496,-8.15172 -1.565801,-17.96537 -1.666031,-19.16808 -0.100219,-1.20271 0.07804,-9.42835 -0.57906,-20.2704 -0.66818,-11.02486 -1.958319,-12.89169 -3.311234,-14.68836 -2.011974,-2.67189 -13.297767,-6.0037 -20.54746,-7.37346 l -10.722725,-1.75297 c -5.091786,-0.35844 -8.6801,1.18913 -10.186262,6.00224 -1.422853,9.42294 -0.981342,15.24441 -1.095663,24.6236 -1.379831,1.49306 -2.70737,1.10058 -3.226257,2.33719 z"/>
+      <!-- Top button behind wheel -->
+      <rect fill="#444" stroke="#555" stroke-width="0.241" rx="0.53" ry="0.95"
+        x="45.907" y="223.403" width="4.025" height="7.199"/>
+      <!-- Scroll wheel -->
+      <g>
+        <rect fill="#505050" stroke="#555" stroke-width="0.265" rx="0.71" ry="0.74"
+          x="44.327" y="198.770" width="7.203" height="15.295"/>
+        <g transform="matrix(1.0163,0,0,1.0510,-4.314,-4.844)">
+          <rect fill="#3a3a3a" x="48.916" y="193.854" width="1.804" height="14.313"/>
+          <rect fill="#3a3a3a" x="52.091" y="193.854" width="1.804" height="14.313"/>
+        </g>
+      </g>
+      <!-- Side seam -->
+      <path fill="#3a3a3a" stroke="#555" stroke-width="0.265" stroke-linecap="round"
+        d="m 23.936811,217.36265 c -0.159891,6.92216 -0.308987,24.17748 -0.172071,31.57213 0.09722,1.54167 0.12574,3.8871 1.287551,3.86763 1.061869,-0.0178 1.09754,-1.5523 1.096111,-3.74538 -0.08137,-3.09261 -0.439988,-22.04292 -0.582504,-33.17194"/>
+      <!-- Thumb wheel (horizontal scroll) -->
+      <g transform="matrix(0.8634,-0.0102,0.0127,1.0764,72.060,-20.503)">
+        <rect transform="rotate(-90)" fill="#505050" stroke="#555" stroke-width="0.265" rx="1.465" ry="0.180"
+          x="-245.602" y="-60.825" width="14.829" height="3.751"/>
+        <g transform="matrix(-9.617e-5,-2.0776,0.2442,7.259e-6,-195.167,339.387)">
+          <rect fill="#3a3a3a" x="49.119" y="550.604" width="2.623" height="14.313"/>
+          <rect fill="#3a3a3a" x="45.737" y="550.604" width="2.623" height="14.313"/>
+        </g>
+      </g>
+      <!-- Gesture / bottom thumb button -->
+      <rect fill="#444" stroke="#555" stroke-width="0.277" rx="0.14" ry="0.83"
+        transform="rotate(5.849)" x="33.254" y="238.770" width="1.078" height="6.298"/>
+      <!-- Forward thumb button -->
+      <rect fill="#444" stroke="#555" stroke-width="0.373" rx="0.18" ry="1.18"
+        x="20.106" y="226.777" width="1.379" height="8.959"/>
+      <!-- Back thumb button -->
+      <rect fill="#444" stroke="#555" stroke-width="0.373" rx="0.18" ry="1.18"
+        x="20.137" y="237.252" width="1.379" height="8.959"/>
+      <!-- Right click surface -->
+      <path fill="#444" stroke="#555" stroke-width="0.265"
+        d="m 47.566319,187.35922 -0.0011,8.83601 h 4.429736 c 0.944074,0.0103 1.541526,0.16286 1.591638,1.49086 v 25.7406 c -0.01613,1.12557 -0.01285,1.28326 0.714169,1.6645 0.633972,0.33245 12.505057,1.73199 13.272819,1.86191 1.136048,0.0834 1.844239,-0.7554 1.771948,-2.18412 l -1.231791,-30.0363 c -3.39095,-3.92651 -17.567747,-6.72829 -20.54746,-7.37346 z"/>
+      <!-- Left click surface -->
+      <path fill="#444" stroke="#555" stroke-width="0.265"
+        d="m 26.657331,191.60849 c -1.399191,8.78714 -0.98853,15.83413 -1.095662,24.6236 l 0.172671,11.37875 c 4.239385,-0.81415 11.143696,-1.79505 15.300476,-3.50103 0.74613,-0.33 0.991198,-0.93406 0.991198,-1.76412 v -24.38833 c 0,-0.75187 1.027432,-1.71283 1.737363,-1.72083 l 3.801841,-0.0413 0.0011,-8.86975 -10.722724,-1.71923 c -4.632653,-0.55739 -9.039261,1.34192 -10.186221,6.00224 z"/>
+      <!-- LED indicator -->
+      <rect fill="#4ade80" stroke="#22c55e" stroke-width="0.168" rx="0.087" ry="0.498"
+        x="24.654" y="246.594" width="0.662" height="3.784"/>
+    </g>
+  </g>
+
+  <!-- ═══ Connector lines ═══ -->
+  <g fill="none" stroke="#666" stroke-width="1">
+    <!-- Right side -->
+    <line x1="430" y1="139" x2="536" y2="139"/>
+    <line x1="430" y1="205" x2="536" y2="234"/>
+    <line x1="335" y1="235" x2="536" y2="338" stroke-opacity="0.45"/>
+    <!-- Left side -->
+    <line x1="320" y1="218" x2="254" y2="184"/>
+    <line x1="320" y1="252" x2="254" y2="276"/>
+    <line x1="289" y1="260" x2="254" y2="369" stroke-opacity="0.45"/>
+  </g>
+
+  <!-- ═══ Button marker circles ═══ -->
+  <!-- Scroll wheel (blue) -->
+  <circle cx="430" cy="139" r="4.5" fill="#60a5fa" stroke="#fff" stroke-width="1"/>
+  <!-- Behind-wheel button (purple) -->
+  <circle cx="430" cy="205" r="4.5" fill="#a78bfa" stroke="#fff" stroke-width="1"/>
+  <!-- Thumb wheel (purple) -->
+  <circle cx="335" cy="235" r="4.5" fill="#a78bfa" stroke="#fff" stroke-width="1"/>
+  <!-- Forward button (green) -->
+  <circle cx="320" cy="218" r="4.5" fill="#34d399" stroke="#fff" stroke-width="1"/>
+  <!-- Back button (orange) -->
+  <circle cx="320" cy="252" r="4.5" fill="#f97316" stroke="#fff" stroke-width="1"/>
+  <!-- Gesture button (purple) -->
+  <circle cx="289" cy="260" r="4.5" fill="#a78bfa" stroke="#fff" stroke-width="1"/>
+
+  <!-- ═══ RIGHT LABELS ═══ -->
+
+  <!-- Label 1: Middle button → Prompt Library -->
+  <g transform="translate(540,100)">
+    <rect width="240" height="78" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect width="3" height="78" rx="1.5" fill="#60a5fa"/>
+    <text x="15" y="24" font-size="13" font-weight="700" fill="#60a5fa">Middle button</text>
+    <text x="15" y="42" font-size="10.5" fill="#93c5fd">Signal: Middle click</text>
+    <text x="15" y="64" font-size="12.5" font-weight="700" fill="#fbbf24">Prompt Library</text>
+  </g>
+
+  <!-- Label 2: Behind-wheel → Diplomatic Rewrite -->
+  <g transform="translate(540,195)">
+    <rect width="240" height="78" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect width="3" height="78" rx="1.5" fill="#a78bfa"/>
+    <text x="15" y="24" font-size="13" font-weight="700" fill="#a78bfa">Keyboard shortcut</text>
+    <text x="15" y="44" font-size="12" font-weight="700" fill="#fff">Ctrl + Alt + Shift + D</text>
+    <text x="15" y="64" font-size="12.5" font-weight="700" fill="#fbbf24">Diplomatic Rewrite</text>
+  </g>
+
+  <!-- Label 3: Thumb wheel → Main Trigger -->
+  <g transform="translate(540,290)">
+    <rect width="240" height="96" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect width="3" height="96" rx="1.5" fill="#a78bfa"/>
+    <text x="15" y="22" font-size="13" font-weight="700" fill="#a78bfa">Keyboard shortcut</text>
+    <text x="15" y="40" font-size="10.5" fill="#c4b5fd">Scroll wheel tilt left / right</text>
+    <text x="15" y="62" font-size="12" font-weight="700" fill="#fff">Ctrl + Alt + Shift + V</text>
+    <text x="15" y="82" font-size="12.5" font-weight="700" fill="#fbbf24">Main Trigger (open UI)</text>
+  </g>
+
+  <!-- ═══ LEFT LABELS ═══ -->
+
+  <!-- Label 4: Forward → Audio to Text -->
+  <g transform="translate(20,145)">
+    <rect width="230" height="78" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect x="227" width="3" height="78" rx="1.5" fill="#34d399"/>
+    <text x="12" y="24" font-size="13" font-weight="700" fill="#34d399">Forward</text>
+    <text x="12" y="42" font-size="10.5" fill="#6ee7b7">Signal: Mouse Forward (X2)</text>
+    <text x="12" y="64" font-size="12.5" font-weight="700" fill="#fbbf24">Audio to Text</text>
+  </g>
+
+  <!-- Label 5: Back → Repaste Last Result -->
+  <g transform="translate(20,237)">
+    <rect width="230" height="78" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect x="227" width="3" height="78" rx="1.5" fill="#f97316"/>
+    <text x="12" y="24" font-size="13" font-weight="700" fill="#f97316">Back</text>
+    <text x="12" y="42" font-size="10.5" fill="#fdba74">Signal: Mouse Back (X1)</text>
+    <text x="12" y="64" font-size="12.5" font-weight="700" fill="#fbbf24">Repaste Last Result (History)</text>
+  </g>
+
+  <!-- Label 6: Gesture button → Rewrite English -->
+  <g transform="translate(20,330)">
+    <rect width="230" height="78" rx="6" fill="#1e1e1e" fill-opacity="0.88"/>
+    <rect x="227" width="3" height="78" rx="1.5" fill="#a78bfa"/>
+    <text x="12" y="24" font-size="13" font-weight="700" fill="#a78bfa">Keyboard shortcut</text>
+    <text x="12" y="44" font-size="12" font-weight="700" fill="#fff">Ctrl + Alt + Shift + R</text>
+    <text x="12" y="64" font-size="12.5" font-weight="700" fill="#fbbf24">Rewrite English</text>
+  </g>
+
+  <!-- ═══ Legend ═══ -->
+  <g transform="translate(0,445)">
+    <!-- Row 1: Mouse signal -->
+    <circle cx="95" cy="0" r="3.5" fill="#34d399"/>
+    <circle cx="104" cy="0" r="3.5" fill="#60a5fa"/>
+    <circle cx="113" cy="0" r="3.5" fill="#f97316"/>
+    <text x="123" y="4" font-size="10" fill="#a0a0a0">Mouse signal &#x2014; detected directly by PasteSuiteAI</text>
+    <!-- Row 1: Keyboard shortcut -->
+    <circle cx="460" cy="0" r="3.5" fill="#a78bfa"/>
+    <text x="470" y="4" font-size="10" fill="#a0a0a0">Keyboard shortcut &#x2014; configured in mouse driver</text>
+    <!-- Row 2: Function -->
+    <circle cx="95" cy="22" r="3.5" fill="#fbbf24"/>
+    <text x="108" y="26" font-size="10" fill="#a0a0a0">PasteSuiteAI function triggered</text>
+  </g>
+
+  <!-- ═══ Footer ═══ -->
+  <text x="400" y="508" text-anchor="middle" font-size="9.5" fill="#555" font-style="italic">Buttons can be freely reassigned in your mouse driver software. This is an example configuration.</text>
+</svg>

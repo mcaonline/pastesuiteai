@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <main class="docs-content">
+      <h1>Welcome</h1>
+      <p class="subtitle">Everything you need to know about PasteSuiteAI.</p>
+
+      <p>
+        PasteSuiteAI is a Windows desktop tool for smart text actions, AI-powered text transforms, and speech-to-text transcription.
+        It works with your own API keys &mdash; bring a key from OpenAI, Anthropic, Google Gemini, Mistral, Azure OpenAI, or connect to a local model via Ollama or another compatible endpoint.
+        Your keys are stored securely in your OS credential store and never leave your machine.
+      </p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Paste as Plain Text</strong> &mdash; strip all formatting from copied text with a single hotkey.</li>
+        <li><strong>AI Text Transforms</strong> &mdash; rewrite, translate, correct, summarize, or apply any custom LLM prompt to selected text.</li>
+        <li><strong>Speech to Text</strong> &mdash; record audio from your microphone and transcribe or translate it using a cloud or local STT provider.</li>
+        <li><strong>PromptBar</strong> &mdash; a global prompt input for free-form AI questions, plus one-click quick prompt buttons.</li>
+        <li><strong>Prompt Library</strong> &mdash; save, organize, and instantly recall prompts from an overlay that works in any application.</li>
+        <li><strong>Action Chaining</strong> &mdash; feed the output of one action into the next to build multi-step processing pipelines.</li>
+        <li><strong>Result Pop-Up Window</strong> &mdash; display AI output in a floating overlay near your cursor, without leaving the current application.</li>
+        <li><strong>Custom API Pipelines</strong> &mdash; connect to any REST API with multi-step request sequences, loops, and conditionals.</li>
+        <li><strong>History</strong> &mdash; browse recent entries and action results within your session.</li>
+      </ul>
+
+      <h2>Quick Start</h2>
+      <p>New to PasteSuiteAI? Follow these steps to get up and running:</p>
+      <ol>
+        <li><a href="getting-started.html">Install &amp; set up</a> &mdash; download the installer, run the Setup Wizard, and connect your first AI provider.</li>
+        <li><a href="actions.html">Explore Actions</a> &mdash; enable the built-in actions or create your own custom text transforms.</li>
+        <li><a href="connections.html">Configure Connections</a> &mdash; add more providers, tune system prompts, and set capability routing defaults.</li>
+      </ol>
+
+      <h2>Explore the Docs</h2>
+
+      <h3>Core Features</h3>
+      <div class="docs-grid">
+        <a href="main-window.html" class="docs-card">
+          <h3>Main Window</h3>
+          <p>Text preview, prompt input, action buttons, and connection selector.</p>
+        </a>
+        <a href="promptbar.html" class="docs-card">
+          <h3>PromptBar</h3>
+          <p>Free-form AI questions and one-click prompt buttons.</p>
+        </a>
+        <a href="actions.html" class="docs-card">
+          <h3>Actions</h3>
+          <p>AI transforms, static text, regex, chaining, and execution modes.</p>
+        </a>
+        <a href="prompt-library.html" class="docs-card">
+          <h3>Prompt Library</h3>
+          <p>Browse, manage, and execute saved prompts from anywhere.</p>
+        </a>
+        <a href="speech-to-text.html" class="docs-card">
+          <h3>Speech to Text</h3>
+          <p>Record audio, transcribe, and translate with configurable STT.</p>
+        </a>
+        <a href="result-overlay.html" class="docs-card">
+          <h3>Result Pop-Up</h3>
+          <p>Floating result display near your cursor or in screen corners.</p>
+        </a>
+      </div>
+
+      <h3>Configuration &amp; Reference</h3>
+      <div class="docs-grid">
+        <a href="connections.html" class="docs-card">
+          <h3>Connections</h3>
+          <p>AI providers, API keys, models, capabilities, and Custom API.</p>
+        </a>
+        <a href="settings.html" class="docs-card">
+          <h3>Settings</h3>
+          <p>Appearance, window behavior, data management, and safety limits.</p>
+        </a>
+        <a href="history.html" class="docs-card">
+          <h3>History</h3>
+          <p>Session history of recent entries and action results.</p>
+        </a>
+        <a href="keyboard-shortcuts.html" class="docs-card">
+          <h3>Keyboard Shortcuts</h3>
+          <p>Default hotkeys, mouse triggers, chords, and conflict detection.</p>
+        </a>
+        <a href="licensing.html" class="docs-card">
+          <h3>Licensing &amp; Trial</h3>
+          <p>Trial, free tier, Pro license, activation, and usage limits.</p>
+        </a>
+        <a href="getting-started.html" class="docs-card">
+          <h3>Getting Started</h3>
+          <p>Installation, first launch, Setup Wizard, and your first action.</p>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

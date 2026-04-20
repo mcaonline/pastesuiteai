@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "api_key",
+      "source": "vault",
+      "default_value": null,
+      "description": "Zhipu AI API Key"
+    },
+    {
+      "name": "model",
+      "source": "config",
+      "default_value": "glm-4-plus",
+      "description": "Model ID (e.g. glm-4-plus, glm-4-air, glm-4-flash)"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Chat Completion",
+      "method": "POST",
+      "url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+      "auth": {
+        "auth_type": "bearer",
+        "credential": "{{api_key}}"
+      },
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ],
+      "body": "{\n  \"model\": \"{{model}}\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"{{system_prompt}}\"},\n    {\"role\": \"user\", \"content\": \"{{prompt}}\"}\n  ],\n  \"temperature\": {{temperature}}\n}",
+      "body_content_type": "application/json",
+      "extract": [
+        {
+          "variable_name": "result",
+          "source": "body",
+          "path": "choices[0].message.content"
+        }
+      ],
+      "stream_path": null
+    }
+  ],
+  "result_from": "steps.1.result"
+}

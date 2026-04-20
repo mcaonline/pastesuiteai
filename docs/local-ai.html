@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local AI Models &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+  <style>
+    /* OS tab switcher */
+    .os-tabs { display: flex; gap: 0; margin: 24px 0 0; border-bottom: 2px solid var(--color-separator); }
+    .os-tab {
+      padding: 10px 20px; font-size: 14px; font-weight: 500;
+      color: var(--color-text-tertiary); cursor: pointer;
+      border: none; background: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; transition: color 0.2s, border-color 0.2s;
+      font-family: var(--font-family);
+    }
+    .os-tab:hover { color: var(--color-text-primary); }
+    .os-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+    .os-panel { display: none; padding: 24px 0 0; }
+    .os-panel.active { display: block; }
+
+    /* Step blocks */
+    .step { margin-bottom: 32px; }
+    .step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--color-accent); color: #fff;
+      font-size: 14px; font-weight: 600; margin-right: 10px;
+      vertical-align: middle;
+    }
+    .step h3 { display: inline; vertical-align: middle; margin-top: 0; }
+
+    /* Terminal blocks */
+    .terminal {
+      background: #1c1c1e; color: #f5f5f7; padding: 16px 20px;
+      border-radius: 8px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px; line-height: 1.7; margin: 12px 0 16px;
+      overflow-x: auto; position: relative;
+    }
+    .terminal-comment { color: #6e6e73; }
+    .terminal .prompt { color: #86868b; user-select: none; }
+    @media (prefers-color-scheme: light) {
+      .terminal { background: #1d1d1f; }
+    }
+
+    /* Clickable code in tables */
+    code.copyable {
+      cursor: pointer; position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+    code.copyable:hover { background: var(--color-accent); color: #fff; }
+    code.copyable::after {
+      content: 'click to copy'; position: absolute;
+      bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: var(--color-text-tertiary);
+      white-space: nowrap; opacity: 0; transition: opacity 0.15s;
+      pointer-events: none;
+    }
+    code.copyable:hover::after { opacity: 1; }
+    code.copyable.copied { background: #30d158; color: #fff; }
+    code.copyable.copied::after { content: 'Copied!'; opacity: 1; color: #30d158; }
+
+    /* Copy button */
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(255,255,255,0.1); border: none; color: #a1a1a6;
+      padding: 4px 10px; border-radius: 4px; font-size: 11px;
+      cursor: pointer; font-family: var(--font-family); transition: background 0.15s, color 0.15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.2); color: #f5f5f7; }
+
+    /* Comparison table highlight */
+    .quality-excellent { color: #30d158; font-weight: 600; }
+    .quality-good { color: #ff9f0a; font-weight: 600; }
+    .quality-poor { color: #ff453a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Local AI Models</h1>
+      <p class="subtitle">Run AI text actions privately on your own machine &mdash; no cloud, no API key, no cost</p>
+
+      <!-- ============================== -->
+      <h2>Why not built-in?</h2>
+
+      <p>We would love to offer a one-click &ldquo;Download &amp; Run&rdquo; experience for local AI models &mdash; and we will, as soon as the quality is there. Today&rsquo;s small local models (2&ndash;7 billion parameters) are not yet good enough to meet our quality standard:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Cloud AI (GPT-4, Claude)</th>
+            <th>Local 7B</th>
+            <th>Local 27&ndash;35B<br>(24+ GB VRAM or 32 GB RAM;<br>RTX 5090 recommended)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Grammar correction (English, German, French)</td>
+            <td class="quality-excellent">Excellent</td>
+            <td class="quality-good">Decent</td>
+            <td class="quality-good">Good</td>
+          </tr>
+          <tr>
+            <td>Grammar correction (smaller languages)</td>
+            <td class="quality-excellent">Very good</td>
+            <td class="quality-poor">Unreliable</td>
+            <td class="quality-good">Acceptable</td>
+          </tr>
+          <tr>
+            <td>Translation (common pairs like EN&harr;DE)</td>
+            <td class="quality-excellent">Excellent</td>
+            <td class="quality-good">Acceptable</td>
+            <td class="quality-good">Good</td>
+          </tr>
+          <tr>
+            <td>Translation (rare pairs like FI&harr;KO)</td>
+            <td class="quality-good">Good</td>
+            <td class="quality-poor">Often wrong</td>
+            <td class="quality-good">Acceptable</td>
+          </tr>
+          <tr>
+            <td>Rewriting &amp; summarization</td>
+            <td class="quality-excellent">Excellent</td>
+            <td class="quality-good">Basic</td>
+            <td class="quality-good">Good</td>
+          </tr>
+          <tr>
+            <td>Complex instructions</td>
+            <td class="quality-excellent">Excellent</td>
+            <td class="quality-poor">Struggles</td>
+            <td class="quality-good">Decent</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>We refuse to ship a built-in experience that gives you mediocre results. When local models reach cloud-level quality, we will add one-click support. Until then, you can set up local AI yourself in about five minutes using <strong>Ollama</strong> &mdash; a free, open-source tool that runs AI models on your machine.</p>
+
+      <div class="docs-tip">
+        <strong>Good news:</strong> Local speech-to-text (Whisper) is a different story &mdash; it already matches cloud quality. PasteSuiteAI includes built-in one-click Whisper support for local transcription. See <a href="speech-to-text.html">Speech to Text</a> for setup details.
+      </div>
+
+      <!-- ============================== -->
+      <h2>When local AI makes sense</h2>
+
+      <ul>
+        <li><strong>Privacy</strong> &mdash; Your text never leaves your machine. Zero cloud contact.</li>
+        <li><strong>Offline use</strong> &mdash; Works without an internet connection.</li>
+        <li><strong>No API costs</strong> &mdash; No API key needed, no per-request charges.</li>
+        <li><strong>Experimentation</strong> &mdash; Try different open-source models and compare results.</li>
+      </ul>
+
+      <div class="docs-warning">
+        <strong>Hardware requirements:</strong> Local AI models need significant RAM. A 7B model needs at least 8&nbsp;GB of RAM (16&nbsp;GB recommended). A dedicated GPU speeds things up considerably but is not strictly required &mdash; CPU-only inference works, just slower.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Setup Guide: Ollama + PasteSuiteAI</h2>
+
+      <p>This guide takes you from zero to a working local AI connection in about five minutes. Pick your operating system below:</p>
+
+      <!-- OS Tabs -->
+      <div class="os-tabs" role="tablist">
+        <button class="os-tab active" role="tab" data-os="windows" aria-selected="true">Windows</button>
+        <button class="os-tab" role="tab" data-os="macos" aria-selected="false">macOS</button>
+        <button class="os-tab" role="tab" data-os="linux" aria-selected="false">Linux</button>
+      </div>
+
+      <!-- ==================== WINDOWS ==================== -->
+      <div class="os-panel active" id="os-windows">
+
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Download Ollama</h3>
+          <p>Visit <a href="https://ollama.com/download/windows" target="_blank" rel="noopener">ollama.com/download/windows</a> and download the installer. Run it &mdash; no configuration needed, just click through.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Download a model</h3>
+          <p>Open a terminal (press <kbd>Win</kbd>+<kbd>R</kbd>, type <code>cmd</code>, press Enter) and run:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">&gt; </span>ollama pull qwen2.5:7b
+          </div>
+          <p>This downloads a multilingual 7B model (~4.7&nbsp;GB). It only needs to download once. See <a href="#recommended-models">Recommended Models</a> below for alternative choices based on your hardware.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Verify Ollama is running</h3>
+          <p>Ollama runs as a background service automatically after installation. Verify it by running:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">&gt; </span>ollama list
+          </div>
+          <p>You should see the model you just downloaded in the list. If you get an error, start Ollama from the Start menu.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Connect PasteSuiteAI</h3>
+          <p>Now open PasteSuiteAI and create a new connection:</p>
+          <ol>
+            <li>Go to <strong>Settings &gt; Connections</strong></li>
+            <li>Click <strong>Add Connection</strong> and select <strong>Ollama (Local)</strong></li>
+            <li>The endpoint URL and auth settings are pre-filled automatically. Just fill in:</li>
+          </ol>
+
+          <table class="docs-table">
+            <thead>
+              <tr><th>Field</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Connection Name</strong></td><td>Ollama Local</td></tr>
+              <tr><td><strong>Model ID</strong></td><td><code>qwen2.5:7b</code> (or whichever model you downloaded)</td></tr>
+              <tr><td><strong>Capabilities</strong></td><td>Enable <strong>LLM</strong> (and <strong>Vision</strong> if using a vision model)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step">
+          <span class="step-number">5</span>
+          <h3>Test it</h3>
+          <p>Click <strong>Test Connection</strong> in the connection editor. You should see a success message. If the test works, click <strong>Done</strong> &mdash; you can now use local AI with any action in PasteSuiteAI.</p>
+          <div class="docs-tip">
+            If you want Ollama to be your default for all AI actions, click the <strong>LLM star (&#9733;)</strong> on the new connection to make it the default LLM provider.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== macOS ==================== -->
+      <div class="os-panel" id="os-macos">
+
+        <div class="docs-warning">
+          <strong>Note:</strong> PasteSuiteAI is currently Windows-only. These instructions help you set up Ollama on macOS &mdash; useful if you run Ollama on a Mac and connect to it from a Windows machine over the network.
+        </div>
+
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Install Ollama</h3>
+          <p>Visit <a href="https://ollama.com/download/mac" target="_blank" rel="noopener">ollama.com/download/mac</a> and download the app. Drag it to your Applications folder and open it once to complete setup.</p>
+          <p>Alternatively, install via Homebrew:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>brew install ollama
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Download a model</h3>
+          <p>Open Terminal and run:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>ollama pull qwen2.5:7b
+          </div>
+          <p>This downloads a multilingual 7B model (~4.7&nbsp;GB). It only needs to download once. See <a href="#recommended-models">Recommended Models</a> below for alternative choices based on your hardware.</p>
+          <div class="docs-tip">
+            Apple Silicon Macs (M1/M2/M3/M4) run local models very well thanks to their unified memory architecture. Even a MacBook Air with 16&nbsp;GB RAM handles 7B models comfortably.
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Verify Ollama is running</h3>
+          <p>Ollama runs as a background service after installation. Verify:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>ollama list
+          </div>
+          <p>You should see your downloaded model. If Ollama isn&rsquo;t running, open it from Applications.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Connect PasteSuiteAI</h3>
+          <p>Open PasteSuiteAI and create a new connection:</p>
+          <ol>
+            <li>Go to <strong>Settings &gt; Connections</strong></li>
+            <li>Click <strong>Add Connection</strong> and select <strong>Ollama (Local)</strong></li>
+            <li>The endpoint URL and auth settings are pre-filled automatically. Just fill in:</li>
+          </ol>
+
+          <table class="docs-table">
+            <thead>
+              <tr><th>Field</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Connection Name</strong></td><td>Ollama Local</td></tr>
+              <tr><td><strong>Model ID</strong></td><td><code>qwen2.5:7b</code> (or whichever model you downloaded)</td></tr>
+              <tr><td><strong>Capabilities</strong></td><td>Enable <strong>LLM</strong> (and <strong>Vision</strong> if using a vision model)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step">
+          <span class="step-number">5</span>
+          <h3>Test it</h3>
+          <p>Click <strong>Test Connection</strong> in the connection editor. You should see a success message. Click <strong>Done</strong> &mdash; local AI is now ready to use with any action.</p>
+          <div class="docs-tip">
+            If you want Ollama to be your default for all AI actions, click the <strong>LLM star (&#9733;)</strong> on the new connection to make it the default LLM provider.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== Linux ==================== -->
+      <div class="os-panel" id="os-linux">
+
+        <div class="docs-warning">
+          <strong>Note:</strong> PasteSuiteAI is currently Windows-only. These instructions help you set up Ollama on Linux &mdash; useful if you run Ollama on a Linux server and connect to it from a Windows machine over the network.
+        </div>
+
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Install Ollama</h3>
+          <p>Open a terminal and run the official installer:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>curl -fsSL https://ollama.com/install.sh | sh
+          </div>
+          <p>This installs Ollama and sets it up as a systemd service that starts automatically.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Download a model</h3>
+          <p>In the same terminal, run:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>ollama pull qwen2.5:7b
+          </div>
+          <p>This downloads a multilingual 7B model (~4.7&nbsp;GB). It only needs to download once. See <a href="#recommended-models">Recommended Models</a> below for alternative choices based on your hardware.</p>
+          <div class="docs-tip">
+            If you have an NVIDIA GPU, Ollama automatically uses CUDA acceleration. For AMD GPUs, ROCm support is available on supported distributions.
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Verify Ollama is running</h3>
+          <p>The service should start automatically. Verify:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>ollama list
+          </div>
+          <p>If the service isn&rsquo;t running, start it manually:</p>
+          <div class="terminal">
+            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            <span class="prompt">$ </span>sudo systemctl start ollama
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Connect PasteSuiteAI</h3>
+          <p>Open PasteSuiteAI and create a new connection:</p>
+          <ol>
+            <li>Go to <strong>Settings &gt; Connections</strong></li>
+            <li>Click <strong>Add Connection</strong> and select <strong>Ollama (Local)</strong></li>
+            <li>The endpoint URL and auth settings are pre-filled automatically. Just fill in:</li>
+          </ol>
+
+          <table class="docs-table">
+            <thead>
+              <tr><th>Field</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Connection Name</strong></td><td>Ollama Local</td></tr>
+              <tr><td><strong>Model ID</strong></td><td><code>qwen2.5:7b</code> (or whichever model you downloaded)</td></tr>
+              <tr><td><strong>Capabilities</strong></td><td>Enable <strong>LLM</strong> (and <strong>Vision</strong> if using a vision model)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step">
+          <span class="step-number">5</span>
+          <h3>Test it</h3>
+          <p>Click <strong>Test Connection</strong> in the connection editor. You should see a success message. Click <strong>Done</strong> &mdash; local AI is now ready to use with any action.</p>
+          <div class="docs-tip">
+            If you want Ollama to be your default for all AI actions, click the <strong>LLM star (&#9733;)</strong> on the new connection to make it the default LLM provider.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================== -->
+      <h2>Browse All Models</h2>
+
+      <p>Ollama hosts hundreds of open-source models. Browse the full catalog at <a href="https://ollama.com/search" target="_blank" rel="noopener">ollama.com/search</a> to find the best model for your needs. You can filter by size, capability, and popularity.</p>
+
+      <!-- ============================== -->
+      <h2 id="recommended-models">Recommended Models</h2>
+
+      <h3>Standard Hardware (8&ndash;16 GB RAM, no dedicated GPU)</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>Model</th>
+            <th>Capabilities</th>
+            <th>Command</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Translation &amp; correction</strong> (many languages)</td>
+            <td>Qwen 2.5 7B</td>
+            <td>LLM</td>
+            <td><code>ollama pull qwen2.5:7b</code></td>
+            <td>4.7 GB</td>
+          </tr>
+          <tr>
+            <td><strong>Best English quality</strong></td>
+            <td>Llama 3.1 8B</td>
+            <td>LLM</td>
+            <td><code>ollama pull llama3.1:8b</code></td>
+            <td>4.9 GB</td>
+          </tr>
+          <tr>
+            <td><strong>Small download, 140+ languages</strong></td>
+            <td>Gemma 3 4B</td>
+            <td>LLM, Vision</td>
+            <td><code>ollama pull gemma3:4b</code></td>
+            <td>3.3 GB</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Power User: NVIDIA RTX 4090 (24 GB VRAM)</h3>
+
+      <p>With a high-end GPU like the RTX 4090, you can run much larger models that deliver quality approaching cloud AI. These models run entirely in GPU memory for fast inference:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>Capabilities</th>
+            <th>Command</th>
+            <th>Size</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Qwen 2.5 32B</strong></td>
+            <td>LLM</td>
+            <td><code>ollama pull qwen2.5:32b</code></td>
+            <td>20 GB</td>
+            <td>Battle-tested multilingual champion. Near cloud-level for translation and correction.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>GPT-OSS 20B</strong></td>
+            <td>LLM</td>
+            <td><code>ollama pull gpt-oss:20b</code></td>
+            <td>14 GB</td>
+            <td>OpenAI&rsquo;s first open model. Strong at English and reasoning tasks.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Gemma 3 27B</strong></td>
+            <td>LLM, Vision</td>
+            <td><code>ollama pull gemma3:27b</code></td>
+            <td>17 GB</td>
+            <td>Google model, 140+ languages.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Qwen3.5 27B</strong></td>
+            <td>LLM, Vision</td>
+            <td><code>ollama pull qwen3.5:27b</code></td>
+            <td>17 GB</td>
+            <td>Multimodal with optional thinking mode. Strong multilingual, 256K context.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Qwen3.5 35B-A3B</strong></td>
+            <td>LLM, Vision</td>
+            <td><code>ollama pull qwen3.5:35b-a3b</code></td>
+            <td>24 GB</td>
+            <td>MoE: 35B total, only 3B active per token &mdash; fast inference. Multimodal.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        <strong>Rule of thumb:</strong> Bigger models = better results. A 27B+ model running locally on a good GPU will give you noticeably better corrections and translations than a 7B model. If your GPU has the VRAM for it, always pick the larger model.
+      </div>
+
+      <div class="docs-tip">
+        Don&rsquo;t see a model that fits? Browse the complete catalog at <a href="https://ollama.com/search" target="_blank" rel="noopener">ollama.com/search</a> &mdash; hundreds of models available, new ones added every week. Filter by size to find what fits your hardware.
+      </div>
+
+      <!-- ============================== -->
+      <h2>LM Studio (Alternative)</h2>
+
+      <p>If you prefer a graphical interface over the terminal, <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM Studio</a> is an excellent alternative. It provides a desktop app where you can browse, download, and run models with a few clicks.</p>
+
+      <ol>
+        <li>Download <strong>LM Studio</strong> from <a href="https://lmstudio.ai" target="_blank" rel="noopener">lmstudio.ai</a> and install it</li>
+        <li>Search for a model (e.g., &ldquo;Qwen 2.5 7B&rdquo;) and click Download</li>
+        <li>Go to the <strong>Local Server</strong> tab and click <strong>Start Server</strong></li>
+        <li>In PasteSuiteAI, create a <strong>LM Studio (Local)</strong> connection &mdash; the endpoint URL is pre-filled automatically</li>
+        <li>Enter your model name as Model ID</li>
+      </ol>
+
+      <div class="docs-tip">
+        LM Studio&rsquo;s default port is <strong>1234</strong>, while Ollama uses <strong>11434</strong>. Make sure the endpoint URL matches the tool you are using.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Troubleshooting</h2>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>Solution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Connection test fails with &ldquo;connection refused&rdquo;</td>
+            <td>Ollama is not running. Start it from the Start menu (Windows), Applications (macOS), or <code>sudo systemctl start ollama</code> (Linux).</td>
+          </tr>
+          <tr>
+            <td>Very slow responses</td>
+            <td>Your model may be too large for your RAM and is swapping to disk. Try a smaller model like <code>qwen3:4b</code>.</td>
+          </tr>
+          <tr>
+            <td>Model not found error</td>
+            <td>The Model ID in PasteSuiteAI must match the exact name shown by <code>ollama list</code>, including the tag (e.g., <code>qwen2.5:7b</code>, not just <code>qwen2.5</code>).</td>
+          </tr>
+          <tr>
+            <td>Poor translation or correction quality</td>
+            <td>This is a known limitation of small local models. Try a larger model (14B, 32B) if your hardware allows it, or use a cloud connection for tasks that require high accuracy.</td>
+          </tr>
+          <tr>
+            <td>Ollama uses too much memory</td>
+            <td>Ollama keeps the model in memory for fast responses. If you need to free RAM, run <code>ollama stop &lt;model&gt;</code> to unload it.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Related Topics</h2>
+
+      <ul>
+        <li><a href="connections.html">Connections</a> &mdash; Full connection configuration reference</li>
+        <li><a href="actions.html">Actions</a> &mdash; How actions use connections for AI routing</li>
+        <li><a href="speech-to-text.html">Speech to Text</a> &mdash; STT setup and recording actions</li>
+        <li><a href="getting-started.html">Getting Started</a> &mdash; First-time setup guide</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+  <script>
+    /* OS tab switching */
+    var tabs = document.querySelectorAll('.os-tab');
+    var panels = document.querySelectorAll('.os-panel');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var os = tab.getAttribute('data-os');
+        tabs.forEach(function (t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(function (p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById('os-' + os).classList.add('active');
+      });
+    });
+
+    /* Make ollama pull commands in tables clickable */
+    document.querySelectorAll('.docs-table code').forEach(function (el) {
+      if (el.textContent.indexOf('ollama pull') !== 0) return;
+      el.classList.add('copyable');
+      el.addEventListener('click', function () {
+        navigator.clipboard.writeText(el.textContent).then(function () {
+          el.classList.add('copied');
+          setTimeout(function () { el.classList.remove('copied'); }, 1500);
+        });
+      });
+    });
+
+    /* Copy terminal command */
+    function copyCommand(btn) {
+      var terminal = btn.parentElement;
+      var text = terminal.textContent.replace('Copy', '').replace(/^[>$]\s*/m, '').trim();
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>

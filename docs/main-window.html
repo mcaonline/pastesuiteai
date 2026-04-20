@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Window &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Main Window</h1>
+      <p>The main window is your command center. It shows a preview of your current input, lets you add free-form instructions, and lets you execute actions &mdash; all from one compact panel.</p>
+
+      <h2>Overview</h2>
+      <img class="docs-screenshot" src="img/main-panel.png" alt="Main window overview">
+      <p>The panel is arranged vertically, from top to bottom:</p>
+      <ol>
+        <li><strong>Title bar</strong> &mdash; app name, usage badge, settings, minimize, and close.</li>
+        <li><strong>Input preview</strong> (left) and <strong>Quick Prompts</strong> (right) &mdash; side-by-side row showing your current input and one-click AI buttons.</li>
+        <li><strong>Prompt input</strong> &mdash; free-form instruction textarea with execution controls and the inline connection selector.</li>
+        <li><strong>Action list</strong> &mdash; scrollable list of enabled action cards.</li>
+      </ol>
+
+      <h2>Title Bar</h2>
+      <p>The custom title bar (shown when native window decorations are turned off in Settings) contains the following elements from left to right. The title bar area is draggable for repositioning the window.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Settings button</td>
+            <td>Icon button</td>
+            <td>Opens the Settings panel on the default tab. Hidden when Settings is already open.</td>
+          </tr>
+          <tr>
+            <td>Minimize button</td>
+            <td>Icon button</td>
+            <td>Minimizes or hides the window to the system tray depending on the active <a href="#window-modes">Window Mode</a>.</td>
+          </tr>
+          <tr>
+            <td>Close button</td>
+            <td>Icon button</td>
+            <td>Hides the window to the tray, minimizes to the taskbar, or quits the app depending on Window Mode and the <em>Close on X</em> setting.</td>
+          </tr>
+          <tr>
+            <td>UsageBadge</td>
+            <td>Clickable badge</td>
+            <td>Shows your current license phase (Trial, Licensed, or free-tier action count). Clicking it opens licensing details.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        When native window decorations are enabled in Settings, the custom title bar is replaced by the standard Windows title bar. The Settings and close buttons move to a header row inside the panel content area.
+      </div>
+
+      <h2>Input Preview</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Input preview area"
+             style="aspect-ratio: 530/110; object-fit: cover; object-position: 0 8%;">
+      </div>
+      <p>The input preview area occupies the left portion of the top row. It shows the text, image, or audio that will be used as input for the next action. The content type is detected automatically:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Content type</th><th>Display</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Text</strong></td>
+            <td>A scrollable preview of the text. Click the preview to re-copy it to the clipboard. A brief <em>Copied</em> badge confirms the action. A character count badge appears when the text exceeds the display threshold.</td>
+          </tr>
+          <tr>
+            <td><strong>Image</strong></td>
+            <td>A thumbnail of the image. Vision-capable AI actions can process images directly.</td>
+          </tr>
+          <tr>
+            <td><strong>Audio</strong></td>
+            <td>An audio icon with a label, and a short descriptive preview if available.</td>
+          </tr>
+          <tr>
+            <td><strong>Empty</strong></td>
+            <td>A hint prompting you to select or copy some content.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Click-to-copy area</td>
+            <td>Clickable region (text only)</td>
+            <td>Clicking the left five-sixths of the text preview copies the text for reuse. Clicking near the right edge or the scrollbar does nothing.</td>
+          </tr>
+          <tr>
+            <td>Character count</td>
+            <td>Static label</td>
+            <td>Shown on text content when the character count exceeds the display threshold. Purely informational.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        Click the text preview to instantly re-copy the last result. This is useful when you ran an action in <em>Clipboard</em> mode and want to verify or reuse what was stored.
+      </div>
+
+      <h2>Quick Prompts</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Quick prompt buttons"
+             style="aspect-ratio: 530/110; object-fit: cover; object-position: 0 8%;">
+      </div>
+      <p>Quick Prompts appear to the right of the input preview. They are one-click buttons for frequently used AI tasks. The buttons shown depend on the current input content type and which categories are enabled in Settings:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Category</th><th>Shown when</th><th>Configured in</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Image</strong></td>
+            <td>Input contains an image</td>
+            <td>Settings &rarr; Quick Prompts &rarr; Image category</td>
+          </tr>
+          <tr>
+            <td><strong>Text &ndash; Language</strong></td>
+            <td>Input contains text</td>
+            <td>Settings &rarr; Quick Prompts &rarr; Text Language category</td>
+          </tr>
+          <tr>
+            <td><strong>Text &ndash; General</strong></td>
+            <td>Input contains text</td>
+            <td>Settings &rarr; Quick Prompts &rarr; Text General category</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Each Quick Prompt button has two click actions:</p>
+      <ul>
+        <li><strong>Left-click</strong> &mdash; primary action (configured per prompt: fill the prompt input, execute and copy, or execute and paste).</li>
+        <li><strong>Right-click</strong> &mdash; secondary action.</li>
+      </ul>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quick Prompt button</td>
+            <td>Button (left-click = primary, right-click = secondary)</td>
+            <td>Executes or fills the associated prompt. The exact action depends on each prompt's configured primary and secondary actions.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>For full details on configuring Quick Prompts, see <a href="promptbar.html">PromptBar</a>.</p>
+
+      <h2>Prompt Input</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Prompt input area"
+             style="aspect-ratio: 530/90; object-fit: cover; object-position: 0 25%;">
+      </div>
+      <p>The prompt input is a free-form textarea below the input preview row. Type instructions here to be sent alongside your text when executing an action. Press <kbd>Enter</kbd> to execute with the default execution mode; press <kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a line break.</p>
+      <p>The prompt bar also contains several execution buttons that run a quick prompt directly from the input field without selecting an action card:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Textarea</td>
+            <td>Text input</td>
+            <td>Free-form instruction. Combined with your input text when an action is executed. <kbd>Enter</kbd> triggers default execution mode.</td>
+          </tr>
+          <tr>
+            <td>Microphone button</td>
+            <td>Icon button</td>
+            <td>Starts STT recording that fills the textarea with the transcribed text. Visible only when an STT connection is configured and recording is idle.</td>
+          </tr>
+          <tr>
+            <td>Clipboard mode toggle</td>
+            <td>Cycling icon button</td>
+            <td>Cycles through six input modes that control how your text is combined with the prompt. Hover for a tooltip listing all modes.</td>
+          </tr>
+          <tr>
+            <td>Overlay button</td>
+            <td>Icon button</td>
+            <td>Executes the prompt and displays the result in a floating overlay near the cursor.</td>
+          </tr>
+          <tr>
+            <td>Clipboard button</td>
+            <td>Icon button</td>
+            <td>Executes the prompt and writes the result to the clipboard only. Does not paste.</td>
+          </tr>
+          <tr>
+            <td>Paste + Clipboard button</td>
+            <td>Icon button</td>
+            <td>Executes the prompt, pastes the result, and also writes it to the clipboard.</td>
+          </tr>
+          <tr>
+            <td>AI Paste button</td>
+            <td>Button (primary)</td>
+            <td>Executes the prompt and pastes the result into the active application. This is the primary send button.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>For full details on the prompt bar including input modes, see <a href="promptbar.html">PromptBar</a>.</p>
+
+      <h2>Connection Selector</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Connection selector"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 22%;">
+      </div>
+      <p>The inline connection selector is embedded at the left edge of the prompt input bar. It shows a numbered badge representing the currently active connection for the capability that matches the current input type (LLM for text, Vision for images, STT for audio).</p>
+      <p>The number corresponds to the 1-based position of the connection in <strong>Settings &rarr; Connections</strong>.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Inline trigger badge</td>
+            <td>Button</td>
+            <td>Displays the active connection number. Click to open the dropdown.</td>
+          </tr>
+          <tr>
+            <td>Dropdown items</td>
+            <td>Clickable rows</td>
+            <td>Lists all connections matching the active capability. Click any row to make it the active routing choice. The selected item is highlighted.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Action List</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Action card with execution buttons"
+             style="aspect-ratio: 530/200; object-fit: cover; object-position: 0 55%;">
+      </div>
+      <p>The action list is a scrollable list below the prompt bar. It shows all enabled, visible actions. Actions that are children of a chain are hidden &mdash; they run automatically when their parent action executes.</p>
+
+      <h3>Action Card</h3>
+      <p>Each action card shows the action name, an optional hotkey badge (keyboard shortcut), an optional panel quick key (single-letter shortcut active when the panel is focused), and a description. When a required connection is not configured, a <em>Setup required</em> badge appears below the description.</p>
+
+      <h3>Execution Buttons (LLM and text-paste actions)</h3>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Overlay button</td>
+            <td>Icon button</td>
+            <td>Runs the action and shows the result in a floating overlay near the cursor. Nothing is pasted or written to the clipboard.</td>
+          </tr>
+          <tr>
+            <td>Clipboard button</td>
+            <td>Icon button</td>
+            <td>Runs the action and writes the result to the clipboard only. The active window is not affected.</td>
+          </tr>
+          <tr>
+            <td>Paste + Clipboard button</td>
+            <td>Icon button</td>
+            <td>Runs the action, pastes the result, and also writes it to the clipboard.</td>
+          </tr>
+          <tr>
+            <td>AI Paste / Paste button</td>
+            <td>Button (primary)</td>
+            <td>Runs the action and pastes the result into the active application. Labelled <em>AI Paste</em> for AI actions and <em>Paste</em> for local transforms.</td>
+          </tr>
+          <tr>
+            <td>Setup button</td>
+            <td>Button (primary, unconfigured state)</td>
+            <td>Shown instead of the normal buttons when a required connection is missing. Clicking opens <strong>Settings &rarr; Connections</strong>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>STT Action Controls</h3>
+      <p>Speech-to-text actions show recording controls instead of the standard execution buttons.</p>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Overlay button</td>
+            <td>Icon button</td>
+            <td>Starts recording and sends the result to the overlay.</td>
+          </tr>
+          <tr>
+            <td>Clipboard button</td>
+            <td>Icon button</td>
+            <td>Starts recording and writes the transcript to the clipboard only.</td>
+          </tr>
+          <tr>
+            <td>Paste + Clipboard button</td>
+            <td>Icon button</td>
+            <td>Starts recording, pastes the transcript, and also writes it to the clipboard.</td>
+          </tr>
+          <tr>
+            <td>AI Paste button (idle)</td>
+            <td>Button (primary)</td>
+            <td>Starts a recording session. The transcript is pasted when recording stops.</td>
+          </tr>
+          <tr>
+            <td>Pause button (recording)</td>
+            <td>Icon button</td>
+            <td>Pauses the active recording.</td>
+          </tr>
+          <tr>
+            <td>Stop button (recording or paused)</td>
+            <td>Icon button</td>
+            <td>Stops the recording and begins transcription processing.</td>
+          </tr>
+          <tr>
+            <td>Resume button (paused)</td>
+            <td>Icon button</td>
+            <td>Resumes a paused recording.</td>
+          </tr>
+          <tr>
+            <td>Language chips</td>
+            <td>Buttons (left-click / right-click)</td>
+            <td>Left-click sets a language as the active input language. Right-click sets it as the output language for translate-on-transcribe. The active input chip is highlighted; the output chip has a distinct style. Only shown when the action has languages configured.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>For full details on speech-to-text actions, see <a href="speech-to-text.html">Speech to Text</a>.</p>
+
+      <h2>Prompt Library Button</h2>
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Prompt Library button"
+             style="aspect-ratio: 530/60; object-fit: cover; object-position: 0 92%;">
+      </div>
+      <p>The <strong>Prompt Library</strong> link appears in the footer row below the prompt bar. Clicking it opens the Prompt Library, a searchable collection of saved prompts, quick prompts, and action prompts that you can insert into the prompt field or execute directly.</p>
+      <p>For full details, see <a href="prompt-library.html">Prompt Library</a>.</p>
+
+      <h3>Footer Elements</h3>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prompt Library link</td>
+            <td>Clickable text</td>
+            <td>Opens the Prompt Library panel above the footer. Clicking again closes it.</td>
+          </tr>
+          <tr>
+            <td>AI disclaimer</td>
+            <td>Static text</td>
+            <td>Brief note that AI results may be inaccurate. Shown only when connected.</td>
+          </tr>
+          <tr>
+            <td>Help button</td>
+            <td>Clickable text (conditional)</td>
+            <td>Starts the interactive guided tour. Hidden when <em>Show Help Button</em> is disabled in Settings.</td>
+          </tr>
+          <tr>
+            <td>History button</td>
+            <td>Clickable text</td>
+            <td>Opens the clipboard history view in Settings. See <a href="history.html">History</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="window-modes">Window Modes</h2>
+      <p>The window mode controls how PasteSuiteAI behaves when minimized or closed. Configure it in <strong>Settings &rarr; General &rarr; Window Mode</strong>. The default mode is <strong>Always Tray</strong>.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr><th>Mode</th><th>When visible</th><th>During actions</th><th>Close / X button</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Always Tray</strong> (default)</td>
+            <td>No taskbar entry &mdash; tray icon only.</td>
+            <td>Window hides instantly. No taskbar flash, no visual interruption.</td>
+            <td>Hides to tray. The app keeps running in the background.</td>
+            <td>Cleanest experience. The app stays completely out of the way &mdash; you interact only via hotkeys and the tray icon.</td>
+          </tr>
+          <tr>
+            <td><strong>Usually Tray</strong></td>
+            <td>Taskbar entry visible while the window is open.</td>
+            <td>Minimizes to the taskbar during execution, taskbar flashes as progress feedback, then hides to the tray once complete.</td>
+            <td>Hides to tray.</td>
+            <td>Gives you a brief visual confirmation in the taskbar that an action is running and when it finishes, without leaving a permanent taskbar entry behind.</td>
+          </tr>
+          <tr>
+            <td><strong>Always Taskbar</strong></td>
+            <td>Taskbar entry visible at all times, even when minimized.</td>
+            <td>Minimizes to the taskbar, flashes on completion, stays in the taskbar.</td>
+            <td>Minimizes to the taskbar (does not quit).</td>
+            <td>Traditional desktop app behavior. Always one click away in the taskbar.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        In tray modes, you can bring the window back by clicking the PasteSuiteAI icon in the system tray, or by pressing the main trigger hotkey.
+      </div>
+
+      <p>For more on window and appearance settings, see <a href="settings.html">Settings</a>.</p>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

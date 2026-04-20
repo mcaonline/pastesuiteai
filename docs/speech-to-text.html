@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech to Text &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Speech to Text</h1>
+      <p class="subtitle">Record audio and transcribe with AI-powered speech recognition</p>
+
+      <h2>Overview</h2>
+      <p>
+        STT (Speech to Text) lets you use your microphone as input for any compatible action. Record your
+        voice, and the audio is sent to an AI speech recognition provider which returns the transcribed text.
+        The result is then handled exactly like any other action output: pasted, saved for later use, or
+        shown in a floating overlay.
+      </p>
+      <p>
+        Two built-in STT actions are included: <strong>Audio to Text</strong> (pure transcription) and
+        <strong>Audio Instruct</strong> (spoken commands processed by an LLM). You can also configure
+        custom STT actions. Any action requires an STT-capable connection to be set up first.
+        See <a href="connections.html">Connections</a> for how to add one.
+      </p>
+
+      <h2>Recording Overlay</h2>
+      <p>
+        When you start recording &mdash; via hotkey, mouse trigger, or the
+        <a href="promptbar.html">PromptBar</a> microphone button &mdash; a small floating overlay window
+        appears near your cursor. It stays on top of all other windows and does not steal focus, so your
+        current application remains active while you record.
+      </p>
+
+      <img class="docs-screenshot" src="img/recording-overlay.png" alt="Recording overlay with waveform">
+
+      <p>The overlay displays:</p>
+      <ul>
+        <li><strong>Live waveform canvas</strong>: Vertical bars that animate in real time based on microphone input amplitude. Gives immediate visual confirmation that audio is being captured. Bars dim to gray when the recording is paused or in the process of stopping.</li>
+        <li><strong>Countdown timer</strong>: Appears in the top-left corner when 2 minutes of the 12-minute maximum remain. The timer turns red when under 1 minute remains.</li>
+        <li><strong>Control buttons</strong>: Three buttons at the bottom of the overlay during active recording.</li>
+        <li><strong>Processing spinner</strong>: Replaces the waveform after you click Finish, while the AI transcribes the audio. A small cancel (X) button remains visible during processing to abort the request.</li>
+      </ul>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Waveform canvas</td>
+            <td>Display</td>
+            <td>Real-time audio amplitude visualization. Shows recording is active. Dims when paused or stopping.</td>
+          </tr>
+          <tr>
+            <td>Countdown timer display</td>
+            <td>Display</td>
+            <td>Shows remaining time (MM:SS) when under 2 minutes remain. Turns red under 1 minute.</td>
+          </tr>
+          <tr>
+            <td>Cancel button (red X)</td>
+            <td>Button</td>
+            <td>Discards the recording entirely during recording, or cancels the active API transcription call during processing.</td>
+          </tr>
+          <tr>
+            <td>Pause button (yellow pause icon)</td>
+            <td>Button</td>
+            <td>Pauses the active recording. Audio captured before the pause is preserved. Icon changes to a play triangle when paused.</td>
+          </tr>
+          <tr>
+            <td>Resume button (play triangle)</td>
+            <td>Button</td>
+            <td>Shown in place of Pause when recording is paused. Click to continue capturing audio.</td>
+          </tr>
+          <tr>
+            <td>Finish button (green checkmark)</td>
+            <td>Button</td>
+            <td>Stops recording and sends all captured audio to the AI for transcription. The overlay switches to the processing spinner.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        You can drag the recording overlay to reposition it anywhere on screen. It stays in the new
+        position for the duration of the recording session.
+      </div>
+
+      <h2>Audio Modes</h2>
+      <p>
+        STT actions operate in one of two modes, configured per connection in
+        <a href="connections.html">Settings &gt; Connections</a>:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Description</th>
+            <th>Use case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Transcribe</strong></td>
+            <td>Speech is converted to text exactly as spoken. The raw transcription is the final output. No LLM processing is applied.</td>
+            <td>Dictating notes, messages, or any text where you want the output to match what you said</td>
+          </tr>
+          <tr>
+            <td><strong>Instruct</strong></td>
+            <td>Speech is treated as an instruction for the AI language model. The transcription is sent as input to the LLM, combined with your current text context, and the LLM produces the final response.</td>
+            <td>Dictating commands such as "Write a polite reply declining this meeting" and receiving a fully composed result</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        The audio mode is a property of the connection, not the action. You can create multiple
+        connections with different modes and assign each to different STT actions.
+      </p>
+
+      <div class="docs-tip">
+        The Instruct/Transcribe mode toggle is only shown for connections whose model is known to
+        support audio input. It does not appear on standard Whisper-only endpoints.
+      </div>
+
+      <h2>Per-Action STT Configuration</h2>
+      <p>
+        Every STT action has its own independent configuration section. Open Settings &gt; Actions,
+        find an STT action card, and expand its STT Configuration section to access these settings.
+      </p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Per-action STT configuration panel"
+             style="aspect-ratio: 530/200; object-fit: cover; object-position: 0 85%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Audio mode toggle (Instruct / Transcribe)</td>
+            <td>Segmented button</td>
+            <td>Switches the STT connection between Instruct and Transcribe mode. Only visible for connections whose model supports audio input.</td>
+          </tr>
+          <tr>
+            <td>Microphone dropdown</td>
+            <td>Select</td>
+            <td>Choose a specific microphone device or leave on Default to use the system default. Only shown when more than one audio input device is detected.</td>
+          </tr>
+          <tr>
+            <td>Language chips (input languages)</td>
+            <td>Chip buttons</td>
+            <td>Shows the languages configured for this action. The active input language chip is highlighted in blue. Click a chip to make it the active input language. Click the X on a chip to remove that language.</td>
+          </tr>
+          <tr>
+            <td>Add language button</td>
+            <td>Button</td>
+            <td>Opens an inline form to add a language. Choose from a curated list or enter a custom BCP-47 language code and name.</td>
+          </tr>
+          <tr>
+            <td>Output language dropdown</td>
+            <td>Select</td>
+            <td>Select a language to auto-translate the transcription into after it is produced. Populated from the input languages added to this action. Leave empty to skip translation.</td>
+          </tr>
+          <tr>
+            <td>Sample rate selector</td>
+            <td>Select</td>
+            <td>Audio sample rate for microphone capture. Options: 16,000 Hz (recommended), 24,000 Hz, 32,000 Hz, 48,000 Hz.</td>
+          </tr>
+          <tr>
+            <td>Noise suppression toggle</td>
+            <td>Toggle</td>
+            <td>Reduces background noise. Useful in noisy environments.</td>
+          </tr>
+          <tr>
+            <td>Echo cancellation toggle</td>
+            <td>Toggle</td>
+            <td>Removes echo from speakers playing back into the microphone. Enable when speakers are active during recording.</td>
+          </tr>
+          <tr>
+            <td>Auto gain control toggle</td>
+            <td>Toggle</td>
+            <td>Automatically adjusts microphone volume to maintain consistent levels regardless of mic sensitivity or speaker distance.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Starting a Recording</h2>
+      <p>You can start an STT recording in three ways:</p>
+      <ul>
+        <li><strong>From the main panel</strong>: Click the microphone button that appears on any STT action card in the action list.</li>
+        <li><strong>Via hotkey</strong>: Press the hotkey assigned to an STT action (for example <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> for Audio to Text).</li>
+        <li><strong>Via mouse trigger</strong>: Use the action's configured mouse trigger if one is set up.</li>
+        <li><strong>From the PromptBar</strong>: Click the microphone button inside the PromptBar to dictate your prompt. See <a href="promptbar.html">PromptBar &amp; Quick Prompts</a>.</li>
+      </ul>
+
+      <p>
+        Configure hotkeys and mouse triggers for STT actions in <a href="actions.html">Settings &gt; Actions</a>.
+      </p>
+
+      <h2>Recording Limits</h2>
+      <p>The following limits apply to all recordings:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Limit</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Maximum recording duration</td>
+            <td>12 minutes (720 seconds). Recording stops automatically at this limit.</td>
+          </tr>
+          <tr>
+            <td>Countdown timer appears at</td>
+            <td>2 minutes remaining (120 seconds)</td>
+          </tr>
+          <tr>
+            <td>Minimum audio size</td>
+            <td>1,000 bytes. Recordings below this threshold (empty or silent) are rejected before being sent to the provider.</td>
+          </tr>
+          <tr>
+            <td>Maximum audio file size</td>
+            <td>100 MB. Very long recordings at high sample rates may approach this limit.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        The 16,000 Hz sample rate produces the smallest files and is the rate recommended by most STT
+        providers. Use higher rates only if your provider or audio quality requires it.
+      </div>
+
+      <h2>Supported Providers</h2>
+      <p>
+        Any connection with the STT capability can be used for speech-to-text actions. Which providers
+        offer STT depends on which connections you have configured. Common STT-capable providers include
+        OpenAI (Whisper), Azure OpenAI, and OpenAI-compatible endpoints that expose a transcription API.
+      </p>
+      <p>
+        See <a href="connections.html">Connections</a> for how to add an STT-capable connection and how to
+        assign it as the default STT connection or to specific actions.
+      </p>
+
+      <h2>Related Topics</h2>
+      <ul>
+        <li><a href="connections.html">Connections</a> &mdash; setting up and configuring STT-capable AI connections</li>
+        <li><a href="actions.html">Actions</a> &mdash; creating STT actions, assigning hotkeys, and configuring execution modes</li>
+        <li><a href="promptbar.html">PromptBar &amp; Quick Prompts</a> &mdash; using the microphone button to dictate prompts</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

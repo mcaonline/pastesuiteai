@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PasteSuiteAI &mdash; Instant AI text actions, anywhere on your desktop</title>
+  <meta name="description" content="Windows desktop tool for smart text actions, AI text transforms, and speech-to-text. Bring your own API keys. Keys stay in your OS credential store.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f5f5f7;
+      --color-bg-tertiary: #fbfbfd;
+      --color-text-primary: #1d1d1f;
+      --color-text-secondary: #424245;
+      --color-text-tertiary: #6e6e73;
+      --color-accent: #0071e3;
+      --color-accent-hover: #0077ed;
+      --color-separator: #d2d2d7;
+      --color-nav-bg: rgba(251, 251, 253, 0.72);
+      --color-card-shadow: rgba(0, 0, 0, 0.06);
+      --gradient-hero: linear-gradient(135deg, #1d1d1f 0%, #0071e3 100%);
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-width: 1040px;
+      --nav-height: 52px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-bg-secondary: #1c1c1e;
+        --color-bg-tertiary: #0a0a0c;
+        --color-text-primary: #f5f5f7;
+        --color-text-secondary: #a1a1a6;
+        --color-text-tertiary: #86868b;
+        --color-separator: #38383a;
+        --color-nav-bg: rgba(22, 22, 23, 0.72);
+        --color-card-shadow: rgba(255, 255, 255, 0.04);
+        --gradient-hero: linear-gradient(135deg, #f5f5f7 0%, #3b9eff 100%);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-separator);
+      display: flex; align-items: center; padding: 0 22px;
+    }
+    .nav-inner {
+      max-width: var(--max-width); width: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 600; letter-spacing: -0.01em;
+      color: var(--color-text-primary); text-decoration: none;
+    }
+    .nav-brand img { width: 22px; height: 22px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; color: var(--color-text-secondary);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--color-accent); }
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      padding: 6px 14px; border-radius: 980px;
+      background: var(--color-accent); color: #fff !important;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--color-accent-hover); color: #fff !important; }
+
+    /* ========== Hero ========== */
+    .hero {
+      padding: 96px 22px 64px;
+      text-align: center;
+      background: var(--color-bg);
+    }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+      color: var(--color-accent);
+      padding: 6px 14px; margin-bottom: 24px;
+      border: 1px solid var(--color-separator);
+      border-radius: 980px;
+      background: var(--color-bg-secondary);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .hero h1 .accent {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p.lead {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--color-text-secondary);
+      max-width: 640px; margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 980px;
+      font-size: 15px; font-weight: 500;
+      text-decoration: none; transition: background 0.2s, transform 0.1s, color 0.2s;
+      border: 1px solid transparent; cursor: pointer;
+    }
+    .btn-primary { background: var(--color-accent); color: #fff; }
+    .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
+    .btn-secondary {
+      background: transparent; color: var(--color-text-primary);
+      border-color: var(--color-separator);
+    }
+    .btn-secondary:hover { background: var(--color-bg-secondary); }
+    .btn-large { padding: 14px 28px; font-size: 16px; }
+    .btn:active { transform: translateY(1px); }
+    .hero-meta {
+      font-size: 13px; color: var(--color-text-tertiary);
+    }
+
+    /* ========== Section base ========== */
+    section { padding: 80px 22px; }
+    .section-alt { background: var(--color-bg-secondary); }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      font-size: 17px; color: var(--color-text-secondary);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ========== Features Grid ========== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-separator);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .section-alt .feature-card { background: var(--color-bg); }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px var(--color-card-shadow);
+    }
+    .feature-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      background: rgba(0, 113, 227, 0.1);
+      color: var(--color-accent);
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 17px; font-weight: 600;
+      letter-spacing: -0.01em; margin-bottom: 8px;
+      color: var(--color-text-primary);
+    }
+    .feature-card p {
+      font-size: 14px; color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ========== Steps ========== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .step {
+      position: relative;
+      padding: 28px 24px 24px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-separator);
+      border-radius: 14px;
+    }
+    .section-alt .step { background: var(--color-bg); }
+    .step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--color-accent); color: #fff;
+      font-size: 14px; font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .step h3 {
+      font-size: 17px; font-weight: 600;
+      letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 14px; color: var(--color-text-secondary); line-height: 1.55;
+    }
+
+    /* ========== Trust / Privacy callout ========== */
+    .callout {
+      max-width: 760px; margin: 0 auto; text-align: center;
+      padding: 48px 32px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-separator);
+      border-radius: 16px;
+    }
+    .callout h3 {
+      font-size: 22px; font-weight: 600;
+      letter-spacing: -0.015em; margin-bottom: 12px;
+    }
+    .callout p {
+      font-size: 15px; color: var(--color-text-secondary);
+      line-height: 1.6; margin-bottom: 16px;
+    }
+    .callout .chips {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 980px;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-separator);
+      font-size: 12px; color: var(--color-text-secondary); font-weight: 500;
+    }
+    .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: #34c759; }
+
+    /* ========== Pricing ========== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 920px; margin: 0 auto;
+    }
+    .price-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-separator);
+      border-radius: 14px;
+      padding: 32px 26px;
+      display: flex; flex-direction: column;
+    }
+    .price-card.featured {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 1px var(--color-accent) inset;
+    }
+    .price-label {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.02em; text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 10px;
+    }
+    .price-card.featured .price-label { color: var(--color-accent); }
+    .price-amount {
+      font-size: 34px; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .price-amount small {
+      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
+      letter-spacing: 0;
+    }
+    .price-desc {
+      font-size: 14px; color: var(--color-text-secondary);
+      margin-bottom: 20px; line-height: 1.5;
+    }
+    .price-features {
+      list-style: none; padding: 0; margin: 0 0 24px;
+      flex: 1;
+    }
+    .price-features li {
+      font-size: 14px; color: var(--color-text-secondary);
+      padding: 6px 0 6px 22px;
+      position: relative; line-height: 1.5;
+    }
+    .price-features li::before {
+      content: "";
+      position: absolute; left: 0; top: 12px;
+      width: 12px; height: 6px;
+      border-left: 2px solid var(--color-accent);
+      border-bottom: 2px solid var(--color-accent);
+      transform: rotate(-45deg);
+    }
+    .price-card .btn { width: 100%; justify-content: center; }
+
+    /* ========== FAQ ========== */
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--color-separator);
+      padding: 20px 0;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--color-separator); }
+    .faq-item summary {
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 16px; font-weight: 500;
+      color: var(--color-text-primary);
+      padding: 4px 0;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 22px; font-weight: 300;
+      color: var(--color-text-tertiary);
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p {
+      font-size: 15px; color: var(--color-text-secondary);
+      line-height: 1.6; padding: 12px 0 4px;
+    }
+    .faq-item a { color: var(--color-accent); text-decoration: none; }
+    .faq-item a:hover { text-decoration: underline; }
+
+    /* ========== Download CTA ========== */
+    .download-cta {
+      text-align: center;
+      max-width: 640px; margin: 0 auto;
+      padding: 56px 32px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-separator);
+      border-radius: 20px;
+    }
+    .download-cta h2 {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700; letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .download-cta p {
+      font-size: 16px; color: var(--color-text-secondary);
+      margin-bottom: 28px;
+    }
+    .download-cta .hero-meta { margin-top: 16px; }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-separator);
+      padding: 32px 22px;
+      background: var(--color-bg);
+    }
+    .footer-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-text {
+      font-size: 12px; color: var(--color-text-tertiary);
+      letter-spacing: -0.01em;
+    }
+    .footer-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 12px; color: var(--color-text-tertiary);
+      transition: color 0.2s; text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 640px) {
+      .hero { padding: 64px 22px 48px; }
+      section { padding: 64px 22px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 6px 12px; font-size: 12px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo.png" alt="" aria-hidden="true">
+        <span>PasteSuiteAI</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="docs/index.html">Docs</a></li>
+      </ul>
+      <a href="#download" class="nav-cta">Download</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Windows &middot; Bring your own API keys</span>
+      <h1>Instant AI text actions,<br><span class="accent">anywhere on your desktop.</span></h1>
+      <p class="lead">
+        Rewrite, translate, summarize, or transcribe with a single hotkey &mdash; in any application, without ever leaving your workflow. Your API keys stay in your OS credential store.
+      </p>
+      <div class="hero-actions">
+        <a href="#download" class="btn btn-primary btn-large">
+          Download for Windows
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M2.5 13.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="docs/index.html" class="btn btn-secondary btn-large">Read the docs</a>
+      </div>
+      <p class="hero-meta">Windows 10 &amp; 11 &middot; 64-bit &middot; Free 7-day trial, no card required</p>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>One hotkey. Any text. Any model.</h2>
+        <p>Built for people who live in their keyboard. Trigger AI workflows over selected text without switching windows, without copy-paste rituals, and without vendor lock-in.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Paste as Plain Text</h3>
+          <p>Strip all formatting from your clipboard with a single hotkey. No more fighting with fonts, colors, or stray tables.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3l2.5 5.5L20 10l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1.5L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>AI Text Transforms</h3>
+          <p>Rewrite, translate, correct, summarize, or run any custom LLM prompt over selected text and replace it in place.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 4a3 3 0 00-3 3v5a3 3 0 006 0V7a3 3 0 00-3-3zM5 12a7 7 0 0014 0M12 19v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Speech to Text</h3>
+          <p>Dictate anywhere. Record, transcribe, and optionally translate with your choice of cloud or local STT provider.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M7 10h10M7 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>PromptBar</h3>
+          <p>A global, on-demand prompt input for free-form AI questions &mdash; plus one-click quick prompt buttons for your most-used flows.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 5h16v4H4zM4 11h10v8H4zM16 11h4v4h-4zM16 17h4v2h-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Prompt Library</h3>
+          <p>Save, organize, and recall prompts from a searchable overlay that works in any application &mdash; no switching to ChatGPT.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 9a3 3 0 116 0 3 3 0 01-6 0zM13 15a3 3 0 116 0 3 3 0 01-6 0z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M10.5 11l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Action Chaining</h3>
+          <p>Feed the output of one action into the next. Translate, then summarize, then format &mdash; all from one hotkey, one license action.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M17 8h4v12h-10v-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Result Pop-Up</h3>
+          <p>Display AI output in a floating overlay near your cursor. Read, copy, or refine without leaving your current application.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="18" cy="18" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3>Custom API Pipelines</h3>
+          <p>Connect to any REST API with multi-step request sequences, loops, and conditionals. Build your own provider in minutes.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3>History</h3>
+          <p>Browse recent inputs and action results within your session. Nothing persists after restart &mdash; local only, by default.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Up and running in three steps.</h2>
+        <p>No servers, no accounts, no cloud backend. Install, add a key, and go.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Install</h3>
+          <p>Download the Windows installer and run it. No admin rights needed for a per-user install.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Connect</h3>
+          <p>Paste an API key from OpenAI, Anthropic, Google, Mistral, Azure, or point at a local Ollama instance. The Setup Wizard walks you through it.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Work</h3>
+          <p>Select text in any app, hit your hotkey, pick an action. The result replaces your selection or pops up next to your cursor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="callout">
+        <h3>Your keys. Your data. Your machine.</h3>
+        <p>
+          PasteSuiteAI never proxies through our servers. Your API keys are stored in the Windows Credential Manager &mdash; encrypted by the OS, isolated to your user account, never written to disk in plain text, never logged, never synced.
+        </p>
+        <p>
+          Requests go straight from your machine to the provider you chose. Prefer to stay fully offline? Point at a local model and never leave your LAN.
+        </p>
+        <div class="chips">
+          <span class="chip"><span class="chip-dot"></span>No telemetry by default</span>
+          <span class="chip"><span class="chip-dot"></span>OS-level key storage</span>
+          <span class="chip"><span class="chip-dot"></span>Local STT supported</span>
+          <span class="chip"><span class="chip-dot"></span>Offline-capable</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Simple pricing. Fair trial.</h2>
+        <p>Non-AI features like plain-text paste and local transforms are always free. AI transforms have a rolling free tier, with no surprises.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-label">Trial</div>
+          <div class="price-amount">Free <small>&middot; 7 days</small></div>
+          <p class="price-desc">Unlimited AI actions, every feature unlocked. No credit card.</p>
+          <ul class="price-features">
+            <li>All AI transforms</li>
+            <li>Speech-to-text</li>
+            <li>Prompt Library &amp; PromptBar</li>
+            <li>No usage cap</li>
+          </ul>
+          <a href="#download" class="btn btn-secondary">Start trial</a>
+        </div>
+
+        <div class="price-card">
+          <div class="price-label">Free</div>
+          <div class="price-amount">&euro;0 <small>&middot; forever</small></div>
+          <p class="price-desc">For light use after your trial ends. Non-AI features stay fully unlocked.</p>
+          <ul class="price-features">
+            <li>15 AI actions per 24h</li>
+            <li>All local transforms (regex, plain paste)</li>
+            <li>Bring your own API keys</li>
+            <li>Prompt Library &amp; PromptBar</li>
+          </ul>
+          <a href="#download" class="btn btn-secondary">Download free</a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-label">Pro</div>
+          <div class="price-amount">&euro;29 <small>&middot; per year &middot; auto-renews &middot; cancel anytime &middot; incl. VAT where applicable</small></div>
+          <p class="price-desc">Unlimited AI actions, annual subscription, offline activation. Cancel anytime via the Paddle Buyer Portal &mdash; your paid year stays active until its end.</p>
+          <ul class="price-features">
+            <li>Unlimited AI actions</li>
+            <li>Offline license verification</li>
+            <li>Priority email support</li>
+          </ul>
+          <a href="docs/licensing.html" class="btn btn-primary">Buy Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Frequently asked.</h2>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Which AI providers are supported?</summary>
+          <p>OpenAI, Anthropic, Google Gemini, Mistral, Azure OpenAI, Azure AI Inference, xAI Grok, Groq, DeepSeek, Qwen, Zhipu, Doubao, Ernie, Hunyuan, MiniMax, Moonshot, Stepfun, Baichuan, SiliconFlow, Cohere, Together, Fireworks, Cerebras, SambaNova, HuggingFace, Perplexity, OpenRouter, plus ElevenLabs and iFlytek for speech. Local servers: Ollama, LM Studio, Foundry Local, Jan, GPT4All, vLLM, LocalAI, llama.cpp, and any other OpenAI-compatible endpoint. You can also define your own Custom API pipelines. The list keeps growing &mdash; see the <a href="docs/connections.html">Connections docs</a> for the current set.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you see my data or prompts?</summary>
+          <p>No. PasteSuiteAI sends requests directly from your machine to the provider you chose. We do not operate any proxy, inference, or analytics backend. Your API keys are held only in your Windows Credential Manager.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I use it fully offline?</summary>
+          <p>Yes. Configure a local model via Ollama or any OpenAI-compatible endpoint, and use a local STT provider. Nothing leaves your machine. License verification is also offline &mdash; no phone-home on activation.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does the Pro license include?</summary>
+          <p>An annual key that removes the free-tier usage cap (15 AI actions per 24h) so you get unlimited AI actions. One key is valid across your devices. The subscription renews automatically each year; you can cancel anytime in the Paddle Buyer Portal (link in your purchase confirmation email) and your current paid year stays active until its end. See <a href="docs/licensing.html">Licensing &amp; Trial</a> for full details.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is there a Mac or Linux version?</summary>
+          <p>Not today. PasteSuiteAI is Windows-only and deeply integrated with Windows input, clipboard, and credential APIs. A cross-platform port is not on the short-term roadmap.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens to my data when I uninstall?</summary>
+          <p>API keys in the OS credential store are removed by the uninstaller. Settings and history live in <code>~/.pastesuiteai/</code> and can be deleted manually. No cloud data exists to clean up.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section-alt">
+    <div class="section-inner">
+      <div class="download-cta">
+        <h2>Ready to paste smarter?</h2>
+        <p>Download PasteSuiteAI for Windows and start your 7-day unlimited trial &mdash; no account, no card, no upsell.</p>
+        <a href="mailto:support@pastesuiteai.com?subject=PasteSuiteAI%20Waitlist&amp;body=Hi%20PasteSuiteAI%20team%2C%0A%0AI%27m%20interested%20in%20PasteSuiteAI.%20Please%20add%20me%20to%20the%20waitlist%20and%20send%20me%20an%20email%20as%20soon%20as%20the%20product%20is%20available.%0A%0AThanks%21" class="btn btn-primary btn-large" id="download-btn">
+          Coming soon &mdash; join waitlist
+        </a>
+        <p class="hero-meta">Windows 10 &amp; 11 &middot; 64-bit installer</p>
+        <p class="hero-meta">Or email us directly: <a href="mailto:support@pastesuiteai.com">support@pastesuiteai.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text" data-trademark></p>
+      <div class="footer-links">
+        <a href="docs/index.html">Docs</a>
+        <a href="legal.html">Licensing</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="footer.js"></script>
+</body>
+</html>

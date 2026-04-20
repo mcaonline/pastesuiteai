@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Getting Started</h1>
+      <p>This guide walks you through installing PasteSuiteAI and configuring your first AI provider so you can start using text transformations, speech transcription, and smart actions right away.</p>
+
+      <h2>Installation</h2>
+      <p>PasteSuiteAI runs on Windows only. To install:</p>
+      <ol>
+        <li>Download the latest installer (<code>.exe</code>) from the <a href="../index.html">PasteSuiteAI website</a>.</li>
+        <li>Run the installer. No administrator rights are required for a per-user install.</li>
+        <li>Launch PasteSuiteAI from the Start Menu or desktop shortcut. On first launch it may take a moment to start, then the main window appears.</li>
+      </ol>
+      <div class="docs-tip">
+        <strong>Windows only.</strong> PasteSuiteAI uses your OS secure credential store to protect API keys. No keys are ever written to disk in plain text.
+      </div>
+
+      <h2>Setup Wizard</h2>
+      <p>On the very first launch, if no connections are configured, the Setup Wizard appears automatically. It guides you through connecting to an AI provider. You can dismiss it at any point and configure connections later from <strong>Settings &rarr; Connections</strong>.</p>
+
+      <img class="docs-screenshot" src="img/setup-wizard.png" alt="Setup Wizard &mdash; provider selection">
+
+      <h3>Step 1: Welcome</h3>
+      <p>The welcome screen introduces the wizard. You have two choices:</p>
+      <ul>
+        <li><strong>Yes, set up</strong> &mdash; advances to provider selection.</li>
+        <li><strong>No thanks</strong> &mdash; dismisses the wizard. It will not reappear automatically. You can relaunch it any time from <strong>Settings &rarr; Connections</strong>.</li>
+      </ul>
+
+      <h3>Step 2: Provider Selection</h3>
+      <p>Click a provider card to select it and advance to configuration. Providers are grouped into two categories:</p>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Category</th><th>Providers</th><th>When to use</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cloud</strong></td>
+            <td>OpenAI, Anthropic, Azure OpenAI, Google AI, and others</td>
+            <td>Best quality and speed. Requires an API key and internet access. Usage is billed by the provider.</td>
+          </tr>
+          <tr>
+            <td><strong>Local</strong></td>
+            <td>Ollama, LM Studio, and any OpenAI-compatible local server</td>
+            <td>Runs on your own hardware. No API key needed, no usage costs, no data leaves your machine.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Each card shows the provider name and the capabilities it supports (for example <code>llm</code>, <code>stt</code>, <code>vision</code>).</p>
+      <div class="docs-tip">
+        In audio mode (reached via the audio upsell at step 5), only providers that support speech-to-text child connections are shown.
+      </div>
+
+      <h3>Step 3: Configuration</h3>
+      <p>Enter the connection details for the selected provider. The fields shown depend on the provider:</p>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Field</th><th>When shown</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Endpoint URL</td>
+            <td>Providers that require a custom endpoint (local providers, Azure OpenAI)</td>
+            <td>The base URL for the provider API. Pre-filled with the provider default where applicable.</td>
+          </tr>
+          <tr>
+            <td>API Key</td>
+            <td>Providers that require authentication</td>
+            <td>Your secret API key. Input is masked. Stored in your OS secure credential store &mdash; never written to disk in plain text. A link to the provider's key management page is shown when available.</td>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td>Always</td>
+            <td>A curated dropdown of supported models for the selected provider. The recommended model is pre-selected. Choose <strong>Custom model&hellip;</strong> at the bottom of the list to type a model identifier that is not in the curated list.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>When you select <strong>Custom model&hellip;</strong>, a text input replaces the dropdown. Click <strong>Back to curated list</strong> to restore the dropdown and reset to the recommended model.</p>
+
+      <div class="docs-tip">
+        The model list is refreshed from the provider catalog when the wizard opens. If your preferred model does not appear, use the custom model input.
+      </div>
+
+      <h3>Step 4: Test Result</h3>
+      <p>Click <strong>Test &amp; Save</strong>. The wizard creates the connection, saves your API key, and sends a short test message to the provider. A spinner is shown while the test is in progress.</p>
+
+      <p><strong>On success:</strong></p>
+      <ul>
+        <li>A checkmark is shown with a confirmation message.</li>
+        <li><strong>Add Another</strong> &mdash; resets the form and returns to provider selection to configure a second connection.</li>
+        <li><strong>No Thanks &mdash; Done</strong> &mdash; moves to the next step (audio upsell or defaults).</li>
+      </ul>
+
+      <p><strong>On failure:</strong></p>
+      <ul>
+        <li>An error message describes what went wrong. The connection is retained so you can save it anyway.</li>
+        <li><strong>Try Again</strong> &mdash; deletes the failed connection and returns you to step 3 to correct the details.</li>
+        <li><strong>Save Anyway</strong> &mdash; saves the connection despite the failed test. Use this when you know the failure was transient (for example a temporary outage or rate limit).</li>
+        <li><strong>Skip</strong> &mdash; deletes the pending connection and dismisses the wizard entirely.</li>
+      </ul>
+
+      <div class="docs-warning">
+        A connection saved with <strong>Save Anyway</strong> will appear in the connections list but actions using it may fail until the underlying issue is resolved.
+      </div>
+
+      <h3>Step 5: Audio Upsell</h3>
+      <p>If you do not yet have a speech-to-text connection configured and audio-capable providers are available, the wizard offers to add one before closing.</p>
+      <ul>
+        <li><strong>Yes, add audio</strong> &mdash; switches to audio mode and returns to provider selection, showing only STT-capable providers.</li>
+        <li><strong>No, skip audio</strong> &mdash; proceeds to defaults or closes the wizard.</li>
+      </ul>
+      <p>This step is skipped when you already have an STT connection or no audio-capable providers are installed.</p>
+
+      <h3>Step 6: Default Assignments</h3>
+      <p>If you have configured more than one connection for the same capability (LLM, Vision, or STT), the wizard asks you to choose a default for each group.</p>
+      <p>Click any connection row to set it as the default for that capability. The star icon fills to indicate the active default. Defaults can be changed at any time from <strong>Settings &rarr; Connections</strong> or from the inline connection selector in the main window.</p>
+      <p>Click <strong>Done</strong> to close the wizard. This step is skipped entirely when each capability has at most one connection.</p>
+
+      <h3>Interactive Elements</h3>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Element</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Yes, set up</td><td>Button (primary)</td><td>Advances from step 1 to provider selection.</td></tr>
+          <tr><td>No thanks</td><td>Button (secondary)</td><td>Dismisses the wizard and marks it as seen. The wizard will not reappear automatically.</td></tr>
+          <tr><td>Provider card</td><td>Clickable card</td><td>Selects the provider and advances to the configuration step.</td></tr>
+          <tr><td>Back</td><td>Button (secondary)</td><td>Returns to the previous step. On the provider grid after looping, goes to the result screen rather than step 1.</td></tr>
+          <tr><td>Endpoint URL</td><td>Text input</td><td>Custom API endpoint URL. Shown only for providers that require it.</td></tr>
+          <tr><td>API Key</td><td>Password input</td><td>Provider API key. Masked on input. Stored in the OS Credential Manager.</td></tr>
+          <tr><td>Model dropdown</td><td>Select</td><td>Curated model list for the provider. Selecting the last option switches to custom text input.</td></tr>
+          <tr><td>Custom model input</td><td>Text input</td><td>Free-form model identifier. Appears when Custom model is selected from the dropdown.</td></tr>
+          <tr><td>Back to curated list</td><td>Link</td><td>Dismisses the custom model input and restores the dropdown with the recommended model.</td></tr>
+          <tr><td>Test &amp; Save</td><td>Button (primary, with spinner)</td><td>Creates the connection, saves the API key, and runs a live connection test.</td></tr>
+          <tr><td>Add Another</td><td>Button (primary)</td><td>On success: resets the form and returns to provider selection.</td></tr>
+          <tr><td>No Thanks &mdash; Done</td><td>Button (secondary)</td><td>On success: advances to audio upsell or defaults depending on configuration.</td></tr>
+          <tr><td>Try Again</td><td>Button (primary)</td><td>On failure: deletes the failed connection and returns to the configuration step.</td></tr>
+          <tr><td>Save Anyway</td><td>Button (secondary)</td><td>On failure: saves the connection without a passing test.</td></tr>
+          <tr><td>Skip</td><td>Button (secondary)</td><td>On failure: deletes the pending connection and closes the wizard.</td></tr>
+          <tr><td>Yes, add audio</td><td>Button (primary)</td><td>Starts audio mode: returns to provider selection showing only STT-capable providers.</td></tr>
+          <tr><td>No, skip audio</td><td>Button (secondary)</td><td>Skips audio setup and proceeds to defaults or closes the wizard.</td></tr>
+          <tr><td>Default capability row</td><td>Clickable row</td><td>Sets the clicked connection as the default for that capability group.</td></tr>
+          <tr><td>Done</td><td>Button (primary)</td><td>Closes the wizard from the defaults step.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>After Setup</h2>
+      <p>Once the wizard closes you will see the main panel. It shows your current text, quick prompt buttons, the prompt input, and the list of available actions. For a full description of every element see <a href="main-window.html">Main Window</a>.</p>
+      <p>To run your first action: select some text, then click <strong>AI Paste</strong> on any action card. The transformed text is pasted into the previously active window.</p>
+      <div class="docs-tip">
+        The default <strong>Paste Plain</strong> action strips all formatting without calling any AI provider. It is always available and does not count against your free usage limit.
+      </div>
+      <p>For more on configuring and using actions, see <a href="actions.html">Actions</a>.</p>
+
+      <h2>Re-running the Wizard</h2>
+      <p>You can reopen the Setup Wizard at any time. Click the settings gear icon in the title bar, navigate to the <strong>Connections</strong> tab, and click <strong>Relaunch Wizard</strong>. To add only an STT provider, click <strong>Add Audio Connection</strong> instead &mdash; this launches the wizard directly in audio mode, showing only speech-to-text capable providers.</p>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

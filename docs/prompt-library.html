@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Library &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Prompt Library</h1>
+      <p class="subtitle">Browse, manage, and execute saved prompts from a searchable library</p>
+
+      <img class="docs-screenshot" src="img/prompt-library-overlay.png" alt="Prompt Library overlay window">
+
+      <h2>Overview</h2>
+      <p>
+        The Prompt Library is a centralized, searchable collection of all your prompts. It
+        aggregates prompts from four sources: User Prompts, Action Prompts, Quick Prompts, and
+        Connection System Prompts. You can open it from the main panel footer, via a keyboard
+        hotkey, or via a mouse trigger.
+      </p>
+      <p>
+        The library has two variants. The <strong>panel variant</strong> opens as a popover or
+        modal inside the main window. The <strong>overlay variant</strong> opens as a separate
+        floating window positioned near your cursor, without stealing focus from the app you are
+        working in. Enabled sections always appear at the top of the list; disabled sections are
+        sorted to the bottom.
+      </p>
+
+      <h2>Opening the Prompt Library</h2>
+      <p>Three methods are available:</p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>How to use</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Footer link</strong></td>
+            <td>Click "Prompt Library" in the main panel footer</td>
+            <td>Opens as a modal inside the main panel window</td>
+          </tr>
+          <tr>
+            <td><strong>Hotkey</strong></td>
+            <td>Press the configured hotkey (configurable in <a href="settings.html">Settings &gt; General</a>)</td>
+            <td>Opens as a floating overlay window near your cursor</td>
+          </tr>
+          <tr>
+            <td><strong>Mouse trigger</strong></td>
+            <td>Perform the configured mouse gesture (configurable in <a href="settings.html">Settings &gt; General</a>)</td>
+            <td>Opens as a floating overlay window near your cursor</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        The hotkey acts as a toggle. Press the same combination again to dismiss the overlay.
+        You can also press <kbd>Escape</kbd> or click the X button to close it.
+      </div>
+      <div class="docs-tip">
+        The floating overlay never steals keyboard focus from your active application. After you
+        execute a prompt or close the overlay, focus returns to the window that was active before
+        the overlay appeared.
+      </div>
+
+      <h2>Prompt Types</h2>
+      <p>
+        Prompts are organized into four sections. Each section has a toggle switch that shows or
+        hides it. Enabled sections are sorted to the top; disabled sections move to the bottom.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Source</th>
+            <th>Editable here</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>User Prompts</strong></td>
+            <td>Your custom prompts, stored locally on your device</td>
+            <td>Yes &mdash; add, edit, delete</td>
+          </tr>
+          <tr>
+            <td><strong>Action Prompts</strong></td>
+            <td>Prompts from your configured <a href="actions.html">actions</a></td>
+            <td>Read-only &mdash; edit in <a href="settings.html">Settings &gt; Actions</a></td>
+          </tr>
+          <tr>
+            <td><strong>Quick Prompts</strong></td>
+            <td>Prompts from your Quick Prompt buttons (enabled only)</td>
+            <td>Read-only &mdash; edit in Settings &gt; Quick Prompts</td>
+          </tr>
+          <tr>
+            <td><strong>Connection Prompts</strong></td>
+            <td>System prompts from your <a href="connections.html">connections</a></td>
+            <td>Read-only &mdash; edit in <a href="connections.html">Settings &gt; Connections</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        Action prompts that belong to chain children are excluded from the library. They are
+        triggered automatically via their parent action and are not intended for direct invocation.
+      </div>
+
+      <h2>Managing User Prompts</h2>
+      <p>
+        User Prompts are the only category you can create and modify directly inside the Prompt
+        Library. Each user prompt has a short label and a full prompt text.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>How</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Add</strong></td>
+            <td>
+              Click the <strong>Add</strong> button in the User Prompts section header (or in
+              the overlay top bar). An inline form appears with a label field and a text area.
+              Fill in both fields and click <strong>Done</strong> to save.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Edit</strong></td>
+            <td>
+              Click the <strong>Edit</strong> button on any user prompt row. The inline form
+              opens pre-filled with the existing label and text. Change what you need and click
+              <strong>Done</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Delete</strong></td>
+            <td>
+              Click the <strong>Delete</strong> button on any user prompt row, or click
+              <strong>Delete</strong> inside the edit form to remove the prompt being edited.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Export data</strong></td>
+            <td>
+              Click the download icon button in the library footer. This saves a full data bundle
+              (actions, user prompts, connections, quick prompts, and settings) as a JSON file
+              for backup or transfer.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-warning">
+        Both the label and text fields must be non-empty before a save is accepted. Clicking
+        <strong>Done</strong> with either field empty has no effect.
+      </div>
+      <div class="docs-tip">
+        In the overlay variant, Edit and Delete buttons are hidden by default to keep the
+        interface compact. Enable them in <a href="settings.html">Settings &gt; General</a>
+        under "Overlay Show Edit/Delete".
+      </div>
+
+      <h2>Using Prompts</h2>
+      <p>
+        Clicking a prompt row selects it. What happens next depends on which variant is open.
+      </p>
+
+      <h3>Panel variant</h3>
+      <p>
+        Clicking a prompt row fills the prompt input area in the
+        <a href="main-window.html">main window</a> with the prompt text and closes the library.
+        You can review or edit the text before running it.
+      </p>
+
+      <h3>Overlay variant</h3>
+      <p>
+        In the overlay, each prompt row shows execution buttons so you can run the prompt
+        immediately without switching back to the main panel.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Button</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Overlay</strong> (window icon)</td>
+            <td>
+              Executes the prompt and shows the result in the
+              <a href="result-overlay.html">Result Pop-Up Window</a>. For actions, uses overlay
+              execution mode. For static text, shows the raw text in the result overlay.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Clipboard</strong> (clipboard icon)</td>
+            <td>
+              Executes the prompt and copies the result to the clipboard. For static text,
+              copies the raw text directly.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Paste + Clipboard</strong> (clipboard with checkmark)</td>
+            <td>
+              Executes the prompt, pastes the result into the active app, and also keeps it on
+              the clipboard.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>AI Paste</strong></td>
+            <td>
+              Executes the prompt through the PromptBar AI paste flow. Shown for AI-capable
+              prompts: Quick Prompts and AI Transform actions.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Paste</strong></td>
+            <td>
+              Pastes the raw prompt text directly into the active app without any AI processing.
+              Shown for non-AI prompts: static text, local transform actions, and user or
+              connection prompts.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        After executing a prompt from the overlay, the overlay hides automatically and focus
+        returns to the app that was active before the overlay appeared.
+      </div>
+
+      <h2>Overlay Variant</h2>
+      <p>
+        The floating overlay is a standalone window that appears near your cursor and auto-resizes
+        its height to fit the current content, up to a maximum height.
+      </p>
+      <ul>
+        <li>
+          <strong>Top bar</strong>: Contains the User Prompts section toggle, an Add button (when
+          User Prompts is enabled), and a Close (X) button.
+        </li>
+        <li>
+          <strong>Prompt sections</strong>: The same four category sections as the panel variant,
+          each with its own toggle switch.
+        </li>
+        <li>
+          <strong>Focus behavior</strong>: The overlay is non-focusable by default. When you start
+          editing a user prompt (clicking Add or Edit), the overlay temporarily becomes focusable
+          so you can type in the input fields. Focus returns to the previous window when you save
+          or cancel.
+        </li>
+        <li>
+          <strong>Dismissing</strong>: Click the X button, press <kbd>Escape</kbd>, or trigger the
+          hotkey a second time.
+        </li>
+        <li>
+          <strong>Screen-aware positioning</strong>: The overlay is clamped to stay fully within
+          the monitor that contains the cursor.
+        </li>
+        <li>
+          <strong>Scale</strong>: The overlay has its own independent scale (PL Overlay Scale),
+          separate from the main panel UI scale.
+        </li>
+      </ul>
+
+      <h2>Configuration</h2>
+      <p>
+        All Prompt Library settings are in <a href="settings.html">Settings &gt; General</a>.
+        The hotkey and mouse trigger can also be changed from the Prompt Library footer.
+        Default section visibility: User Prompts on, Action Prompts on, Quick Prompts off,
+        Connection Prompts off.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hotkey</td>
+            <td>&mdash;</td>
+            <td>
+              Global keyboard shortcut to open or close the Prompt Library overlay. Click the
+              hotkey display to open the Hotkey Editor. Conflict detection warns you if the
+              hotkey overlaps with an existing action or the main trigger.
+            </td>
+          </tr>
+          <tr>
+            <td>Mouse trigger</td>
+            <td>&mdash;</td>
+            <td>
+              Mouse gesture to open or close the Prompt Library overlay. Click the mouse icon
+              button to open the Mouse Trigger Editor. Conflict detection warns you if the gesture
+              is already used by another action or the main trigger.
+            </td>
+          </tr>
+          <tr>
+            <td>Show User Prompts</td>
+            <td>On</td>
+            <td>Toggle the User Prompts section in the library.</td>
+          </tr>
+          <tr>
+            <td>Show Action Prompts</td>
+            <td>On</td>
+            <td>Toggle the Action Prompts section in the library.</td>
+          </tr>
+          <tr>
+            <td>Show Quick Prompts</td>
+            <td>Off</td>
+            <td>Toggle the Quick Prompts section in the library.</td>
+          </tr>
+          <tr>
+            <td>Show Connection Prompts</td>
+            <td>Off</td>
+            <td>Toggle the Connection System Prompts section in the library.</td>
+          </tr>
+          <tr>
+            <td>Overlay Show Edit/Delete</td>
+            <td>Off</td>
+            <td>
+              When enabled, Edit and Delete buttons appear on user prompt rows in the floating
+              overlay variant.
+            </td>
+          </tr>
+          <tr>
+            <td>PL Overlay Scale</td>
+            <td>1.4&times;</td>
+            <td>
+              Zoom level of the floating overlay window. Range: 1.0&times;&ndash;3.0&times;.
+              Independent from the main panel UI scale and the Result Pop-Up Window scale.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Interactive Elements Reference</h2>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>User Prompts toggle</td>
+            <td>Section header / overlay top bar</td>
+            <td>Show or hide the User Prompts section</td>
+          </tr>
+          <tr>
+            <td>Action Prompts toggle</td>
+            <td>Section header</td>
+            <td>Show or hide the Action Prompts section</td>
+          </tr>
+          <tr>
+            <td>Quick Prompts toggle</td>
+            <td>Section header</td>
+            <td>Show or hide the Quick Prompts section</td>
+          </tr>
+          <tr>
+            <td>Connection Prompts toggle</td>
+            <td>Section header</td>
+            <td>Show or hide the Connection Prompts section</td>
+          </tr>
+          <tr>
+            <td>Add button</td>
+            <td>User Prompts section header (panel) / overlay top bar</td>
+            <td>Open an inline form to create a new user prompt</td>
+          </tr>
+          <tr>
+            <td>Edit button</td>
+            <td>Per user prompt row</td>
+            <td>Open the inline edit form pre-filled with the prompt's existing label and text</td>
+          </tr>
+          <tr>
+            <td>Delete button (row)</td>
+            <td>Per user prompt row</td>
+            <td>Delete the user prompt immediately</td>
+          </tr>
+          <tr>
+            <td>Label input</td>
+            <td>Inline add / edit form</td>
+            <td>Enter the short display name for the prompt</td>
+          </tr>
+          <tr>
+            <td>Text textarea</td>
+            <td>Inline add / edit form</td>
+            <td>Enter the full prompt text</td>
+          </tr>
+          <tr>
+            <td>Done button</td>
+            <td>Inline add / edit form</td>
+            <td>Save the prompt (requires non-empty label and text)</td>
+          </tr>
+          <tr>
+            <td>Cancel button</td>
+            <td>Inline add / edit form</td>
+            <td>Discard changes and close the form</td>
+          </tr>
+          <tr>
+            <td>Delete button (form)</td>
+            <td>Inline edit form only</td>
+            <td>Delete the prompt currently being edited</td>
+          </tr>
+          <tr>
+            <td>Overlay execute button</td>
+            <td>Per prompt row (overlay variant)</td>
+            <td>Execute and show result in the Result Pop-Up Window</td>
+          </tr>
+          <tr>
+            <td>Clipboard execute button</td>
+            <td>Per prompt row (overlay variant)</td>
+            <td>Execute and copy result to clipboard</td>
+          </tr>
+          <tr>
+            <td>Paste + Clipboard button</td>
+            <td>Per prompt row (overlay variant)</td>
+            <td>Execute, paste result, and copy result to clipboard</td>
+          </tr>
+          <tr>
+            <td>AI Paste button</td>
+            <td>Per prompt row, AI prompts only (overlay variant)</td>
+            <td>Execute through the PromptBar AI paste flow</td>
+          </tr>
+          <tr>
+            <td>Paste button</td>
+            <td>Per prompt row, non-AI prompts only (overlay variant)</td>
+            <td>Paste the raw prompt text into the active app</td>
+          </tr>
+          <tr>
+            <td>Prompt row click</td>
+            <td>Any prompt row (panel variant)</td>
+            <td>Fill the main window prompt input with this prompt text and close the library</td>
+          </tr>
+          <tr>
+            <td>Hotkey editor button</td>
+            <td>Library footer</td>
+            <td>Open the Hotkey Editor modal to assign or clear the PL hotkey</td>
+          </tr>
+          <tr>
+            <td>Mouse trigger editor button</td>
+            <td>Library footer (mouse icon)</td>
+            <td>Open the Mouse Trigger Editor modal to assign or clear the mouse gesture</td>
+          </tr>
+          <tr>
+            <td>Export data download button</td>
+            <td>Library footer (download icon)</td>
+            <td>Save a full data bundle JSON backup file</td>
+          </tr>
+          <tr>
+            <td>Close (X) button</td>
+            <td>Overlay top bar</td>
+            <td>Hide the floating overlay and restore focus to the previous window</td>
+          </tr>
+          <tr>
+            <td>Modal backdrop</td>
+            <td>Modal variant only</td>
+            <td>Click outside the library to close it</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Related</h2>
+      <ul>
+        <li><a href="actions.html">Actions</a> &mdash; Configure action prompts and per-action execution behavior.</li>
+        <li><a href="connections.html">Connections</a> &mdash; Manage AI provider connections and their system prompts.</li>
+        <li><a href="settings.html">Settings</a> &mdash; General settings including overlay scale, section visibility, hotkey, and mouse trigger.</li>
+        <li><a href="main-window.html">Main Window</a> &mdash; The panel where selected prompts are filled for editing.</li>
+        <li><a href="result-overlay.html">Result Pop-Up Window</a> &mdash; Where prompt execution results appear in overlay mode.</li>
+        <li><a href="keyboard-shortcuts.html">Keyboard Shortcuts</a> &mdash; Full list of configurable hotkeys.</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

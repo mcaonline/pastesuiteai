@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connections &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Connections</h1>
+      <p class="subtitle">Configure AI providers, API keys, models, and capabilities</p>
+
+      <p>Connections tell PasteSuiteAI how to reach AI providers. Each connection bundles a provider, credentials, and a model into a single entry. You can add up to 50 connections and assign different ones for different tasks &mdash; for example, one connection for text generation and a separate one for speech-to-text transcription.</p>
+
+      <img class="docs-screenshot" src="img/settings-connections.png" alt="Connections tab overview">
+
+      <!-- ============================== -->
+      <h2>Overview</h2>
+
+      <p>When you run an <a href="actions.html">action</a>, PasteSuiteAI routes the request to the correct connection based on the action's capability requirement and which connection is marked as the default for that capability. You can override this routing on a per-action basis or for the <a href="promptbar.html">PromptBar</a> specifically.</p>
+
+      <p>Connections are managed in <strong>Settings &gt; Connections</strong>. Changes take effect immediately &mdash; no restart required.</p>
+
+      <div class="docs-tip">
+        If this is your first time setting up PasteSuiteAI, use the <strong>Setup Wizard</strong> to create your first connection. You can relaunch it at any time from the Connections tab.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Supported Providers</h2>
+
+      <p>The following provider types are available out of the box. New providers appear automatically in the provider dropdown when they are added &mdash; no option lists are hardcoded.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Description</th>
+            <th>Typical Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>OpenAI-Compatible</strong></td>
+            <td>Works with any API that follows the OpenAI chat completions format: OpenAI, Together.ai, Ollama, LM Studio, Mistral, Groq, and more.</td>
+            <td>LLM, Vision, STT</td>
+          </tr>
+          <tr>
+            <td><strong>Anthropic</strong></td>
+            <td>Native Claude API support (claude-3-5-sonnet, claude-opus-4-6, etc.).</td>
+            <td>LLM, Vision</td>
+          </tr>
+          <tr>
+            <td><strong>Azure OpenAI</strong></td>
+            <td>Enterprise Azure endpoints with optional OAuth2 client credentials authentication.</td>
+            <td>LLM, Vision, STT</td>
+          </tr>
+          <tr>
+            <td><strong>Google AI</strong></td>
+            <td>Gemini models via the Google AI Generative Language API.</td>
+            <td>LLM, Vision</td>
+          </tr>
+          <tr>
+            <td><strong>Custom API</strong></td>
+            <td>Build multi-step HTTP pipelines with template variables, conditional blocks, loops, and JSONPath extraction. Useful for internal APIs or chained workflows.</td>
+            <td>Advanced</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        For local models (Ollama, LM Studio), choose <strong>OpenAI-Compatible</strong> and set the Endpoint URL to your local server address (e.g., <code>http://localhost:11434/v1</code>).
+      </div>
+
+      <!-- ============================== -->
+      <h2>Capabilities</h2>
+
+      <p>Each connection declares which AI tasks it can perform. PasteSuiteAI uses these declarations to route requests to the right connection automatically.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LLM</strong></td>
+            <td>Text generation and transformation. Required for AI actions that rewrite, summarize, or translate text.</td>
+          </tr>
+          <tr>
+            <td><strong>STT</strong></td>
+            <td>Speech-to-text transcription. Required for <a href="speech-to-text.html">recording actions</a>.</td>
+          </tr>
+          <tr>
+            <td><strong>Vision</strong></td>
+            <td>Image understanding. Allows actions to pass images alongside text prompts.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The <strong>star (&#9733;)</strong> next to a capability marks the default connection for that capability. When an action needs LLM and no override is set, the starred LLM connection is used. Click the star on any connection card to change the default.</p>
+
+      <div class="docs-tip">
+        If a new connection is the first one with a given capability, it is automatically starred as the default for that capability.
+      </div>
+
+      <!-- ============================== -->
+      <h2>Connection List</h2>
+
+      <p>Open <strong>Settings &gt; Connections</strong> to see all your connections. Each card shows the connection name, provider, model, and its declared capabilities.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-connections.png" alt="Connection list with capabilities"
+             style="aspect-ratio: 530/180; object-fit: cover; object-position: 0 15%;">
+      </div>
+
+      <p>Use the buttons on each card to manage connections:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Edit</td>
+            <td>Button</td>
+            <td>Opens the connection editor for this connection.</td>
+          </tr>
+          <tr>
+            <td>Delete</td>
+            <td>Button</td>
+            <td>Removes the connection (and any child connections) after confirmation. Cannot be undone.</td>
+          </tr>
+          <tr>
+            <td>Move Up / Move Down</td>
+            <td>Buttons</td>
+            <td>Reorders the connection in the list. Order affects tie-breaking when multiple connections share a capability.</td>
+          </tr>
+          <tr>
+            <td>LLM &#9733; / STT &#9733; / Vision &#9733;</td>
+            <td>Default Star Buttons</td>
+            <td>Marks this connection as the default for the corresponding capability. Clicking a filled star removes the default (only if another connection also supports that capability).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Below the connection list you will find two additional buttons:</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-connections.png" alt="Relaunch wizard button"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 85%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Relaunch Setup Wizard</strong></td>
+            <td>Re-runs the first-time setup wizard to add or reconfigure a primary LLM connection.</td>
+          </tr>
+          <tr>
+            <td><strong>Relaunch Audio Wizard</strong></td>
+            <td>Re-runs the audio setup wizard to add or reconfigure a speech-to-text connection.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Connection Editor</h2>
+
+      <p>Click <strong>Edit</strong> on an existing connection or select a provider from the Add Connection dropdown to open the connection editor. Changes are auto-saved as you fill in fields &mdash; you do not need to click Save after each field.</p>
+
+      <img class="docs-screenshot" src="img/settings-connection-form.png" alt="Connection editor form">
+
+      <h3>Basic Settings</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Provider</td>
+            <td>Dropdown</td>
+            <td>Selects the AI provider. Changing the provider resets the model, auth method, and endpoint fields.</td>
+          </tr>
+          <tr>
+            <td>Model ID</td>
+            <td>Text Input</td>
+            <td>The model identifier to use (e.g., <code>gpt-4o</code>, <code>claude-opus-4-6</code>). Leave blank to use the provider's recommended default. A suggestions dropdown appears as you type if the provider has a curated model list.</td>
+          </tr>
+          <tr>
+            <td>Refresh Models</td>
+            <td>Button</td>
+            <td>Fetches the live model list from the provider's API and updates the suggestions dropdown.</td>
+          </tr>
+          <tr>
+            <td>API Format</td>
+            <td>Dropdown</td>
+            <td>Selects the API format when a provider supports multiple formats (e.g., standard chat completions vs. Responses API). Only shown for applicable providers.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Authentication</h3>
+
+      <p>All secrets are stored exclusively in your <strong>OS secure credential store</strong>. They are never written to disk in plaintext and are never logged.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Auth Method</td>
+            <td>Dropdown</td>
+            <td>Choose <strong>API Key</strong>, <strong>OAuth2</strong> (client credentials flow), or <strong>None</strong> for providers that require no authentication (e.g., a local Ollama instance).</td>
+          </tr>
+          <tr>
+            <td>API Key</td>
+            <td>Password Input</td>
+            <td>Your provider API key. Displayed as a masked field. A Help link opens the provider's key documentation page. Only visible when Auth Method is API Key.</td>
+          </tr>
+          <tr>
+            <td>Token URL</td>
+            <td>Text Input</td>
+            <td>OAuth2 token endpoint URL (e.g., an Azure AD token endpoint). Only visible when Auth Method is OAuth2.</td>
+          </tr>
+          <tr>
+            <td>Client ID</td>
+            <td>Text Input</td>
+            <td>OAuth2 client identifier. Only visible when Auth Method is OAuth2.</td>
+          </tr>
+          <tr>
+            <td>Client Secret</td>
+            <td>Password Input</td>
+            <td>OAuth2 client secret. Stored in the OS keychain. Only visible when Auth Method is OAuth2.</td>
+          </tr>
+          <tr>
+            <td>App Key</td>
+            <td>Password Input</td>
+            <td>Optional secondary key for certain OAuth2 providers (e.g., an Azure Cognitive Services subscription key). Stored in the OS keychain.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-warning">
+        API keys and OAuth2 secrets are committed to the OS keychain when you leave the field (on blur) or click Done. If you close the editor by clicking Cancel on a new connection, any unsaved secrets are discarded.
+      </div>
+
+      <h3>Endpoint URL</h3>
+
+      <p>The Endpoint URL field sets a custom base URL for the provider API. This is required for self-hosted models, private cloud deployments, or API proxies. For standard cloud providers the field is pre-filled with the correct default and usually does not need to be changed.</p>
+
+      <h3>System Prompts</h3>
+
+      <p>Each connection can carry its own system prompts that are sent to the model alongside the action's instruction and user input. See <a href="actions.html">Actions</a> for how all prompt components are assembled.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mode Toggle (Instruct / Transcribe)</td>
+            <td>Toggle</td>
+            <td>Switches which system prompt you are currently editing: the regular Instruct prompt or the Transcribe prompt used for STT actions.</td>
+          </tr>
+          <tr>
+            <td>System Prompt (Instruct)</td>
+            <td>Textarea</td>
+            <td>The system prompt sent for regular AI text actions. Defines the model's persona and general behaviour.</td>
+          </tr>
+          <tr>
+            <td>System Prompt (Transcribe)</td>
+            <td>Textarea</td>
+            <td>The system prompt sent when this connection is used for <a href="speech-to-text.html">transcription actions</a>.</td>
+          </tr>
+          <tr>
+            <td>PromptBar System Prompt</td>
+            <td>Textarea</td>
+            <td>The system prompt used when this connection handles <a href="promptbar.html">PromptBar</a> AI Paste. Defaults to a shorter, conversational prompt optimised for inline use.</td>
+          </tr>
+          <tr>
+            <td>Transcription Hint</td>
+            <td>Textarea</td>
+            <td>Extra hint text passed to the STT provider to improve transcription accuracy (e.g., domain-specific terminology, proper nouns, or spelling preferences).</td>
+          </tr>
+          <tr>
+            <td>Reset Prompt</td>
+            <td>Button</td>
+            <td>Restores the currently visible system prompt field to the application default text.</td>
+          </tr>
+          <tr>
+            <td>Prompt Library</td>
+            <td>Link</td>
+            <td>Opens the <a href="prompt-library.html">Prompt Library</a> so you can browse and copy a saved prompt into the system prompt field.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Capabilities</h3>
+
+      <p>Toggle switches enable or disable each capability (LLM, STT, Vision) for this connection. The default star buttons (one per capability) mark this connection as the primary default for that capability.</p>
+
+      <div class="docs-tip">
+        Capability toggles are updated automatically when you pick a model that appears in the provider's curated list. For custom or unlisted model IDs, set capabilities manually.
+      </div>
+
+      <h3>Custom Fields</h3>
+
+      <p>Custom fields let you pass additional headers or query parameters to the provider API. This is useful for providers that require extra authentication headers, API versioning parameters, or custom routing keys.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Text Input</td>
+            <td>The header or query parameter name (e.g., <code>api-version</code> or <code>x-custom-header</code>).</td>
+          </tr>
+          <tr>
+            <td>Value</td>
+            <td>Text Input</td>
+            <td>The value. If Is Secret is checked, the value is stored in the OS keychain and masked in the UI.</td>
+          </tr>
+          <tr>
+            <td>Transport</td>
+            <td>Dropdown</td>
+            <td>Whether to send the field as an HTTP <strong>header</strong> or a URL <strong>query</strong> parameter.</td>
+          </tr>
+          <tr>
+            <td>Is Secret</td>
+            <td>Checkbox</td>
+            <td>Marks the value as a secret. Secrets are stored in the OS keychain and never written to config files in plaintext.</td>
+          </tr>
+          <tr>
+            <td>Remove</td>
+            <td>Button</td>
+            <td>Deletes this custom field row.</td>
+          </tr>
+          <tr>
+            <td>Add Field</td>
+            <td>Button</td>
+            <td>Adds a new custom field row. Maximum 20 custom fields per connection.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Child Connections</h3>
+
+      <p>Child connections inherit authentication from their parent and are deleted automatically when the parent is deleted. They are typically used to pair a primary LLM connection with a dedicated STT connection from the same provider, sharing the same API key without re-entering it.</p>
+
+      <p>Preset buttons create common child configurations in one click (e.g., "Audio Recommended" creates a child STT connection with optimal audio settings). Grandchild connections are not supported.</p>
+
+      <h3>Test Connection</h3>
+
+      <p>Use the Test Connection button to verify that the connection is correctly configured before using it in an action.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Test Message</td>
+            <td>Text Input</td>
+            <td>Optional message sent to the model for the test call. Defaults to a generic short prompt if left blank.</td>
+          </tr>
+          <tr>
+            <td>Test Connection</td>
+            <td>Button</td>
+            <td>Sends a real API request and reports whether it succeeded. On failure, shows the error returned by the provider.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Token Usage</h3>
+
+      <p>The Token Usage section shows cumulative token statistics for this connection: total input tokens, total output tokens, and total request count. Statistics persist across restarts.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Token Usage Display</td>
+            <td>Read-only</td>
+            <td>Shows lifetime input tokens, output tokens, and request count for this connection.</td>
+          </tr>
+          <tr>
+            <td>Reset Stats</td>
+            <td>Button</td>
+            <td>Clears the token usage counters for this connection. Cannot be undone.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Done and Cancel</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Done</td>
+            <td>Button</td>
+            <td>Saves any pending changes (including unsaved secrets) and closes the editor, returning to the connection list.</td>
+          </tr>
+          <tr>
+            <td>Cancel</td>
+            <td>Button</td>
+            <td>For new connections: deletes the in-progress connection entirely. For existing connections: reverts all fields to the state they were in when you clicked Edit.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Custom API Editor</h2>
+
+      <p>When the selected provider is <strong>Custom API</strong>, the editor reveals a full HTTP pipeline builder below the standard connection fields. This lets you build multi-step workflows that call arbitrary HTTP endpoints and chain their outputs.</p>
+
+      <div class="docs-tip">
+        Custom API is an advanced feature. For most use cases, one of the standard provider types (OpenAI-Compatible, Anthropic, Google AI) is sufficient and requires significantly less configuration.
+      </div>
+
+      <h3>Steps</h3>
+
+      <p>Each Custom API pipeline consists of one or more HTTP steps executed in sequence. You can add up to 10 steps. Extracted variables from one step are available as template inputs in all subsequent steps.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Step Name</td>
+            <td>Text Input</td>
+            <td>A label for this step, shown in debug output and error messages.</td>
+          </tr>
+          <tr>
+            <td>HTTP Method</td>
+            <td>Select</td>
+            <td>GET, POST, PUT, PATCH, or DELETE.</td>
+          </tr>
+          <tr>
+            <td>URL</td>
+            <td>Text Input</td>
+            <td>The request URL. Supports template variables using <code>&#123;&#123;variable&#125;&#125;</code> syntax.</td>
+          </tr>
+          <tr>
+            <td>Auth Type</td>
+            <td>Select</td>
+            <td>Authentication method for this step: None, Bearer, Basic, or API Key.</td>
+          </tr>
+          <tr>
+            <td>Auth Credential</td>
+            <td>Text Input</td>
+            <td>The credential value (token, password, or key value). Supports template variables.</td>
+          </tr>
+          <tr>
+            <td>Auth Param</td>
+            <td>Text Input</td>
+            <td>Optional secondary auth parameter: username for Basic auth, or header name for API Key auth.</td>
+          </tr>
+          <tr>
+            <td>Headers</td>
+            <td>Key/Value Rows</td>
+            <td>Additional HTTP request headers. Each row has a name field and a value field. Both support template variables.</td>
+          </tr>
+          <tr>
+            <td>Body</td>
+            <td>Textarea</td>
+            <td>The request body (JSON, XML, or plain text). Supports template variables and conditional blocks using <code>&#123;&#123;#if var&#125;&#125;...&#123;&#123;/if&#125;&#125;</code> syntax. Built-in variables <code>has_image</code> and <code>has_audio</code> enable conditional multimodal sections.</td>
+          </tr>
+          <tr>
+            <td>Stream Path</td>
+            <td>Text Input</td>
+            <td>JSONPath expression to extract streamed content from Server-Sent Events (SSE) responses. Leave blank for non-streamed JSON responses.</td>
+          </tr>
+          <tr>
+            <td>Extraction Rows</td>
+            <td>Rows</td>
+            <td>Extract named variables from the response using JSONPath. Each row defines a variable name, a source (response body or a specific header), and a JSONPath expression. Extracted variables are available in subsequent steps.</td>
+          </tr>
+          <tr>
+            <td>On Error</td>
+            <td>Select</td>
+            <td>What to do if this step fails: <strong>Stop</strong> (abort the pipeline and return an error), <strong>Continue</strong> (proceed with an empty result for this step), or <strong>Skip</strong> (skip remaining steps and return what has been gathered so far).</td>
+          </tr>
+          <tr>
+            <td>Move Up / Move Down</td>
+            <td>Buttons</td>
+            <td>Reorders this step within the pipeline.</td>
+          </tr>
+          <tr>
+            <td>Remove</td>
+            <td>Button</td>
+            <td>Deletes this step from the pipeline.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Advanced Step Options</h3>
+
+      <p>Expand the Advanced section on any step to access timeout, condition, and loop controls:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Timeout (seconds)</td>
+            <td>Number Input</td>
+            <td>Per-step HTTP timeout in seconds. Overrides the connection-level default timeout.</td>
+          </tr>
+          <tr>
+            <td>Condition</td>
+            <td>Text Input</td>
+            <td>A template expression evaluated before the step runs. If the result is falsy (empty string, "false", "0", or "null"), the step is skipped.</td>
+          </tr>
+          <tr>
+            <td>Enable Loop</td>
+            <td>Toggle</td>
+            <td>Repeats this step in a loop. Configure max iterations, a break condition, and how to accumulate results across iterations.</td>
+          </tr>
+          <tr>
+            <td>Max Iterations</td>
+            <td>Number Input</td>
+            <td>Maximum number of loop repetitions. Subject to a hard application cap.</td>
+          </tr>
+          <tr>
+            <td>Break When</td>
+            <td>Text Input</td>
+            <td>Template expression evaluated after each iteration. When the result is truthy, the loop stops before the next iteration.</td>
+          </tr>
+          <tr>
+            <td>Result Mode</td>
+            <td>Select</td>
+            <td>How loop iteration outputs are combined: <strong>Last</strong> (use only the final iteration's output), <strong>Concat</strong> (join all outputs as a single string), or <strong>Array</strong> (collect all outputs as a JSON array).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Variables</h3>
+
+      <p>Variables parameterise your templates. Each variable has a name, a source, a default value, and an optional description. Built-in variables are provided automatically by the pipeline at runtime and include <code>input_text</code>, <code>has_image</code>, <code>has_audio</code>, and others.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Variable Name</td>
+            <td>Text Input</td>
+            <td>The key referenced in templates as <code>&#123;&#123;name&#125;&#125;</code>.</td>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td>Select</td>
+            <td><strong>Config</strong> (a static value stored in the config file), <strong>Vault</strong> (a secret stored in the OS keychain), or <strong>Builtin</strong> (a value provided by the pipeline at runtime).</td>
+          </tr>
+          <tr>
+            <td>Default Value</td>
+            <td>Text Input</td>
+            <td>Fallback value used when the runtime does not supply a value for this variable.</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>Text Input</td>
+            <td>Human-readable description shown in the debug panel.</td>
+          </tr>
+          <tr>
+            <td>Remove</td>
+            <td>Button</td>
+            <td>Removes this variable definition.</td>
+          </tr>
+          <tr>
+            <td>Add Variable</td>
+            <td>Button</td>
+            <td>Adds a new variable row.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Result Path and Pipeline Controls</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Result Path</td>
+            <td>Text Input</td>
+            <td>JSONPath expression applied to the final step's response to extract the output text that will be used by the action (e.g., <code>$.choices[0].message.content</code>).</td>
+          </tr>
+          <tr>
+            <td>Add Step</td>
+            <td>Button</td>
+            <td>Appends a new HTTP step to the end of the pipeline.</td>
+          </tr>
+          <tr>
+            <td>Import Config</td>
+            <td>Button</td>
+            <td>Loads a complete pipeline configuration from a YAML or JSON file, replacing the current configuration.</td>
+          </tr>
+          <tr>
+            <td>Export Config</td>
+            <td>Button</td>
+            <td>Saves the current pipeline configuration to a YAML or JSON file for backup or sharing.</td>
+          </tr>
+          <tr>
+            <td>Browse Templates</td>
+            <td>Button</td>
+            <td>Opens the template gallery of pre-built pipeline configurations. Click <strong>Use Template</strong> on any entry to import it as your starting point.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Debug Mode</h3>
+
+      <p>The debug panel lets you run the pipeline with test variable values without affecting real input data or triggering any action side-effects. Enter test key/value pairs, then click <strong>Debug Run</strong>. The output shows each step's request details, raw response, and extracted variables so you can diagnose template or extraction issues.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Debug Variable Rows</td>
+            <td>Key/Value Inputs</td>
+            <td>Test values for template variables. Add or remove rows as needed to preview how the request will look with sample data.</td>
+          </tr>
+          <tr>
+            <td>Debug Run</td>
+            <td>Button</td>
+            <td>Executes the pipeline with the supplied test variables and displays per-step debug results.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============================== -->
+      <h2>Related Topics</h2>
+
+      <ul>
+        <li><a href="actions.html">Actions</a> &mdash; How actions use connections for AI routing</li>
+        <li><a href="speech-to-text.html">Speech to Text</a> &mdash; STT connection setup and recording actions</li>
+        <li><a href="prompt-library.html">Prompt Library</a> &mdash; Managing and reusing system prompts</li>
+        <li><a href="promptbar.html">PromptBar</a> &mdash; Per-connection LLM override for PromptBar</li>
+        <li><a href="getting-started.html">Getting Started</a> &mdash; First-time setup guide</li>
+        <li><a href="result-overlay.html">Result Overlay</a> &mdash; Displaying action output in an overlay</li>
+        <li><a href="licensing.html">Licensing</a> &mdash; Free tier limits and license keys</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

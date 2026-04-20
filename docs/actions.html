@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actions &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Actions</h1>
+      <p class="subtitle">Configure AI transforms, text paste operations, and regex processing</p>
+
+      <img class="docs-screenshot" src="img/settings-actions.png" alt="Actions tab overview">
+
+      <!-- ================================================================ -->
+      <h2 id="what-are-actions">What Are Actions?</h2>
+
+      <p>Actions are the core feature of PasteSuiteAI. Each action takes your current text (or selected text) as input, processes it, and delivers the result back to you &mdash; by pasting it in place, copying it for later use, or showing a floating result overlay. You can trigger any action from the main panel, via a global keyboard hotkey, or with a mouse button combination.</p>
+
+      <p>Actions come in two categories:</p>
+      <ul>
+        <li><strong>Default actions</strong> &mdash; shipped with the app. You can edit, disable, or delete them. Deleted or modified defaults are fully restorable via the <em>Restore Default Actions</em> button.</li>
+        <li><strong>User-created actions</strong> &mdash; added by you with the <em>Add New Action</em> button. These are not affected by <em>Restore Default Actions</em>.</li>
+      </ul>
+
+      <div class="docs-tip">
+        <strong>No AI required for everything.</strong> Many actions run entirely locally &mdash; plain text paste and regex transforms work with no connection configured at all.
+      </div>
+
+      <!-- ================================================================ -->
+      <h2 id="action-modes">Action Modes</h2>
+
+      <p>Every action has one of three processing modes, selected in the action card:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>What it does</th>
+            <th>Requires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AI Transform</strong></td>
+            <td>Sends the text to an LLM (or STT service) with your prompt and returns the model's response.</td>
+            <td>A configured <a href="connections.html">connection</a> (LLM or STT)</td>
+          </tr>
+          <tr>
+            <td><strong>Static Text Paste</strong></td>
+            <td>Pastes a fixed template text. Use <code>{selected_text}</code> in the template to embed your current text at a specific position. No AI involved.</td>
+            <td>Nothing</td>
+          </tr>
+          <tr>
+            <td><strong>Local Regex Transform</strong></td>
+            <td>Applies a regex find-and-replace to the text locally. Fast, private, and completely offline.</td>
+            <td>Nothing</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ================================================================ -->
+      <h2 id="default-actions">Default Actions</h2>
+
+      <p>These actions are included with every installation. All of them are editable. If you delete or modify a default action, click <strong>Restore Default Actions</strong> in the Actions tab header to reset all defaults to factory state.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Mode</th>
+            <th>Default Hotkey</th>
+            <th>Default Mouse</th>
+            <th>Enabled by Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Paste as Plain Text</strong></td>
+            <td>Local Regex Transform</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></td>
+            <td>&mdash;</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td><strong>Diplomatic Rewrite</strong></td>
+            <td>Static Text Paste</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd></td>
+            <td>Middle click</td>
+            <td>Yes (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Audio to Text</strong></td>
+            <td>AI Transform (STT)</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td>
+            <td>X2 button</td>
+            <td>No (auto-enables on first STT connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Rewrite &amp; Correct</strong></td>
+            <td>AI Transform</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Rewrite &amp; Correct to English</strong></td>
+            <td>AI Transform</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd></td>
+            <td>X1 button</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Remove Empty Lines</strong></td>
+            <td>Local Regex Transform</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Simple Correction</strong></td>
+            <td>AI Transform</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Translate to English</strong></td>
+            <td>AI Transform</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Translate to German</strong></td>
+            <td>AI Transform</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Address Correction</strong></td>
+            <td>AI Transform</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd></td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+          <tr>
+            <td><strong>Network Switch Interface Check</strong></td>
+            <td>AI Transform</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>No (auto-enables on first LLM connection)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="paste-plain">Paste as Plain Text</h3>
+      <p>Strips all formatting and pastes clean plain text. Always enabled by default and always free regardless of license status.</p>
+
+      <h3 id="diplomatic-rewrite">Diplomatic Rewrite</h3>
+      <p>Prepends a diplomacy-focused instruction prefix before your text. Uses Static Text Paste mode &mdash; the template is delivered directly with no LLM call. Designed to be used with an AI chat interface such as ChatGPT or Claude.</p>
+
+      <h3 id="audio-to-text">Audio to Text</h3>
+      <p>Records from your microphone and transcribes the speech using your configured STT connection. See <a href="speech-to-text.html">Speech to Text</a> for setup and configuration details.</p>
+
+      <h3 id="rewrite-correct">Rewrite &amp; Correct</h3>
+      <p>Rewrites text in its original language to be clear, concise, professional, and diplomatically toned, while preserving all original content and intent.</p>
+
+      <h3 id="rewrite-correct-en">Rewrite &amp; Correct to English</h3>
+      <p>Rewrites text in correct English, preserving all original facts, intent, and meaning with a professional tone.</p>
+
+      <h3 id="remove-empty-lines">Remove Empty Lines</h3>
+      <p>Compresses sequences of three or more consecutive blank lines down to two using a local regex. Pattern: <code>(\r?\n){3,}</code> &rarr; <code>\n\n</code>. No internet connection required.</p>
+
+      <h3 id="simple-correction">Simple Correction</h3>
+      <p>Corrects grammar, spelling, punctuation, and clarity while preserving the original meaning and content.</p>
+
+      <h3 id="translate-english">Translate to English</h3>
+      <p>Translates text into English, preserving the original meaning, tone, and formatting exactly.</p>
+
+      <h3 id="translate-german">Translate to German</h3>
+      <p>Translates text into German, preserving the original meaning, tone, and formatting exactly.</p>
+
+      <h3 id="address-correction">Address Correction</h3>
+      <p>Validates and corrects a postal address &mdash; street name, house number, postal/ZIP code, city, and country &mdash; and returns the corrected address in the same format as input. Auto-Copy Before is enabled by default so it captures the selected text automatically when triggered via hotkey.</p>
+
+      <h3 id="switch-interface-check">Network Switch Interface Check</h3>
+      <p>Analyzes a Cisco IOS running configuration and reports any interface blocks that do not comply with a defined access port template. Only non-compliant interfaces are reported.</p>
+
+      <!-- ================================================================ -->
+      <h2 id="execution-modes">Execution Modes</h2>
+
+      <p>When an action fires via hotkey or mouse trigger, the <strong>Hotkey Execution Mode</strong> setting on the action card controls how the result is delivered. When triggered from the main panel, the button you click determines the delivery mode regardless of this setting.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>What happens</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Paste</strong></td>
+            <td>Replaces the selected text with the result directly in the active application.</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td><strong>Paste+Clipboard</strong></td>
+            <td>Pastes the result into the active application and also copies it to the clipboard.</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Clipboard</strong></td>
+            <td>Copies the result to the clipboard only. Nothing is pasted or typed automatically.</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Execution mode toggle"
+             style="aspect-ratio: 530/60; object-fit: cover; object-position: 0 28%;">
+      </div>
+
+      <!-- ================================================================ -->
+      <h2 id="action-card">Action Card Configuration</h2>
+
+      <p>Each action is represented by a card in <strong>Settings &rarr; Actions</strong>. All configuration is done directly on the card.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Action card in settings"
+             style="aspect-ratio: 530/250; object-fit: cover; object-position: 0 10%;">
+      </div>
+
+      <h3 id="name-description">Name &amp; Description</h3>
+
+      <p>The action name appears on the main panel button and in all dropdowns. The description is shown as a subtitle beneath the name on the card. Both fields are editable inline &mdash; click to edit, then press <kbd>Enter</kbd> or click away to save.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Action name and description"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 12%;">
+      </div>
+
+      <h3 id="triggers">Triggers</h3>
+
+      <p>Each action supports two independent global triggers that fire from anywhere on your system, even when PasteSuiteAI is not in focus:</p>
+
+      <ul>
+        <li><strong>Keyboard hotkey</strong> &mdash; a global key combination (e.g., <code>&lt;ctrl&gt;+&lt;shift&gt;+&lt;alt&gt;+p</code>). Click the hotkey field to open the Hotkey Editor modal, press your desired combination, and save. See <a href="keyboard-shortcuts.html">Keyboard Shortcuts</a> for the full format reference.</li>
+        <li><strong>Mouse trigger</strong> &mdash; a mouse button (middle, X1, or X2) with optional modifier keys. Click the mouse icon button to open the Mouse Trigger Editor modal.</li>
+      </ul>
+
+      <p>Use the <strong>Move Up</strong> and <strong>Move Down</strong> arrow buttons to change an action's position in the list. Order determines display order on the main panel.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Hotkey and mouse trigger"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 18%;">
+      </div>
+
+      <div class="docs-warning">
+        <strong>Trigger conflicts:</strong> If you assign a hotkey or mouse trigger already used by another action, the app detects the conflict and prompts you to resolve it. Duplicate triggers on startup are automatically cleared from all conflicting actions.
+      </div>
+
+      <h3 id="enabled-visible">Enabled &amp; Visible on Panel</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Toggle</th>
+            <th>Effect when on</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Enabled</strong></td>
+            <td>Activates the action. Hotkeys and mouse triggers only fire for enabled actions. AI actions cannot be enabled if the required connection is not configured &mdash; the toggle is locked with a warning until you add the connection.</td>
+          </tr>
+          <tr>
+            <td><strong>Visible on Panel</strong></td>
+            <td>Shows the action as a clickable button on the main panel. An action can be enabled but hidden from the panel (hotkey-only use), or visible on the panel without a hotkey assigned.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="hotkey-execution-mode">Hotkey Execution Mode</h3>
+
+      <p>The three-segment toggle selects what happens when this action fires via hotkey or mouse trigger. See <a href="#execution-modes">Execution Modes</a> above. Default: <strong>Paste</strong>.</p>
+
+      <h3 id="auto-copy-enter">Auto-Copy &amp; Auto-Enter</h3>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Auto-Copy Before</strong></td>
+            <td>Off</td>
+            <td>Automatically captures the currently selected text before the action runs. Useful for hotkey-triggered actions where you want to transform highlighted text without copying it manually first. Hidden for STT actions, which record from the microphone instead.</td>
+          </tr>
+          <tr>
+            <td><strong>Auto-Enter After</strong></td>
+            <td>Off</td>
+            <td>Automatically presses <kbd>Enter</kbd> after the result is delivered. Convenient for chat inputs or search boxes where you want the text submitted immediately.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="result-overlay">Result Overlay</h3>
+
+      <p>Each action can show its result in a floating overlay window that appears on top of whatever application is in the foreground. Three settings control this:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Options</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Overlay Mode</strong></td>
+            <td><strong>Off</strong> &mdash; no overlay shown. <strong>Always</strong> &mdash; shows the overlay for both panel and hotkey execution. <strong>Hotkey Only</strong> &mdash; shows the overlay only when triggered via hotkey or mouse trigger, not from the panel.</td>
+            <td>Off</td>
+          </tr>
+          <tr>
+            <td><strong>Overlay Position</strong></td>
+            <td>Cursor / Upper Left / Upper Right / Lower Left / Lower Right</td>
+            <td>Cursor</td>
+          </tr>
+          <tr>
+            <td><strong>Duration (seconds)</strong></td>
+            <td>0&ndash;999. Set to 0 to keep open until dismissed.</td>
+            <td>5</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>See <a href="result-overlay.html">Result Overlay</a> for full details on the overlay window behavior and appearance.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Result overlay settings"
+             style="aspect-ratio: 530/100; object-fit: cover; object-position: 0 38%;">
+      </div>
+
+      <h3 id="action-mode-selector">Action Mode</h3>
+
+      <p>Select the processing type: <strong>AI Transform</strong>, <strong>Static Text Paste</strong>, or <strong>Local Regex Transform</strong>. Changing the mode updates the configuration fields shown below the selector. See <a href="#action-modes">Action Modes</a> above for a comparison.</p>
+
+      <h3 id="prompt-ai-mode">Prompt (AI Transform mode)</h3>
+
+      <p>The textarea where you write the instruction sent to the LLM. The action processes your text using this prompt as the instruction.</p>
+
+      <ul>
+        <li>Use <code>{selected_text}</code> as a placeholder to embed your text at a specific position within the prompt. Without this placeholder, the input text is automatically appended after the prompt in a structured block.</li>
+        <li>Press <kbd>Shift</kbd>+<kbd>Enter</kbd> for a newline inside the textarea.</li>
+        <li>Click the <strong>Prompt Library</strong> link below the textarea to browse and insert a saved prompt from your <a href="prompt-library.html">Prompt Library</a>.</li>
+      </ul>
+
+      <h3 id="static-text-mode">Static Text (Static Text Paste mode)</h3>
+
+      <p>The textarea where you enter the template that will be delivered. Use <code>{selected_text}</code> to embed the text you are working with at any position within the template. No AI connection is required for this mode.</p>
+
+      <div class="docs-tip">
+        The Diplomatic Rewrite action uses this mode: it prepends a diplomacy instruction prefix before your text, all locally with no API call.
+      </div>
+
+      <h3 id="regex-mode">Regex Configuration (Local Regex Transform mode)</h3>
+
+      <p>Two fields define the transformation:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pattern</strong></td>
+            <td>The regex pattern to match. Supports standard regex syntax: character classes, groups, quantifiers, anchors, and inline flags like <code>(?i)</code> for case-insensitive matching.</td>
+          </tr>
+          <tr>
+            <td><strong>Replacement</strong></td>
+            <td>The replacement string. Use <code>$0</code> for the full match, <code>$1</code>, <code>$2</code>, etc. for numbered capture groups.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>A live <strong>Preview</strong> panel lets you test the transform before saving:</p>
+      <ul>
+        <li>Type sample input in the <em>Before</em> textarea.</li>
+        <li>The <em>After</em> textarea updates automatically as you type (with a short debounce delay).</li>
+        <li>If the pattern is invalid, an error message is displayed in place of the output.</li>
+        <li>Click the <strong>?</strong> button next to the Pattern label to toggle a regex quick-reference panel with examples and a syntax table.</li>
+      </ul>
+
+      <div class="docs-tip">
+        <strong>Example patterns:</strong><br>
+        <code>(\r?\n){3,}</code> &rarr; <code>\n\n</code> &mdash; Collapse multiple blank lines<br>
+        <code>\s+$</code> &rarr; (empty) &mdash; Remove trailing whitespace per line<br>
+        <code>^\s+</code> &rarr; (empty) &mdash; Remove leading whitespace per line<br>
+        <code>(?i)foo</code> &rarr; <code>bar</code> &mdash; Case-insensitive replace<br>
+        <code>(\w+)\s(\w+)</code> &rarr; <code>$2 $1</code> &mdash; Swap two words
+      </div>
+
+      <h3 id="connection-overrides">Connection Overrides</h3>
+
+      <p>By default, each action uses the global default connection for its required capability (LLM, STT, or Vision). You can override this per-action to always use a specific connection, regardless of the global default.</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Dropdown</th>
+            <th>When shown</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LLM Connection</strong></td>
+            <td>Shown for AI Transform actions that require an LLM. Overrides which LLM connection processes this action.</td>
+          </tr>
+          <tr>
+            <td><strong>STT Connection</strong></td>
+            <td>Shown for STT (speech-to-text) actions. Overrides which STT connection handles transcription for this action.</td>
+          </tr>
+          <tr>
+            <td><strong>Vision Connection</strong></td>
+            <td>Shown when vision-capable connections are available for an LLM action.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Selecting the default option (displayed as the current default connection name) removes the per-action override. See <a href="connections.html">Connections</a> for how to configure connections and set global defaults.</p>
+
+      <div class="docs-tip">
+        <strong>Example:</strong> Route most actions through a fast, inexpensive model, but override the connection on the Network Switch Interface Check action to use a more capable model for that specific task.
+      </div>
+
+      <h3 id="stt-configuration">STT Configuration (STT actions)</h3>
+
+      <p>Actions that use speech-to-text display an additional <strong>STT Configuration</strong> panel with per-action audio settings:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Microphone</strong></td>
+            <td>Select which input device to use for this specific action, overriding the system default.</td>
+          </tr>
+          <tr>
+            <td><strong>Noise Suppression</strong></td>
+            <td>Toggle to reduce background noise in the audio stream.</td>
+          </tr>
+          <tr>
+            <td><strong>Echo Cancellation</strong></td>
+            <td>Toggle to reduce echo from speakers picked up by the microphone.</td>
+          </tr>
+          <tr>
+            <td><strong>Auto Gain Control</strong></td>
+            <td>Toggle to automatically normalize microphone input volume.</td>
+          </tr>
+          <tr>
+            <td><strong>Language</strong></td>
+            <td>Language chips for selecting the spoken input language. The selected language is passed to the STT provider. Multiple languages can be configured per action.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>STT actions also show editable prompt fields that apply to the active STT connection:</p>
+      <ul>
+        <li><strong>Instruct mode prompt</strong> &mdash; the system prompt used when the STT connection operates in instruction mode (LLM-assisted post-processing of the transcript).</li>
+        <li><strong>Transcribe mode prompt</strong> &mdash; a context hint passed to the STT provider during pure transcription mode to improve accuracy.</li>
+      </ul>
+
+      <p>See <a href="speech-to-text.html">Speech to Text</a> for full setup and configuration details.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="STT configuration panel"
+             style="aspect-ratio: 530/200; object-fit: cover; object-position: 0 85%;">
+      </div>
+
+      <h3 id="chain-action">Chain Action</h3>
+
+      <p>The <strong>Chain Action</strong> dropdown lets you feed this action's result directly into another action as its input. The chained action runs immediately after this one completes.</p>
+
+      <ul>
+        <li>The entire chain counts as a single license action, not one per step.</li>
+        <li>Actions in a chain are visually grouped in the list with a link connector icon between them.</li>
+        <li>The list is automatically reordered to keep chained actions contiguous.</li>
+      </ul>
+
+      <p>See <a href="#action-chaining">Action Chaining</a> below for validation rules and limits.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Action chaining dropdown"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 72%;">
+      </div>
+
+      <h3 id="delete-action">Delete Action</h3>
+
+      <p>Click the <strong>Delete Action</strong> button at the bottom of a card to permanently remove the action. A confirmation dialog appears before the action is deleted. Default actions can also be deleted and restored later via <em>Restore Default Actions</em>.</p>
+
+      <div class="docs-warning">
+        Deleting an action that is the target of another action's chain automatically clears that chain link on the parent action. You will need to reconfigure the chain manually if needed.
+      </div>
+
+      <!-- ================================================================ -->
+      <h2 id="actions-tab-header">Actions Tab Header</h2>
+
+      <p>The header of the Actions tab contains three buttons:</p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Button</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Restore Default Actions</strong></td>
+            <td>Resets all default actions to factory state (names, prompts, hotkeys, and all settings). Re-adds any defaults that were previously deleted. User-created actions are not affected. A confirmation dialog appears before the restore runs.</td>
+          </tr>
+          <tr>
+            <td><strong>Prompt Library</strong></td>
+            <td>Opens the <a href="prompt-library.html">Prompt Library</a> in modal mode. In this context, selecting a prompt copies it to your clipboard so you can paste it where needed.</td>
+          </tr>
+          <tr>
+            <td><strong>Add New Action</strong></td>
+            <td>Creates a new user action and scrolls to it automatically. If an LLM connection is configured, the new action defaults to AI Transform mode; otherwise it defaults to Static Text Paste mode. You can change the mode at any time.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ================================================================ -->
+      <h2 id="action-chaining">Action Chaining</h2>
+
+      <p>Action chaining lets you build multi-step pipelines where the output of one action becomes the input of the next, all triggered by a single hotkey press or panel button click.</p>
+
+      <p><strong>Example:</strong> Chain "Audio to Text" &rarr; "Translate to English" &rarr; "Simple Correction" to transcribe, translate, and clean up speech in one step.</p>
+
+      <p>To create a chain, open an action card and use the <strong>Chain Action</strong> dropdown to select the next action in the sequence. The app automatically reorders the actions list to keep chained actions contiguous, with a link icon shown between connected cards.</p>
+
+      <div class="docs-crop">
+        <img src="img/settings-actions.png" alt="Action chaining in the settings list"
+             style="aspect-ratio: 530/80; object-fit: cover; object-position: 0 72%;">
+      </div>
+
+      <h3>How Chaining Works</h3>
+      <ol>
+        <li>The first action runs and produces its result.</li>
+        <li>That result is passed as the input to the next action in the chain.</li>
+        <li>This repeats until the chain ends or a step fails.</li>
+        <li>The final result is delivered using the first action's execution mode setting.</li>
+      </ol>
+
+      <h3>Validation Rules</h3>
+      <ul>
+        <li><strong>No cycles:</strong> An action cannot chain back to itself, directly or indirectly.</li>
+        <li><strong>No fan-in:</strong> Each action can only have one parent in a chain. Two different actions cannot both chain to the same downstream action.</li>
+        <li><strong>Max depth:</strong> A chain can be at most 20 actions long.</li>
+        <li><strong>Auto-cleanup on delete:</strong> If a chained target action is deleted, the chain link on the parent action is automatically cleared.</li>
+        <li><strong>Startup sanitization:</strong> Invalid chain references (missing target or cycles) are detected and cleared automatically when the app starts.</li>
+      </ul>
+
+      <h3>Licensing</h3>
+      <p>The entire chain counts as a single action for licensing purposes, regardless of how many steps it contains.</p>
+
+      <!-- ================================================================ -->
+      <h2 id="interactive-elements">Interactive Elements Reference</h2>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Restore Default Actions</td>
+            <td>Button (header)</td>
+            <td>Resets all default actions to factory state after confirmation.</td>
+          </tr>
+          <tr>
+            <td>Prompt Library</td>
+            <td>Button (header)</td>
+            <td>Opens Prompt Library in modal mode; selecting a prompt copies it to clipboard.</td>
+          </tr>
+          <tr>
+            <td>Add New Action</td>
+            <td>Button (header)</td>
+            <td>Creates a new user action and scrolls to it.</td>
+          </tr>
+          <tr>
+            <td>Name input</td>
+            <td>Text input (per card)</td>
+            <td>Editable action display name. Saves on blur or <kbd>Enter</kbd>.</td>
+          </tr>
+          <tr>
+            <td>Description input</td>
+            <td>Text input (per card)</td>
+            <td>Editable action description. Saves on blur or <kbd>Enter</kbd>.</td>
+          </tr>
+          <tr>
+            <td>Move Up / Move Down</td>
+            <td>Buttons (per card)</td>
+            <td>Reorders the action in the list. Disabled at the top or bottom position.</td>
+          </tr>
+          <tr>
+            <td>Hotkey editor</td>
+            <td>Click-to-edit field (per card)</td>
+            <td>Opens the Hotkey Editor modal to record a new keyboard shortcut.</td>
+          </tr>
+          <tr>
+            <td>Mouse trigger editor</td>
+            <td>Icon button (per card)</td>
+            <td>Opens the Mouse Trigger Editor modal to assign a mouse button combination.</td>
+          </tr>
+          <tr>
+            <td>Enabled toggle</td>
+            <td>Toggle switch (per card)</td>
+            <td>Activates or deactivates the action. Disabling requires confirmation. Locked if required capability connection is missing.</td>
+          </tr>
+          <tr>
+            <td>Visible on Panel toggle</td>
+            <td>Toggle switch (per card)</td>
+            <td>Shows or hides the action button on the main panel.</td>
+          </tr>
+          <tr>
+            <td>Hotkey Execution Mode</td>
+            <td>3-segment toggle (per card)</td>
+            <td>Paste / Paste+Clipboard / Clipboard. Controls hotkey result delivery. Default: Paste.</td>
+          </tr>
+          <tr>
+            <td>Auto-Copy Before toggle</td>
+            <td>Toggle switch (per card)</td>
+            <td>Automatically captures selected text before running the action. Hidden for STT actions.</td>
+          </tr>
+          <tr>
+            <td>Auto-Enter After toggle</td>
+            <td>Toggle switch (per card)</td>
+            <td>Presses <kbd>Enter</kbd> after delivering the result.</td>
+          </tr>
+          <tr>
+            <td>Result Overlay Mode</td>
+            <td>3-segment toggle (per card)</td>
+            <td>Off / Always / Hotkey Only. Default: Off.</td>
+          </tr>
+          <tr>
+            <td>Overlay Position</td>
+            <td>Dropdown (per card, when overlay enabled)</td>
+            <td>Cursor / Upper Left / Upper Right / Lower Left / Lower Right. Default: Cursor.</td>
+          </tr>
+          <tr>
+            <td>Overlay Duration</td>
+            <td>Number input (per card, when overlay enabled)</td>
+            <td>Seconds before overlay auto-dismisses. Range: 0&ndash;999. Default: 5.</td>
+          </tr>
+          <tr>
+            <td>Action Mode selector</td>
+            <td>Mode selector (per card)</td>
+            <td>AI Transform / Static Text Paste / Local Regex Transform.</td>
+          </tr>
+          <tr>
+            <td>Prompt textarea</td>
+            <td>Textarea (AI Transform mode)</td>
+            <td>LLM instruction text. Saves on blur. Supports <code>{selected_text}</code> placeholder.</td>
+          </tr>
+          <tr>
+            <td>Prompt Library link</td>
+            <td>Link (AI Transform and Static Text Paste modes)</td>
+            <td>Opens the Prompt Library inline to browse and insert a saved prompt.</td>
+          </tr>
+          <tr>
+            <td>Static text textarea</td>
+            <td>Textarea (Static Text Paste mode)</td>
+            <td>Template text to paste. Supports <code>{selected_text}</code> placeholder. Saves on blur.</td>
+          </tr>
+          <tr>
+            <td>Regex Pattern input</td>
+            <td>Text input (Local Regex Transform mode)</td>
+            <td>Regex pattern to match. Triggers live preview on change. Saves on blur.</td>
+          </tr>
+          <tr>
+            <td>Regex Replacement input</td>
+            <td>Text input (Local Regex Transform mode)</td>
+            <td>Replacement string. Use <code>$0</code> for full match, <code>$1</code>/<code>$2</code> for capture groups. Saves on blur.</td>
+          </tr>
+          <tr>
+            <td>Regex Preview &mdash; Before</td>
+            <td>Textarea (Local Regex Transform mode)</td>
+            <td>Type sample text here to test the regex transform live.</td>
+          </tr>
+          <tr>
+            <td>Regex Preview &mdash; After</td>
+            <td>Textarea, read-only (Local Regex Transform mode)</td>
+            <td>Shows the transformed result. Displays an error message if the pattern is invalid.</td>
+          </tr>
+          <tr>
+            <td>Regex Help toggle (?)</td>
+            <td>Button (Local Regex Transform mode)</td>
+            <td>Shows or hides the regex quick-reference panel with syntax examples and tables.</td>
+          </tr>
+          <tr>
+            <td>LLM Connection dropdown</td>
+            <td>Dropdown (AI Transform actions)</td>
+            <td>Override the default LLM connection for this specific action.</td>
+          </tr>
+          <tr>
+            <td>STT Connection dropdown</td>
+            <td>Dropdown (STT actions)</td>
+            <td>Override the default STT connection for this specific action.</td>
+          </tr>
+          <tr>
+            <td>Vision Connection dropdown</td>
+            <td>Dropdown (when vision connections exist)</td>
+            <td>Override the Vision connection for this specific action.</td>
+          </tr>
+          <tr>
+            <td>STT Config Panel</td>
+            <td>Panel (STT actions)</td>
+            <td>Microphone dropdown, audio quality toggles (noise suppression, echo cancellation, auto gain control), and language chip selector.</td>
+          </tr>
+          <tr>
+            <td>STT Instruct prompt textarea</td>
+            <td>Textarea (STT actions)</td>
+            <td>System prompt for the active STT connection in instruction mode. Edits the connection directly and applies to all actions using that connection.</td>
+          </tr>
+          <tr>
+            <td>STT Transcribe prompt textarea</td>
+            <td>Textarea (STT actions)</td>
+            <td>Context hint passed to the STT provider in pure transcription mode.</td>
+          </tr>
+          <tr>
+            <td>Chain Action dropdown</td>
+            <td>Dropdown (per card)</td>
+            <td>Select an action to receive this action's result as input. Auto-reorders the list to keep chains contiguous.</td>
+          </tr>
+          <tr>
+            <td>Delete Action button</td>
+            <td>Button (per card)</td>
+            <td>Permanently deletes the action after confirmation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

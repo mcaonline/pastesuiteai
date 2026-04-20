@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "api_key",
+      "source": "vault",
+      "default_value": null,
+      "description": "xAI API Key"
+    },
+    {
+      "name": "model",
+      "source": "config",
+      "default_value": "grok-3",
+      "description": "Model ID (e.g. grok-3, grok-3-mini, grok-2)"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Chat Completion",
+      "method": "POST",
+      "url": "https://api.x.ai/v1/chat/completions",
+      "auth": {
+        "auth_type": "bearer",
+        "credential": "{{api_key}}"
+      },
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ],
+      "body": "{\n  \"model\": \"{{model}}\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"{{system_prompt}}\"},\n    {\"role\": \"user\", \"content\": \"{{prompt}}\"}\n  ],\n  \"temperature\": {{temperature}}\n}",
+      "body_content_type": "application/json",
+      "extract": [
+        {
+          "variable_name": "result",
+          "source": "body",
+          "path": "choices[0].message.content"
+        }
+      ],
+      "stream_path": null
+    }
+  ],
+  "result_from": "steps.1.result"
+}

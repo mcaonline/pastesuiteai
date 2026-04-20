@@ -1,0 +1,7 @@
+name = "stt-phrases"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "STT_PHRASES"
+id = "<TO_BE_FILLED_AFTER_KV_CREATION>"

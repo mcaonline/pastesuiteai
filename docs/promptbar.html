@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptBar &amp; Quick Prompts &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>PromptBar &amp; Quick Prompts</h1>
+      <p class="subtitle">Free-form AI questions and one-click prompt buttons</p>
+
+      <h2>PromptBar Overview</h2>
+      <p>
+        The PromptBar is the prompt input area on the main panel. Type any instruction, combine it with
+        your text in one of six modes, and execute it via your configured AI connection. The result
+        can be pasted directly, saved for later use, or shown in a floating overlay &mdash; all without
+        leaving your current application.
+      </p>
+      <p>
+        The PromptBar is available when at least one AI connection is configured. An inline connection
+        selector above the textarea lets you switch connections without opening Settings.
+        See <a href="connections.html">Connections</a> for setup details.
+      </p>
+
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="PromptBar with input mode toggle and execution buttons"
+             style="aspect-ratio: 530/90; object-fit: cover; object-position: 0 25%;">
+      </div>
+
+      <h2>Input Modes</h2>
+      <p>
+        Click the input mode toggle button (the small icon to the left of the execution buttons) to
+        cycle through six modes. Each mode controls how your typed prompt and your current text
+        are combined before being sent to the AI. Hovering over the button shows a tooltip with the name
+        and description of all six modes.
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>What the AI receives</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Instruct</strong> (default)</td>
+            <td>Your prompt as the instruction; your text as the content to transform</td>
+            <td>Editing, rewriting, or transforming existing text</td>
+          </tr>
+          <tr>
+            <td><strong>Supply</strong></td>
+            <td>Your text first, then your prompt as additional context (swapped order)</td>
+            <td>When your text is the primary subject and your prompt adds supporting context</td>
+          </tr>
+          <tr>
+            <td><strong>Combine</strong></td>
+            <td>Your prompt and your text merged into one input</td>
+            <td>Combining two pieces of text for the AI to process together</td>
+          </tr>
+          <tr>
+            <td><strong>Combine Reversed</strong></td>
+            <td>Your text first, then your prompt, merged together</td>
+            <td>Same as Combine but with your text leading</td>
+          </tr>
+          <tr>
+            <td><strong>Solo</strong></td>
+            <td>Only your typed prompt; input text is excluded entirely</td>
+            <td>Standalone questions or generation tasks independent of any input text</td>
+          </tr>
+          <tr>
+            <td><strong>Forward</strong></td>
+            <td>Input text passed through without modification</td>
+            <td>Routing input text through a chained action unchanged</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        In Solo mode, the execution buttons are disabled when the prompt textarea is empty, since there
+        would be nothing to send.
+      </div>
+
+      <h2>Execution Buttons</h2>
+      <p>
+        Four buttons to the right of the input mode toggle control what happens to the AI result.
+        All four are disabled while a previous request or recording is in progress.
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Overlay (pop-up icon)</td>
+            <td>Button</td>
+            <td>Shows the AI result in a floating overlay window near the cursor. Nothing is pasted or copied automatically.</td>
+          </tr>
+          <tr>
+            <td>Clipboard (clipboard icon)</td>
+            <td>Button</td>
+            <td>Copies the AI result to the clipboard silently. Paste it anywhere with <kbd>Ctrl</kbd>+<kbd>V</kbd>.</td>
+          </tr>
+          <tr>
+            <td>Paste+Clipboard (clipboard with checkmark icon)</td>
+            <td>Button</td>
+            <td>Pastes the result into the active application and also copies it to clipboard for further use.</td>
+          </tr>
+          <tr>
+            <td>AI Paste (primary button)</td>
+            <td>Button / <kbd>Enter</kbd></td>
+            <td>
+              Pastes the result directly into the active application, replacing the current selection.
+              Pressing <kbd>Enter</kbd> in the textarea triggers whichever execution mode is set as the
+              default (configurable in Settings &gt; General). Use <kbd>Shift</kbd>+<kbd>Enter</kbd> to
+              insert a newline in the textarea without executing.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        The default execution mode &mdash; what <kbd>Enter</kbd> triggers &mdash; is configurable in
+        Settings &gt; General under PromptBar settings. The factory default is Overlay.
+      </div>
+
+      <h2>Microphone Input</h2>
+      <p>
+        When an STT-capable connection is configured and set as the active STT default, a microphone
+        button appears inside the prompt textarea area. Click it to record audio instead of typing.
+        The recorded audio is transcribed and the result is delivered using the same execution path
+        as typed prompts.
+      </p>
+      <p>
+        While recording, the textarea area shows the current state alongside inline controls:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Microphone button (idle state)</td>
+            <td>Button</td>
+            <td>Starts a PromptBar recording session. Only visible when an STT connection is active and recording is not in progress.</td>
+          </tr>
+          <tr>
+            <td>Recording indicator</td>
+            <td>Label</td>
+            <td>Shows "Recording" while audio is being captured</td>
+          </tr>
+          <tr>
+            <td>Pause button</td>
+            <td>Button</td>
+            <td>Pauses the active recording. Audio captured so far is preserved.</td>
+          </tr>
+          <tr>
+            <td>Paused indicator</td>
+            <td>Label</td>
+            <td>Shows "Paused" while recording is suspended</td>
+          </tr>
+          <tr>
+            <td>Resume button</td>
+            <td>Button</td>
+            <td>Continues a paused recording</td>
+          </tr>
+          <tr>
+            <td>Stop button</td>
+            <td>Button</td>
+            <td>Stops recording and sends the audio for transcription</td>
+          </tr>
+          <tr>
+            <td>Processing indicator</td>
+            <td>Label</td>
+            <td>Shows "Processing" while the audio is being transcribed by the AI</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        For per-action STT configuration including microphone selection, languages, and audio quality
+        settings, see <a href="speech-to-text.html">Speech to Text</a>.
+      </p>
+
+      <h2>Connection Selector</h2>
+      <p>
+        An inline connection selector appears above the prompt textarea when a connection is active. It
+        displays the current connection name and model badge. Click it to open a dropdown and switch to
+        a different AI connection for the next request.
+      </p>
+      <p>
+        The connection used by the PromptBar can be fixed to a specific connection via the LLM Connection
+        Override in Settings &gt; General. When an override is active, the inline selector reflects it.
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Connection badge (inline trigger)</td>
+            <td>Button</td>
+            <td>Shows the active connection name and model. Click to open the connection dropdown.</td>
+          </tr>
+          <tr>
+            <td>Connection dropdown items</td>
+            <td>List</td>
+            <td>All configured AI connections. Click any item to switch to that connection for the next prompt execution.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Quick Prompts</h2>
+      <p>
+        Quick Prompts are one-click buttons displayed above the prompt area, organized into three
+        categories. Each button runs a pre-defined prompt with a single click, without requiring you
+        to type anything.
+      </p>
+
+      <div class="docs-crop">
+        <img src="img/main-panel.png" alt="Quick Prompt buttons showing categories"
+             style="aspect-ratio: 530/110; object-fit: cover; object-position: 0 8%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Image</strong></td>
+            <td>Vision-related prompts such as describing an image, OCR, and visual analysis of screenshots</td>
+          </tr>
+          <tr>
+            <td><strong>Text &mdash; Language</strong></td>
+            <td>Translation and language-specific tasks such as translating to another language or grammar correction</td>
+          </tr>
+          <tr>
+            <td><strong>Text &mdash; General</strong></td>
+            <td>General-purpose text tasks such as rewriting, summarizing, or formatting text</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Each Quick Prompt button has two independently configurable click actions:
+      </p>
+      <ul>
+        <li><strong>Left-click</strong>: Triggers the primary action (fill, execute+copy, or execute+paste)</li>
+        <li><strong>Right-click arrow (&#9658;)</strong>: Triggers the secondary action, configured separately from the left-click action</li>
+      </ul>
+
+      <p>The three possible click actions are:</p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fill</strong></td>
+            <td>Inserts the prompt text into the PromptBar textarea without executing. You can review or edit it before sending.</td>
+          </tr>
+          <tr>
+            <td><strong>Execute + Copy</strong></td>
+            <td>Executes the prompt immediately and copies the result to clipboard</td>
+          </tr>
+          <tr>
+            <td><strong>Execute + Paste</strong></td>
+            <td>Executes the prompt immediately and pastes the result into the active application</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-tip">
+        Each Quick Prompt category can be toggled on or off independently. Disabled categories are
+        hidden from the main panel entirely.
+      </div>
+
+      <h2>Quick Prompts Settings</h2>
+      <p>
+        Manage Quick Prompts in <a href="settings.html">Settings</a> &gt; Quick Prompts tab.
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Category header toggle</td>
+            <td>Toggle</td>
+            <td>Show or hide an entire Quick Prompt category on the main panel. Independent from per-QP enable toggles.</td>
+          </tr>
+          <tr>
+            <td>Category collapse arrow</td>
+            <td>Button</td>
+            <td>Expand or collapse a category section in the settings list for easier browsing</td>
+          </tr>
+          <tr>
+            <td>Per-QP enable toggle</td>
+            <td>Toggle</td>
+            <td>Enable or disable individual Quick Prompts within a category without deleting them</td>
+          </tr>
+          <tr>
+            <td>Move Up / Move Down buttons</td>
+            <td>Buttons</td>
+            <td>Reorder Quick Prompts within their category. Order in settings matches order on the main panel.</td>
+          </tr>
+          <tr>
+            <td>Edit button</td>
+            <td>Button</td>
+            <td>Opens inline edit mode for a Quick Prompt. Fields auto-save as you type.</td>
+          </tr>
+          <tr>
+            <td>Delete button</td>
+            <td>Button (danger)</td>
+            <td>Permanently removes the Quick Prompt after a confirmation dialog</td>
+          </tr>
+          <tr>
+            <td>Add Quick Prompt button</td>
+            <td>Button</td>
+            <td>Creates a new Quick Prompt and immediately opens it in inline edit mode</td>
+          </tr>
+          <tr>
+            <td>Restore Defaults button</td>
+            <td>Button</td>
+            <td>Resets all Quick Prompts to the factory-provided set after confirmation. All customizations are removed.</td>
+          </tr>
+          <tr>
+            <td>Prompt Library link (edit mode)</td>
+            <td>Link</td>
+            <td>Opens the Prompt Library inline while editing a Quick Prompt, so you can browse and insert saved prompts as the QP text</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Each Quick Prompt has five editable fields when in inline edit mode:
+      </p>
+      <ul>
+        <li><strong>Label</strong>: The button text displayed on the main panel</li>
+        <li><strong>Prompt Text</strong>: The prompt sent to the AI when the button is clicked</li>
+        <li><strong>Content Type</strong>: Which category the QP belongs to (Image, Text &mdash; Language, Text &mdash; General). Changing this moves the QP to the appropriate section.</li>
+        <li><strong>Left-click action</strong>: Fill, Execute+Copy, or Execute+Paste</li>
+        <li><strong>Right-click action</strong>: Fill, Execute+Copy, or Execute+Paste (independent of left-click)</li>
+      </ul>
+
+      <h2>PromptBar Settings</h2>
+      <p>
+        Configure PromptBar behavior in Settings &gt; General. The following options are available:
+      </p>
+      <ul>
+        <li><strong>Default Execution Mode</strong>: Which output mode runs when you press <kbd>Enter</kbd> or click the AI Paste button. Options: Overlay, Clipboard, Paste+Clipboard, Paste. Default: Overlay.</li>
+        <li><strong>Auto-Enter</strong>: Automatically presses <kbd>Enter</kbd> in the target application after pasting the result. Useful for chat inputs and search bars. Default: off.</li>
+        <li><strong>LLM Connection Override</strong>: Pin the PromptBar to a specific AI connection instead of following the active model selector choice.</li>
+        <li><strong>Chain Action</strong>: Feed the PromptBar result as input into another configured action. See <a href="actions.html">Actions</a> for details on chaining.</li>
+        <li><strong>Overlay Mode</strong>: When the Overlay execution mode is used, controls the result overlay display mode (Always, HotkeyOnly, Off).</li>
+        <li><strong>Overlay Position</strong>: Where the result overlay appears (near cursor or a fixed screen position).</li>
+        <li><strong>Overlay Duration</strong>: How long the result overlay stays visible before auto-dismissing (in seconds).</li>
+      </ul>
+
+      <div class="docs-warning">
+        Auto-Enter presses <kbd>Enter</kbd> after delivering the result. Only enable it when the target
+        application uses Enter to submit input (chat boxes, search bars). Do not enable it in text
+        editors or word processors.
+      </div>
+
+      <h2>Footer Area</h2>
+      <p>
+        A footer row below the PromptBar contains four elements:
+      </p>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prompt Library trigger link</td>
+            <td>Link</td>
+            <td>
+              Opens the Prompt Library popup, which aggregates saved user prompts, action prompts, and
+              connection system prompts. Selecting a prompt fills the PromptBar textarea with it.
+              See <a href="prompt-library.html">Prompt Library</a>.
+            </td>
+          </tr>
+          <tr>
+            <td>AI disclaimer</td>
+            <td>Text</td>
+            <td>Displayed when connected. Reminds you that AI-generated output may not always be accurate.</td>
+          </tr>
+          <tr>
+            <td>Help button</td>
+            <td>Link (conditional)</td>
+            <td>
+              Starts the interactive Help Tour, which guides you through the main UI elements with
+              step-by-step annotations. Only shown when the Help button is enabled in settings.
+            </td>
+          </tr>
+          <tr>
+            <td>History button</td>
+            <td>Link</td>
+            <td>
+              Opens the history sidebar, showing recent entries you can click to
+              restore. See <a href="main-window.html">Main Window</a>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Related Topics</h2>
+      <ul>
+        <li><a href="main-window.html">Main Window</a> &mdash; overview of the panel layout including PromptBar placement</li>
+        <li><a href="prompt-library.html">Prompt Library</a> &mdash; saving and reusing prompt templates</li>
+        <li><a href="actions.html">Actions</a> &mdash; configuring actions, chaining, and execution modes</li>
+        <li><a href="speech-to-text.html">Speech to Text</a> &mdash; microphone configuration and STT connections</li>
+        <li><a href="connections.html">Connections</a> &mdash; setting up AI connections for use with the PromptBar</li>
+      </ul>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

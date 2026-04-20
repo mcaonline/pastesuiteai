@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &mdash; PasteSuiteAI</title>
+  <meta name="description" content="Terms of Service, disclaimer, and limitation of liability for PasteSuiteAI.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f5f5f7;
+      --color-text-primary: #1d1d1f;
+      --color-text-secondary: #424245;
+      --color-text-tertiary: #6e6e73;
+      --color-accent: #0071e3;
+      --color-separator: #d2d2d7;
+      --color-nav-bg: rgba(251, 251, 253, 0.72);
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-width: 720px;
+      --nav-height: 52px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-bg-secondary: #1c1c1e;
+        --color-text-primary: #f5f5f7;
+        --color-text-secondary: #a1a1a6;
+        --color-text-tertiary: #86868b;
+        --color-separator: #38383a;
+        --color-nav-bg: rgba(22, 22, 23, 0.72);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-separator);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+    }
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav a:hover { color: var(--color-accent); }
+
+    /* ========== Content ========== */
+    .legal-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 22px 80px;
+    }
+
+    .legal-content h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .legal-content .subtitle {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    .legal-content p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul, .legal-content ol {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ol {
+      counter-reset: item;
+    }
+
+    .legal-content ol li::before {
+      counter-increment: item;
+      content: counter(item) ".";
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-right: 8px;
+    }
+
+    .legal-content ul li, .legal-content ol li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-separator);
+    }
+
+    .legal-content ul li:last-child, .legal-content ol li:last-child { border-bottom: none; }
+
+    .legal-content ul li strong, .legal-content ol li strong {
+      color: var(--color-text-primary);
+    }
+
+    .legal-content .note {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+
+    .legal-content .highlight-box {
+      background: var(--color-bg-secondary);
+      border-left: 3px solid var(--color-accent);
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .legal-content .highlight-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-separator);
+      padding: 24px 22px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-text {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      letter-spacing: -0.01em;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html">&larr; Back to PasteSuiteAI</a>
+  </nav>
+
+  <main class="legal-content">
+    <h1>Terms of Service</h1>
+    <p class="subtitle">Last updated: 19 April 2026</p>
+
+    <p>These Terms of Service (&ldquo;<strong>Terms</strong>&rdquo;) form a legally binding agreement between you (&ldquo;<strong>you</strong>&rdquo; or &ldquo;<strong>User</strong>&rdquo;) and <strong>Keynaptic GmbH</strong>, c/o IP-Management #9777, Ludwig-Erhard-Stra&szlig;e 18, 20459 Hamburg, Germany (&ldquo;<strong>Keynaptic</strong>&rdquo;, &ldquo;<strong>we</strong>&rdquo;, &ldquo;<strong>us</strong>&rdquo;) regarding your use of the PasteSuiteAI software and any associated services (together, the &ldquo;<strong>Software</strong>&rdquo;). By downloading, installing, running, or otherwise using the Software, you agree to these Terms. If you do not agree, do not use the Software.</p>
+
+    <div class="highlight-box">
+      <p><strong>Notice for consumers in the European Economic Area (EEA), the United Kingdom, and Switzerland:</strong> Section&nbsp;15 contains mandatory provisions that apply to you and override any conflicting provisions elsewhere in these Terms. Please read Section&nbsp;15 carefully.</p>
+    </div>
+
+    <h2>How This Agreement is Concluded</h2>
+
+    <p>PasteSuiteAI is distributed as an offline desktop application. The contract between you and Keynaptic&nbsp;GmbH is concluded through the following three independent steps, each of which creates a durable record:</p>
+
+    <ol>
+      <li><strong>Purchase.</strong> Payment is processed by our payment provider, which records the date, amount, and purchaser for each transaction and retains this information for the period required by applicable tax and commercial law. This record is our primary evidence of the date and content of your purchase.</li>
+      <li><strong>Installer &amp; Click-Wrap Acceptance.</strong> Every release of the Software is distributed as an installer that ships with the version of these Terms in force at the time of release. The installer presents these Terms on a dedicated license page and requires you to actively click &ldquo;I&nbsp;Agree&rdquo; before installation can proceed. Without this active acceptance, no installation takes place. The installer file itself (with its cryptographic hash and release tag) is the durable record of which version of the Terms you accepted.</li>
+      <li><strong>Version Traceability.</strong> Every released version of the Software corresponds to a tagged release in our source repository. The plain-text Terms file bundled with each installer (<code style="background: var(--color-bg-secondary); padding: 1px 6px; border-radius: 3px;">license.txt</code>) mirrors this online page one-to-one at the time of release. In case of any discrepancy caused by editorial oversight, this online version at <a href="terms.html" style="color: var(--color-accent);">pastesuiteai.com/terms.html</a> prevails as the authoritative source.</li>
+    </ol>
+
+    <p>This mechanism constitutes a valid &ldquo;click-wrap&rdquo; agreement recognised under German and EU contract law. You are not required to consent to any additional online tracking, server-side logging, or hidden data transmission to prove your acceptance. No acceptance data is transmitted to Keynaptic&nbsp;GmbH; the combination of purchase record, installer click-through, and version-controlled Terms bundle is sufficient evidence of contract formation.</p>
+
+    <!-- ===== 1 ===== -->
+    <h2>1. Definitions</h2>
+
+    <p>
+      <strong>&ldquo;Consumer&rdquo;</strong> means a natural person who acts for purposes that are primarily outside their trade, business, craft, or profession.<br>
+      <strong>&ldquo;Business User&rdquo;</strong> means any user that is not a Consumer, including legal entities, sole traders, and individuals acting in a professional capacity.<br>
+      <strong>&ldquo;Third-Party Provider&rdquo;</strong> means any external service &mdash; including AI model providers such as OpenAI, Anthropic, Google, or any OpenAI-compatible endpoint &mdash; that you access through the Software using your own credentials.
+    </p>
+
+    <!-- ===== 2 ===== -->
+    <h2>2. Nature of the Software</h2>
+
+    <p>PasteSuiteAI is a desktop application that sends user-provided text to Third-Party Providers via the user&rsquo;s own API keys. The Software does not include, host, or resell AI model access. All API calls are made directly from your device to the Third-Party Provider you have configured.</p>
+
+    <!-- ===== 3 ===== -->
+    <h2>3. License Grant</h2>
+
+    <p>Subject to your compliance with these Terms and payment of any applicable license fees, Keynaptic grants you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to install and use the Software for your personal or internal business purposes. All rights not expressly granted are reserved by Keynaptic.</p>
+
+    <p>You may not: (a) reverse engineer, decompile, or disassemble the Software, except to the extent such restriction is prohibited by applicable mandatory law; (b) remove or alter any proprietary notices; (c) distribute, sublicense, rent, lease, or sell the Software; (d) use the Software to build a competing product.</p>
+
+    <p><strong>License term and automatic renewal.</strong> The Pro license is granted as an <strong>annual subscription</strong> for a term of twelve (12) months commencing on the date of your initial purchase. Unless cancelled before the end of the current term, the subscription <strong>renews automatically</strong> for a further twelve (12) months at the then-current price. Where required by applicable law, you will be notified in advance of the renewal date and of any price change, and your consent will be obtained where the law so requires.</p>
+
+    <p><strong>Cancellation at any time.</strong> You may cancel the automatic renewal at any time, free of charge and without giving reasons, via the Paddle Buyer Portal (the link is included in your purchase confirmation email and in any subsequent invoice). Cancellation takes effect at the end of your current paid term &mdash; your license remains fully active for the remainder of the period you have already paid for, and no further charges are made by the Merchant of Record.</p>
+
+    <p><strong>Merchant of Record.</strong> Purchases and renewals are processed by <strong>Paddle.com Market Limited</strong> (Judd House, 18-29 Mora Street, London EC1V 8BT, United Kingdom) or, for U.S. buyers, <strong>Paddle.com Inc.</strong>, acting as Merchant of Record and seller of the Pro subscription. Paddle issues invoices, collects and remits applicable VAT, and handles payment, refunds, and chargebacks. Keynaptic does not receive or store your payment-instrument data.</p>
+
+    <p><strong>Free features and trial.</strong> Non-AI features (e.g.&nbsp;plain-text paste and local transforms) remain available without a Pro subscription. The 7-day trial provides full access to AI features without payment and <strong>does not auto-convert</strong> into a paid subscription &mdash; a Pro subscription is only created if you complete a purchase via the Merchant of Record.</p>
+
+    <!-- ===== 4 ===== -->
+    <h2>4. Bring-Your-Own-API-Key Model</h2>
+
+    <p>You are solely responsible for:</p>
+    <ul>
+      <li><strong>Obtaining and managing your API keys</strong> &mdash; You must create and maintain accounts with your chosen Third-Party Providers and comply with their respective terms of service.</li>
+      <li><strong>All costs incurred through API usage</strong> &mdash; Every API call made by the Software is charged by the Third-Party Provider to your account. Keynaptic has no control over, visibility into, or responsibility for any charges on your provider account.</li>
+      <li><strong>Setting spending limits and usage alerts</strong> &mdash; You are strongly encouraged to configure hard spending caps, rate limits, and usage alerts in each provider&rsquo;s dashboard before using the Software.</li>
+    </ul>
+
+    <!-- ===== 5 ===== -->
+    <h2>5. User Responsibility for Configuration</h2>
+
+    <p>The Software allows extensive customization of actions, prompts, hotkeys, and action chains. You are fully responsible for any configuration you create or modify, including without limitation:</p>
+
+    <ul>
+      <li><strong>Action chains and loops</strong> &mdash; Misconfigured chains may result in repeated or rapid API calls. Although the Software enforces a maximum chain depth, you are responsible for ensuring your configurations do not produce unintended call patterns.</li>
+      <li><strong>Prompt design</strong> &mdash; The content and behavior of prompts is entirely user-defined. Keynaptic is not responsible for unintended, inaccurate, or harmful AI outputs resulting from user-provided prompts.</li>
+      <li><strong>Hotkey conflicts and unintended triggers</strong> &mdash; Assigning hotkeys that conflict with other applications or trigger actions unintentionally is your responsibility.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p><strong>Important:</strong> If a misconfiguration causes excessive or looping API calls, you &mdash; not Keynaptic &mdash; bear the full financial and operational responsibility. Always test new configurations with low-cost models or small inputs before deploying them in production workflows. After any reconfiguration or update &mdash; and at regular intervals &mdash; continue to monitor your API usage on your provider&rsquo;s dashboard and ensure you have hard spending caps in place to protect yourself from unexpected financial impact.</p>
+    </div>
+
+    <!-- ===== 6 ===== -->
+    <h2>6. Disclaimer of Warranties</h2>
+
+    <p>To the maximum extent permitted by applicable law, the Software is provided <strong>&ldquo;as is&rdquo;</strong> and <strong>&ldquo;as available&rdquo;</strong>, without warranty of any kind, whether express, implied, or statutory, including without limitation the implied warranties of merchantability, fitness for a particular purpose, non-infringement, title, accuracy, and quiet enjoyment.</p>
+
+    <p>Keynaptic does not warrant that:</p>
+    <ul>
+      <li>The Software will be uninterrupted, error-free, secure, or free of defects.</li>
+      <li>AI outputs will be accurate, complete, appropriate, lawful, or fit for any particular purpose.</li>
+      <li>The Software will be compatible with any Third-Party Provider, API, or system, now or in the future.</li>
+      <li>Any particular result or outcome will be achieved through the use of the Software.</li>
+    </ul>
+
+    <!-- ===== 7 ===== -->
+    <h2>7. Limitation of Liability</h2>
+
+    <p>To the maximum extent permitted by applicable law, Keynaptic and its officers, employees, and affiliates shall not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of profits, revenue, data, goodwill, or business opportunities, whether in contract, tort (including negligence), strict liability, or otherwise, even if Keynaptic has been advised of the possibility of such damages. This includes, without limitation:</p>
+
+    <ul>
+      <li><strong>Financial loss</strong> from API overuse, misconfiguration, loops, or excessive calls to Third-Party Providers.</li>
+      <li><strong>Data loss or corruption</strong> resulting from the use or inability to use the Software.</li>
+      <li><strong>Business interruption</strong> or lost profits arising from reliance on AI-generated outputs.</li>
+      <li><strong>Third-party claims</strong> arising from content processed through the Software.</li>
+    </ul>
+
+    <p>In no event shall Keynaptic&rsquo;s total aggregate liability under or in connection with these Terms or the Software exceed the greater of (a) the total amount you paid to Keynaptic for the Software in the twelve (12) months preceding the event giving rise to the claim, or (b) fifty euros (EUR&nbsp;50.00).</p>
+
+    <!-- ===== 8 ===== -->
+    <h2>8. Indemnification</h2>
+
+    <p>You agree to indemnify, defend, and hold harmless Keynaptic and its officers, employees, and affiliates from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys&rsquo; fees) arising from or related to: (a) your use of or inability to use the Software; (b) your breach of these Terms; (c) your violation of any law or regulation; (d) your violation of any third-party right, including intellectual property, privacy, or contractual rights; (e) content, data, or prompts you process through the Software.</p>
+
+    <!-- ===== 9 ===== -->
+    <h2>9. Third-Party Services</h2>
+
+    <p>The Software integrates with Third-Party Providers that have their own terms of service, privacy policies, and usage restrictions. Keynaptic is not a party to your agreement with any Third-Party Provider and assumes no responsibility for:</p>
+
+    <ul>
+      <li>The availability, performance, or pricing of third-party APIs.</li>
+      <li>Changes to third-party API formats, endpoints, or authentication mechanisms.</li>
+      <li>Data handling practices of Third-Party Providers.</li>
+      <li>Content generated by third-party AI models.</li>
+    </ul>
+
+    <p>You must review and comply with the terms of service of each Third-Party Provider you use with the Software.</p>
+
+    <!-- ===== 10 ===== -->
+    <h2>10. Automatic Updates</h2>
+
+    <p>The Software includes an automatic update mechanism that periodically checks for new versions by contacting pastesuiteai.com. When an update is available, you are notified within the application and may choose to install, skip, or dismiss the update.</p>
+
+    <ul>
+      <li><strong>No automatic installation by default</strong> &mdash; Updates are only installed with your explicit consent. An optional &ldquo;Background updates&rdquo; setting allows fully unattended installation, but is disabled by default.</li>
+      <li><strong>Opt-out</strong> &mdash; You may disable update checks entirely in Settings. Disabling updates means you will not receive security patches or bug fixes automatically.</li>
+      <li><strong>Post-update changes</strong> &mdash; Updates may modify application behavior, fix bugs, or change features. You should review the changelog after each update and verify that your configured actions and hotkeys work as expected.</li>
+    </ul>
+
+    <p>By keeping automatic updates enabled, you acknowledge that updates may change the Software&rsquo;s functionality. Keynaptic is not liable for disruption caused by updates applied with your consent (subject to Section&nbsp;7).</p>
+
+    <!-- ===== 11 ===== -->
+    <h2>11. User Obligations</h2>
+
+    <p>By using the Software, you agree to:</p>
+
+    <ol>
+      <li>Monitor your own API usage and costs through your provider&rsquo;s dashboard.</li>
+      <li>Configure appropriate spending limits and rate controls with your Third-Party Providers.</li>
+      <li>Test action chains and custom configurations before using them in production.</li>
+      <li>Not use the Software for any unlawful purpose or to process content that violates applicable law.</li>
+      <li>Not attempt to circumvent any technical limitations, licensing restrictions, or security measures of the Software.</li>
+      <li>Keep your API keys and license keys confidential and secure.</li>
+      <li>Comply with all applicable export controls, sanctions, and trade regulations.</li>
+    </ol>
+
+    <!-- ===== 12 ===== -->
+    <h2>12. Term and Termination</h2>
+
+    <p>These Terms remain in effect for as long as you use the Software. Keynaptic may terminate or suspend your license immediately, without notice, if you materially breach these Terms. Upon termination, you must cease all use of the Software and uninstall it from your devices. Sections&nbsp;4,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;12,&nbsp;13,&nbsp;14,&nbsp;15, and&nbsp;16 survive termination.</p>
+
+    <!-- ===== 13 ===== -->
+    <h2>13. Modifications to the Terms</h2>
+
+    <p>Keynaptic may update these Terms from time to time. The &ldquo;Last updated&rdquo; date at the top reflects the most recent revision. Material changes will be communicated through the application&rsquo;s changelog or on pastesuiteai.com. For Consumers to whom Section&nbsp;15 applies, changes that materially disadvantage the Consumer require separate acceptance. Continued use of the Software after changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <!-- ===== 14 ===== -->
+    <h2>14. Governing Law, Jurisdiction &amp; Class-Action Waiver</h2>
+
+    <p>These Terms and any dispute arising from or in connection with them are governed by the laws of the Federal Republic of Germany, excluding its conflict-of-law rules and the UN Convention on Contracts for the International Sale of Goods (CISG).</p>
+
+    <p>The exclusive place of jurisdiction for all disputes arising from or in connection with these Terms is Hamburg, Germany, provided this choice is permissible under applicable mandatory law.</p>
+
+    <p><strong>Class-action waiver (outside the EEA, UK, and Switzerland):</strong> To the maximum extent permitted by applicable law, and except for users to whom Section&nbsp;15 applies, you agree that disputes will be resolved on an individual basis only. You waive any right to participate in a class action, collective action, or representative proceeding against Keynaptic.</p>
+
+    <!-- ===== 15 ===== -->
+    <h2>15. Special Provisions for Consumers in the EEA, UK, and Switzerland</h2>
+
+    <p>This Section&nbsp;15 applies exclusively if you are a <strong>Consumer</strong> (as defined in Section&nbsp;1) resident in a member state of the European Economic Area (EEA), the United Kingdom, or Switzerland. Where any provision in this Section&nbsp;15 conflicts with another provision of these Terms, this Section&nbsp;15 prevails. Nothing in these Terms excludes or limits rights that you may have under applicable mandatory consumer protection law and that cannot be excluded or limited by contract.</p>
+
+    <h3>15.1 Statutory Warranty Rights and Update Obligations</h3>
+
+    <p><strong>Warranty.</strong> Your statutory rights regarding defective goods and digital content under applicable law (including, for users in Germany, &sect;&sect;&nbsp;434&nbsp;ff. BGB and &sect;&sect;&nbsp;327&nbsp;ff. BGB) remain fully unaffected. The &ldquo;as is&rdquo; disclaimer in Section&nbsp;6 does not apply to you to the extent it would conflict with these statutory rights. In particular, you retain the rights to <em>supplementary performance</em> (Nacherf&uuml;llung), <em>price reduction</em> (Minderung), <em>termination of contract</em> (R&uuml;cktritt / Vertragsbeendigung) and <em>damages</em> as set out in &sect;&sect;&nbsp;327i&nbsp;ff. BGB.</p>
+
+    <p><strong>Software updates (&sect;&nbsp;327f BGB).</strong> Keynaptic will provide such security updates and functional updates as are necessary to maintain the conformity of the Software with the contract during the period for which Consumers may reasonably expect continued conformity. As a guideline, this period is at least <strong>twenty-four (24) months</strong> from the date of your purchase, and in any case for as long as the Software is commercially distributed by Keynaptic. Updates will be made available through the in-application update mechanism or via the official download page. You are responsible for installing offered updates within a reasonable period; failure to install updates may, under &sect;&nbsp;327f Paragraph&nbsp;2 BGB, exclude liability for defects that would have been avoided by installing them, provided that Keynaptic informed you of the update and the consequences of non-installation.</p>
+
+    <p><strong>Compatibility.</strong> Where reasonably possible and proportionate, Keynaptic will adapt the Software to remain compatible with material changes to supported operating systems and runtime environments during the update period referred to above. The supported operating systems and minimum technical requirements at the time of purchase are stated on the official product page.</p>
+
+    <h3>15.2 Limitation of Liability (Consumer Version)</h3>
+
+    <p>Notwithstanding Section&nbsp;7, Keynaptic&rsquo;s liability to you is as follows:</p>
+
+    <ul>
+      <li>Keynaptic is liable <strong>without limitation</strong> for damages caused by intent (Vorsatz) or gross negligence (grobe Fahrl&auml;ssigkeit), for damages arising from injury to life, body, or health, for liability under the German Product Liability Act (Produkthaftungsgesetz), and for liability resulting from the fraudulent concealment of defects or the assumption of a guarantee.</li>
+      <li>For the breach of material contractual obligations (<em>wesentliche Vertragspflichten / Kardinalpflichten</em> &mdash; obligations the fulfilment of which is essential to the proper performance of the contract and on the fulfilment of which you regularly rely), Keynaptic&rsquo;s liability for ordinary negligence (leichte Fahrl&auml;ssigkeit) is limited to damages typical for this type of contract and foreseeable at the time of contract conclusion.</li>
+      <li>Any further liability for ordinary negligence is excluded.</li>
+    </ul>
+
+    <h3>15.3 Right of Withdrawal for Digital Content</h3>
+
+    <p>As a Consumer, you have a statutory right to withdraw from the purchase of the Software within fourteen (14) days without giving any reason.</p>
+
+    <p><strong>Who to address the withdrawal to:</strong> PasteSuiteAI is sold to you by a Merchant of Record (MoR) acting as the legal seller on our behalf. Your purchase contract is concluded with that MoR, not with Keynaptic directly. The right of withdrawal must therefore be exercised against the MoR from whom you purchased. The specific MoR and their contact details are shown on your order confirmation and invoice. Use the contact channel indicated there to send an unambiguous statement identifying yourself and stating your decision to withdraw from the contract. The MoR provides a statutory model withdrawal form at the time of purchase; its use is not mandatory.</p>
+
+    <p><strong>Expiry of the right of withdrawal for digital content:</strong> The right of withdrawal expires prematurely once provision of the digital content has commenced (for example, by making the Software available for download or activating your license key) after you have:
+      (a)&nbsp;expressly consented to commencement of performance before the expiry of the withdrawal period;
+      (b)&nbsp;acknowledged that you thereby lose your right of withdrawal upon commencement of performance; and
+      (c)&nbsp;received confirmation of the contract on a durable medium.</p>
+
+    <h3>15.4 Consumer Dispute Resolution (VSBG)</h3>
+
+    <p>We are <strong>not willing and not obliged</strong> to participate in dispute resolution proceedings before a consumer arbitration board (Verbraucherschlichtungsstelle) within the meaning of the German Consumer Dispute Resolution Act (VSBG).</p>
+
+    <h3>15.5 Jurisdiction for Consumers</h3>
+
+    <p>As a Consumer, you may bring proceedings against Keynaptic either before the courts of Hamburg, Germany, or before the courts of the EEA, UK, or Swiss member state in which you are resident. Keynaptic may bring proceedings against you only before the courts of the member state in which you are resident.</p>
+
+    <h3>15.6 Mandatory Law Prevails</h3>
+
+    <p>Any rights granted to you by mandatory provisions of the law of your country of residence remain unaffected by these Terms, including without limitation rights under Directive&nbsp;2011/83/EU (Consumer Rights Directive), Directive&nbsp;93/13/EEC (Unfair Contract Terms Directive), and Directive&nbsp;(EU)&nbsp;2019/770 (Digital Content Directive).</p>
+
+    <h3>15.7 No Class-Action Waiver</h3>
+
+    <p>The class-action waiver in Section&nbsp;14 does not apply to you.</p>
+
+    <!-- ===== 16 ===== -->
+    <h2>16. Severability</h2>
+
+    <p>If any provision of these Terms is found to be unenforceable or invalid by a competent court or authority, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect. The invalidity of a single provision does not affect the validity of the Terms as a whole.</p>
+
+    <!-- ===== 17 ===== -->
+    <h2>17. Entire Agreement</h2>
+
+    <p>These Terms, together with the Privacy Policy and any additional terms referenced herein, constitute the entire agreement between you and Keynaptic regarding the Software and supersede any prior agreements or understandings on the subject matter.</p>
+
+    <!-- ===== 18 ===== -->
+    <h2>18. Contact</h2>
+
+    <p>
+      Keynaptic GmbH<br>
+      c/o IP-Management #9777<br>
+      Ludwig-Erhard-Stra&szlig;e 18, 20459 Hamburg, Germany<br>
+      E-Mail: <strong>keynaptic@pastesuiteai.com</strong>
+    </p>
+
+    <p class="note">See also: <a href="legal.html" style="color: var(--color-accent);">Licensing</a> &middot; <a href="privacy.html" style="color: var(--color-accent);">Privacy Policy</a> &middot; <a href="accessibility.html" style="color: var(--color-accent);">Accessibility</a> &middot; <a href="impressum.html" style="color: var(--color-accent);">Legal Notice</a></p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text" data-trademark></p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="legal.html">Licensing</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="footer.js"></script>
+
+</body>
+</html>

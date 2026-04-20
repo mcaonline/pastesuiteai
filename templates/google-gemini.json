@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "api_key",
+      "source": "vault",
+      "default_value": null,
+      "description": "Google AI Studio API Key"
+    },
+    {
+      "name": "model",
+      "source": "config",
+      "default_value": "gemini-2.0-flash",
+      "description": "Model ID (e.g. gemini-2.0-flash, gemini-2.5-pro, gemini-1.5-pro)"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Generate Content",
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:generateContent?key={{api_key}}",
+      "auth": {
+        "auth_type": "none",
+        "credential": ""
+      },
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ],
+      "body": "{\n  \"systemInstruction\": {\n    \"parts\": [{\"text\": \"{{system_prompt}}\"}]\n  },\n  \"contents\": [\n    {\n      \"parts\": [{\"text\": \"{{prompt}}\"}]\n    }\n  ],\n  \"generationConfig\": {\n    \"temperature\": {{temperature}}\n  }\n}",
+      "body_content_type": "application/json",
+      "extract": [
+        {
+          "variable_name": "result",
+          "source": "body",
+          "path": "candidates[0].content.parts[0].text"
+        }
+      ],
+      "stream_path": null
+    }
+  ],
+  "result_from": "steps.1.result"
+}

@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "id": "openai-chat",
+      "name": "OpenAI Chat Completions",
+      "description": "Standard OpenAI GPT chat completions API. Supports all GPT models including GPT-4o.",
+      "author": "PasteSuiteAI",
+      "tags": ["openai", "chat", "gpt"],
+      "url": "https://pastesuiteai.com/templates/openai-chat.json"
+    },
+    {
+      "id": "openai-streaming",
+      "name": "OpenAI Chat (Streaming)",
+      "description": "OpenAI GPT with SSE streaming enabled. Same models, real-time token-by-token output.",
+      "author": "PasteSuiteAI",
+      "tags": ["openai", "chat", "streaming"],
+      "url": "https://pastesuiteai.com/templates/openai-streaming.json"
+    },
+    {
+      "id": "openai-vision",
+      "name": "OpenAI Vision",
+      "description": "OpenAI GPT-4o with image/vision support. Automatically includes clipboard image if available.",
+      "author": "PasteSuiteAI",
+      "tags": ["openai", "vision", "multimodal"],
+      "url": "https://pastesuiteai.com/templates/openai-vision.json"
+    },
+    {
+      "id": "anthropic-claude",
+      "name": "Anthropic Claude Messages",
+      "description": "Anthropic Claude Messages API. Supports Claude 4.5 Sonnet, Claude 3.5 Haiku, and other Claude models.",
+      "author": "PasteSuiteAI",
+      "tags": ["anthropic", "claude", "chat"],
+      "url": "https://pastesuiteai.com/templates/anthropic-claude.json"
+    },
+    {
+      "id": "anthropic-vision",
+      "name": "Anthropic Claude Vision",
+      "description": "Anthropic Claude with image/vision support. Automatically includes clipboard image if available.",
+      "author": "PasteSuiteAI",
+      "tags": ["anthropic", "claude", "vision", "multimodal"],
+      "url": "https://pastesuiteai.com/templates/anthropic-vision.json"
+    },
+    {
+      "id": "google-gemini",
+      "name": "Google Gemini (Native API)",
+      "description": "Google Gemini via native generateContent API. Uses API key authentication. Supports Gemini 2.0 Flash, 2.5 Pro, and more.",
+      "author": "PasteSuiteAI",
+      "tags": ["google", "gemini", "chat"],
+      "url": "https://pastesuiteai.com/templates/google-gemini.json"
+    },
+    {
+      "id": "deepseek-chat",
+      "name": "DeepSeek Chat",
+      "description": "DeepSeek API with OpenAI-compatible format. Supports DeepSeek-V3 (deepseek-chat) and DeepSeek-R1 (deepseek-reasoner).",
+      "author": "PasteSuiteAI",
+      "tags": ["deepseek", "chat", "reasoning"],
+      "url": "https://pastesuiteai.com/templates/deepseek-chat.json"
+    },
+    {
+      "id": "groq-chat",
+      "name": "Groq Chat",
+      "description": "Groq ultra-fast inference API. Supports Llama 3.3, Mixtral, Gemma, and other open-source models.",
+      "author": "PasteSuiteAI",
+      "tags": ["groq", "chat", "fast"],
+      "url": "https://pastesuiteai.com/templates/groq-chat.json"
+    },
+    {
+      "id": "xai-grok-chat",
+      "name": "xAI Grok Chat",
+      "description": "xAI Grok API. Supports Grok-3, Grok-3-mini, and Grok-2 models.",
+      "author": "PasteSuiteAI",
+      "tags": ["xai", "grok", "chat"],
+      "url": "https://pastesuiteai.com/templates/xai-grok-chat.json"
+    },
+    {
+      "id": "openrouter-chat",
+      "name": "OpenRouter (200+ Models)",
+      "description": "OpenRouter meta-provider with access to 200+ models from OpenAI, Anthropic, Google, Meta, and more via a single API key.",
+      "author": "PasteSuiteAI",
+      "tags": ["openrouter", "chat", "multi-provider"],
+      "url": "https://pastesuiteai.com/templates/openrouter-chat.json"
+    },
+    {
+      "id": "qwen-chat",
+      "name": "Alibaba Qwen Chat",
+      "description": "Alibaba Cloud Qwen models via DashScope API. Supports Qwen-Max, Qwen-Plus, and Qwen-Turbo.",
+      "author": "PasteSuiteAI",
+      "tags": ["qwen", "alibaba", "chat", "chinese"],
+      "url": "https://pastesuiteai.com/templates/qwen-chat.json"
+    },
+    {
+      "id": "zhipu-glm-chat",
+      "name": "Zhipu GLM Chat",
+      "description": "Zhipu AI GLM-4 models. Supports GLM-4-Plus, GLM-4-Air, and GLM-4-Flash.",
+      "author": "PasteSuiteAI",
+      "tags": ["zhipu", "glm", "chat", "chinese"],
+      "url": "https://pastesuiteai.com/templates/zhipu-glm-chat.json"
+    },
+    {
+      "id": "openai-whisper-stt",
+      "name": "OpenAI Whisper STT",
+      "description": "Speech-to-text transcription via OpenAI Whisper API. Uses multipart/form-data to upload audio.",
+      "author": "PasteSuiteAI",
+      "tags": ["openai", "whisper", "stt", "multipart", "audio"],
+      "url": "https://pastesuiteai.com/templates/openai-whisper-stt.json"
+    }
+  ]
+}

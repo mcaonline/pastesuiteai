@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "api_key",
+      "source": "vault",
+      "default_value": null,
+      "description": "OpenAI API Key"
+    },
+    {
+      "name": "model",
+      "source": "config",
+      "default_value": "whisper-1",
+      "description": "Whisper model ID (e.g. whisper-1)"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Transcribe Audio",
+      "method": "POST",
+      "url": "https://api.openai.com/v1/audio/transcriptions",
+      "auth": {
+        "auth_type": "bearer",
+        "credential": "{{api_key}}"
+      },
+      "headers": [],
+      "body": null,
+      "body_content_type": "multipart/form-data",
+      "multipart_parts": [
+        {
+          "name": "file",
+          "value": "{{audio_base64}}",
+          "part_type": "file",
+          "filename": "audio.wav",
+          "content_type": "audio/wav"
+        },
+        {
+          "name": "model",
+          "value": "{{model}}",
+          "part_type": "text"
+        },
+        {
+          "name": "response_format",
+          "value": "json",
+          "part_type": "text"
+        }
+      ],
+      "extract": [
+        {
+          "variable_name": "transcription",
+          "source": "body",
+          "path": "text"
+        }
+      ],
+      "stream_path": null
+    }
+  ],
+  "result_from": "steps.1.transcription"
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clipboard History &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Clipboard History</h1>
+      <p class="subtitle">Automatically capture and rerun text, images, and audio from your clipboard</p>
+
+      <h2>Overview</h2>
+      <p>
+        PasteSuiteAI automatically tracks clipboard changes and records the inputs and outputs of every
+        action you run. History is stored in memory and cleared on app restart &mdash; nothing is written
+        to disk. Entries cover text, images, and audio from both the system clipboard and AI action results.
+      </p>
+      <p>
+        The history panel lives in <strong>Settings &rsaquo; History</strong>. Entries appear in
+        reverse-chronological order. Click any entry to copy its content back to the clipboard.
+      </p>
+
+      <img class="docs-screenshot" src="img/settings-history.png" alt="History tab overview">
+
+      <h2>Enabling History</h2>
+      <p>
+        Two independent toggles control what gets recorded. Both are <strong>on by default</strong>.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Toggle</th>
+            <th>What it records</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Session History</strong></td>
+            <td>Inputs and outputs of every action you run (AI transforms, STT, regex, etc.)</td>
+            <td>On</td>
+          </tr>
+          <tr>
+            <td><strong>Clipboard History</strong></td>
+            <td>External clipboard changes &mdash; anything you copy from other applications</td>
+            <td>On</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        You can disable Clipboard History while keeping Session History active if you only want to track
+        action results, not every copy you make in other apps.
+      </div>
+
+      <h2>History Settings</h2>
+      <p>
+        The controls at the top of the History tab let you adjust capacity and toggle each recording mode.
+      </p>
+
+      <div class="docs-crop">
+        <img src="img/settings-history.png" alt="History controls"
+             style="aspect-ratio: 530/120; object-fit: cover; object-position: 0 0%;">
+      </div>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Max Entries</td>
+            <td>Number input (1&ndash;999)</td>
+            <td>
+              Maximum entries kept in memory. Default: <strong>25</strong>. Oldest entries are discarded
+              first when the limit is reached. Press <kbd>Enter</kbd> or click away to apply.
+            </td>
+          </tr>
+          <tr>
+            <td>Clipboard History Enabled</td>
+            <td>Toggle</td>
+            <td>Records changes from the system clipboard (external copies). Default: <strong>on</strong>.</td>
+          </tr>
+          <tr>
+            <td>Session History Enabled</td>
+            <td>Toggle</td>
+            <td>Records action inputs and outputs. Default: <strong>on</strong>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Using History Entries</h2>
+      <p>
+        Click the content area of any entry to copy it back to the clipboard. A brief
+        <strong>Copied</strong> badge confirms the action.
+      </p>
+
+      <h3>Text entries</h3>
+      <p>
+        Click the text preview to copy the full text to the clipboard. The preview is truncated to
+        200&nbsp;characters for display; the full content is always what gets copied.
+      </p>
+      <p>
+        For <a href="actions.html">action</a> entries, you will see separate clickable rows for the
+        <em>Input</em> and the <em>Output</em>. Click either row independently to copy that specific value.
+      </p>
+
+      <h3>Image entries</h3>
+      <p>
+        Click the thumbnail to copy the image back to the clipboard. A scaled-down thumbnail is displayed
+        in the list; the full-resolution image is what gets copied, not the thumbnail.
+      </p>
+
+      <h3>Audio entries</h3>
+      <p>
+        Audio entries recorded by speech-to-text (STT) actions include an inline audio player so you can
+        listen back. Two additional controls let you rerun the audio through the current speech-to-text connection:
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Transcribe / Instruct mode toggle</td>
+            <td>
+              Selects the processing mode before hitting Rerun.
+              <strong>Transcribe</strong> processes the audio through speech-to-text and pastes the result.
+              <strong>Instruct</strong> sends the audio as an instruction input to the configured AI model.
+              The default matches the mode the entry was originally recorded with.
+            </td>
+          </tr>
+          <tr>
+            <td>Rerun button</td>
+            <td>
+              Re-processes the stored audio using the selected mode and the active STT connection. Useful
+              for re-running an old recording with a different model or prompt.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>History Entry Details</h2>
+      <p>Each entry header shows:</p>
+      <ul>
+        <li><strong>Action name</strong> &mdash; the action that produced the entry, or &ldquo;Clipboard&rdquo; for raw clipboard snapshots.</li>
+        <li><strong>Timestamp</strong> &mdash; when the entry was recorded.</li>
+        <li><strong>Duration</strong> &mdash; how long the action took (action entries only).</li>
+        <li><strong>Model ID</strong> &mdash; the AI model used (action entries only).</li>
+        <li><strong>Token counts</strong> &mdash; prompt + completion = total tokens, when the provider reports them.</li>
+      </ul>
+      <p>
+        Entries that are part of an <a href="actions.html">action chain</a> are visually grouped together
+        and display a <em>Chain Step N</em> or <em>Chain Final</em> badge.
+      </p>
+      <div class="docs-tip">
+        Token counts appear only when the provider reports usage data. Some providers and local models do
+        not return token counts.
+      </div>
+
+      <h2>Security</h2>
+      <p>
+        The clipboard monitor automatically skips recording any text that looks like an API key or secret
+        token. This check runs on both the preview and the full clipboard content. If a match is detected,
+        the entry is silently discarded and never stored.
+      </p>
+
+      <h2>Limitations</h2>
+      <ul>
+        <li>
+          <strong>Not persisted to disk.</strong> History is memory-only. Restarting the app clears all
+          entries.
+        </li>
+        <li>
+          <strong>Image history stores thumbnails.</strong> Full original image bytes are not retained
+          beyond what is needed to copy back to the clipboard. An internal cap limits how many bytes are
+          stored per media entry.
+        </li>
+        <li>
+          <strong>Deduplication is active.</strong> Rapid clipboard changes from the same source &mdash;
+          for example, when an application writes multiple formats at once (plain text, RTF, HTML) &mdash;
+          are collapsed into a single entry using a 30-second deduplication window. This prevents duplicate
+          consecutive entries from the same copy action.
+        </li>
+        <li>
+          <strong>Audio and empty clipboard states are not recorded</strong> as clipboard history entries.
+          Only text and images from the system clipboard are captured. Audio is recorded when it is the
+          input to an STT action.
+        </li>
+      </ul>
+
+      <div class="docs-warning">
+        Because history is memory-only, disabling and re-enabling Session History mid-session does not
+        lose previously recorded entries &mdash; they remain in memory. Entries are only cleared on app
+        restart.
+      </div>
+
+      <h2>Related</h2>
+      <div class="docs-grid">
+        <a class="docs-card" href="main-window.html">
+          <strong>Main Window</strong>
+          <span>Learn about the panel, clipboard preview, and quick actions.</span>
+        </a>
+        <a class="docs-card" href="settings.html">
+          <strong>Settings</strong>
+          <span>Overview of all Settings tabs and configuration options.</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

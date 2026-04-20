@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licensing &amp; Trial &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Licensing &amp; Trial</h1>
+      <p class="subtitle">Trial, free tier, and license activation</p>
+
+      <h2>Overview</h2>
+      <p>
+        PasteSuiteAI offers a generous trial and a permanent free tier. Non-AI features &mdash; such as
+        Paste as Plain Text, local regex transforms, and static text paste &mdash; are always free with
+        no usage limits, regardless of your license status.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Duration</th>
+            <th>AI Actions</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Trial</strong></td>
+            <td>7 days</td>
+            <td>Unlimited</td>
+            <td>Starts on first launch. No sign-up required.</td>
+          </tr>
+          <tr>
+            <td><strong>Free</strong></td>
+            <td>Indefinite</td>
+            <td>15 per rolling 24h window</td>
+            <td>Escalating cooldowns as limit approaches.</td>
+          </tr>
+          <tr>
+            <td><strong>Licensed</strong></td>
+            <td>As long as license is valid</td>
+            <td>Unlimited</td>
+            <td>Offline verification. Key stored in OS keychain.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Trial Period</h2>
+      <p>
+        A <strong>7-day trial</strong> starts automatically on the first launch of PasteSuiteAI. During
+        the trial:
+      </p>
+      <ul>
+        <li>All AI features are available without any restrictions.</li>
+        <li>No credit card or account is required.</li>
+        <li>No upsell prompts appear.</li>
+      </ul>
+      <p>
+        After the trial ends, the app automatically transitions to the Free tier. The trial start date is
+        stored securely in your OS credential store.
+      </p>
+
+      <h2>Free Tier</h2>
+      <p>
+        After the trial expires, you can continue using AI features within a rolling 24-hour usage window:
+      </p>
+      <ul>
+        <li><strong>15 AI actions</strong> per rolling 24-hour window.</li>
+        <li><strong>Brief cooldowns</strong> between actions as the limit approaches.</li>
+        <li>Cooldowns reset automatically as older actions age out of the 24-hour window.</li>
+      </ul>
+      <div class="docs-tip">
+        Non-AI features (Paste as Plain Text, clipboard history, regex transforms, static text paste,
+        all hotkey and trigger configuration) are always free regardless of your tier.
+      </div>
+
+      <h2>Pro &mdash; Pricing &amp; Subscription</h2>
+      <p>
+        The Pro license is an <strong>annual subscription</strong>. The current price is
+        <strong>&euro;29 per year</strong>, incl. VAT where applicable. The subscription
+        <strong>renews automatically</strong> each year at the then-current price; you can
+        <strong>cancel anytime</strong>, and your current paid year stays active until its end.
+      </p>
+      <ul>
+        <li><strong>Seller of record:</strong> Purchases are processed by <strong>Paddle</strong>
+            (Paddle.com Market Ltd., United Kingdom / Paddle Inc., USA), which acts as the
+            merchant of record and issues the invoice.</li>
+        <li><strong>Manage or cancel:</strong> Use the Paddle Buyer Portal link included in your
+            purchase confirmation email. Your license remains valid for the remainder of the
+            paid year after cancellation.</li>
+        <li><strong>Refunds &amp; right of withdrawal:</strong> See the
+            <a href="../terms.html">Terms of Service</a> and the withdrawal instructions
+            Paddle provides during checkout.</li>
+      </ul>
+
+      <h2>License Activation</h2>
+      <p>
+        A license key removes the daily AI action limit and cooldown delays. To activate:
+      </p>
+
+      <img class="docs-screenshot" src="img/settings-license.png" alt="License tab overview">
+
+      <ol>
+        <li>Open <strong>Settings</strong> and go to the <strong>License</strong> tab.</li>
+        <li>Enter your license key in the input field. Keys use the format <code>PASTEAI-&hellip;</code>.</li>
+        <li>Click <strong>Activate</strong> or press <kbd>Enter</kbd>.</li>
+        <li>A confirmation message shows your licensed email, tier, and expiry if applicable.</li>
+      </ol>
+
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>License Key input</td>
+            <td>Enter your <code>PASTEAI-&hellip;</code> key here. Visible only when not licensed.</td>
+          </tr>
+          <tr>
+            <td>Activate button</td>
+            <td>Submits the key for verification. Also triggered by pressing <kbd>Enter</kbd> in the input.</td>
+          </tr>
+          <tr>
+            <td>Deactivate button</td>
+            <td>Removes the license key from the OS keychain. The app reverts to the free tier. Visible only when licensed.</td>
+          </tr>
+          <tr>
+            <td>Pro badge effect toggle</td>
+            <td>Cosmetic option (licensed users only). Enables an animated gradient effect on the Pro badge in the title bar. Default: on.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Technical details about license verification:</p>
+      <ul>
+        <li><strong>Offline verification.</strong> Keys are cryptographically signed and verified entirely locally. No internet connection is needed to activate or use a license.</li>
+        <li><strong>Secure storage.</strong> The key is stored in your OS secure credential store. It is never written to disk as plain text.</li>
+        <li><strong>Periodic re-verification.</strong> The app periodically re-verifies your license. If the key is missing or invalid, the app falls back to the free tier automatically.</li>
+      </ul>
+
+      <div class="docs-warning">
+        License activation is rate-limited to prevent abuse. If you enter too many invalid keys in a short
+        period, wait a moment before trying again.
+      </div>
+
+      <h2>Paywall Behavior</h2>
+      <p>
+        When you hit the daily AI limit, PasteSuiteAI uses a graduated, non-intrusive approach:
+      </p>
+
+      <h3>Soft Banner</h3>
+      <p>
+        Appears on the <strong>first time</strong> you hit the daily limit within a 7-day period. The
+        banner shows at the top of the main panel and is dismissible. It includes:
+      </p>
+      <ul>
+        <li>An <strong>Upgrade</strong> button that switches the banner to inline activation mode, letting you enter a license key without opening Settings.</li>
+        <li>A <strong>dismiss button</strong> with an optional countdown (you may need to wait a few seconds before dismissing on first appearance).</li>
+      </ul>
+
+      <h3>Strong Modal</h3>
+      <p>
+        Appears on the <strong>second or later</strong> limit hit within a 7-day window. A more prominent
+        dialog shows usage statistics and a call-to-action to enter a license key. Features:
+      </p>
+      <ul>
+        <li>A CTA button that switches to inline activation mode directly in the modal.</li>
+        <li>A dismiss button to close the modal and continue with the free tier.</li>
+        <li>Clicking the backdrop also dismisses the modal.</li>
+        <li>A cooldown between strong paywall appearances prevents it from showing on every single action once the limit is hit.</li>
+      </ul>
+      <div class="docs-tip">
+        Non-AI actions are never blocked, regardless of license status or how many limit hits have occurred.
+      </div>
+
+      <h2>Usage Display</h2>
+      <p>
+        Your current license status is visible in the main window title bar as a compact badge:
+      </p>
+
+      <div class="docs-crop">
+        <img src="img/settings-license.png" alt="License status display"
+             style="aspect-ratio: 530/100; object-fit: cover; object-position: 0 65%;">
+      </div>
+
+      <ul>
+        <li><strong>Trial:</strong> shows days remaining (e.g., "6 days left").</li>
+        <li><strong>Free:</strong> shows actions used vs. the daily limit (e.g., "8 of 15").</li>
+        <li><strong>Licensed:</strong> shows a "Pro" badge with an optional animated gradient effect.</li>
+      </ul>
+      <p>
+        The full breakdown is available in <strong>Settings &rsaquo; License</strong>: phase, trial days
+        remaining, actions used today, daily limit, licensed email, tier, and license validity period.
+      </p>
+
+      <h2>Safety Limits</h2>
+      <p>
+        Separate from licensing, PasteSuiteAI includes a <strong>daily API call safety limit</strong>
+        that applies to all users (trial, free, and licensed). This prevents runaway API costs if an
+        automation bug or long action chain misbehaves.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>Range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Daily API Call Limit</td>
+            <td>500</td>
+            <td>10&ndash;100,000</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The counter resets at midnight UTC each day. When the limit is reached, all AI actions are blocked
+        until the next UTC day. Configure it in <strong>Settings &rsaquo; General &rsaquo; Safety</strong>.
+      </p>
+      <div class="docs-tip">
+        The safety limit is independent of the free-tier daily limit. A licensed user with 500 AI calls
+        per day set as the safety limit can still be blocked if they hit 500 calls before midnight UTC.
+      </div>
+
+      <h2>Non-AI Features (Always Free)</h2>
+      <ul>
+        <li><strong>Paste as Plain Text</strong> &mdash; strip formatting and paste clean text.</li>
+        <li><strong>Local Regex Transform</strong> &mdash; run regex-based text transformations locally.</li>
+        <li><strong>Static Text Paste</strong> &mdash; paste pre-defined text snippets.</li>
+        <li><strong>Clipboard History</strong> &mdash; in-session history of clipboard changes and action results.</li>
+        <li><strong>Global hotkeys &amp; mouse triggers</strong> &mdash; all trigger configuration and assignment.</li>
+        <li><strong>Prompt Library</strong> &mdash; organize and access prompts via the overlay.</li>
+        <li><strong>All settings &amp; customization</strong> &mdash; UI scale, themes, connections, actions.</li>
+      </ul>
+
+      <h2>Related</h2>
+      <div class="docs-grid">
+        <a class="docs-card" href="settings.html">
+          <strong>Settings</strong>
+          <span>Configure the safety limit and other app-wide options.</span>
+        </a>
+        <a class="docs-card" href="actions.html">
+          <strong>Actions</strong>
+          <span>See which actions use AI and which are always free.</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

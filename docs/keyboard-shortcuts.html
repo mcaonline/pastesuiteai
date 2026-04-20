@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Shortcuts &amp; Triggers &mdash; PasteSuiteAI Docs</title>
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="docs-nav-links">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="../index.html">PasteSuiteAI</a>
+      <span class="separator">/</span>
+      <span class="current">Docs</span>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <main class="docs-content">
+
+      <h1>Keyboard Shortcuts &amp; Triggers</h1>
+      <p class="subtitle">Global hotkeys, mouse triggers, and chord sequences</p>
+
+      <h2>Overview</h2>
+      <p>
+        PasteSuiteAI uses global hotkeys and mouse triggers to execute <a href="actions.html">actions</a>
+        from anywhere on your system. All triggers work system-wide, even when PasteSuiteAI is minimized
+        to the tray. Select text in any application, fire the trigger, and the result replaces your
+        selection in place.
+      </p>
+
+      <h2>Hotkey Format</h2>
+      <p>
+        Hotkeys use a standard notation: modifier keys wrapped in angle brackets, joined
+        by <code>+</code>. Example: <code>&lt;ctrl&gt;+&lt;shift&gt;+&lt;alt&gt;+v</code>.
+      </p>
+      <p>
+        Modifiers are always stored in canonical order regardless of the order you press them. The
+        canonical order is:
+      </p>
+      <p>
+        <kbd>Cmd</kbd> &rarr; <kbd>Ctrl</kbd> &rarr; <kbd>Alt</kbd> &rarr; <kbd>Shift</kbd>
+      </p>
+      <p>
+        For example, if you press <kbd>Shift</kbd> then <kbd>Ctrl</kbd> then <kbd>Alt</kbd> then
+        <kbd>V</kbd>, the stored hotkey is
+        <code>&lt;ctrl&gt;+&lt;alt&gt;+&lt;shift&gt;+v</code> &mdash; modifiers reordered
+        automatically. In the UI, hotkeys are displayed as individual key badges rather than the raw
+        shortcut notation.
+      </p>
+
+      <h2>Chord Sequences</h2>
+      <p>
+        Chord shortcuts are used for the <strong>main app trigger</strong> (the shortcut that opens the
+        PasteSuiteAI panel). Instead of a single simultaneous key press, you press the combination once,
+        fully release it, then press it again within a configurable timeout window.
+      </p>
+      <ul>
+        <li><strong>Default timeout:</strong> 500&nbsp;ms</li>
+        <li><strong>Minimum timeout:</strong> 200&nbsp;ms</li>
+        <li>The panel opens on the second press when both presses occur within the timeout.</li>
+      </ul>
+      <div class="docs-tip">
+        Double-tap mode makes accidental triggers nearly impossible and reduces conflicts with other
+        applications that use the same key combination.
+      </div>
+
+      <h2>Mouse Triggers</h2>
+      <p>
+        Mouse triggers fire an action when you click a specific mouse button, optionally while holding
+        modifier keys. They are registered and checked globally, alongside keyboard hotkeys.
+      </p>
+      <p><strong>Supported buttons:</strong></p>
+      <ul>
+        <li><code>middle</code> &mdash; middle-click (scroll wheel click)</li>
+        <li><code>x1</code> &mdash; back / thumb button (the one closer to your wrist)</li>
+        <li><code>x2</code> &mdash; forward / thumb button (the one farther from your wrist)</li>
+        <li><code>left</code> &mdash; left-click, but only with at least one modifier key</li>
+      </ul>
+      <p><strong>Supported modifiers:</strong> <kbd>Ctrl</kbd>, <kbd>Alt</kbd>, <kbd>Shift</kbd></p>
+      <p>
+        The canonical modifier order for mouse triggers is:
+        <kbd>Ctrl</kbd> &rarr; <kbd>Alt</kbd> &rarr; <kbd>Shift</kbd>
+      </p>
+      <p>Examples: <code>shift+x2</code>, <code>middle</code>, <code>ctrl+x1</code>, <code>ctrl+alt+shift+left</code></p>
+      <div class="docs-warning">
+        Bare left-click (no modifiers) and right-click are not supported. Left-click without a modifier
+        would interfere with normal use; right-click is reserved for system context menus.
+      </div>
+
+      <h2>Default Hotkeys</h2>
+      <p>These keyboard shortcuts are pre-configured out of the box. Each can be customized or removed on the action card in Settings.</p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Hotkey</th>
+            <th>Mouse Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Open App (main trigger)</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Paste as Plain Text</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Audio to Text</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td>
+            <td><code>x2</code></td>
+          </tr>
+          <tr>
+            <td>Diplomatic Rewrite</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Rewrite &amp; Correct</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Rewrite &amp; Correct to English</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Address Correction</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Save to File</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Prompt Library</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd></td>
+            <td><code>middle</code></td>
+          </tr>
+          <tr>
+            <td>Chat Window</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>Repaste Last Result</td>
+            <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd></td>
+            <td><code>x1</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        "X1" is the back thumb button and "X2" is the forward thumb button. Not all mice have these
+        extra buttons. For a full guide on using all your mouse buttons (including extra buttons
+        via keyboard shortcuts), see <a href="mouse-configuration.html">Mouse Configuration</a>.
+      </div>
+
+      <h2>Editing Hotkeys</h2>
+      <p>
+        To assign or change a keyboard shortcut for an action, click the hotkey badge (or empty hotkey
+        slot) on any action card in Settings. This opens the <strong>Hotkey Editor</strong>.
+      </p>
+
+      <div class="screenshot-placeholder">Hotkey Editor Modal showing key capture area with badge display</div>
+
+      <p>Inside the Hotkey Editor:</p>
+      <ol>
+        <li>Click the <strong>recording area</strong> to focus it, then press your desired key combination. All pressed keys are captured simultaneously and displayed as badges.</li>
+        <li>Click <strong>Save</strong> to confirm the new hotkey.</li>
+        <li>Click <strong>Cancel</strong> to close without saving.</li>
+      </ol>
+
+      <p>Additional controls within the editor:</p>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reset to original</td>
+            <td>Reverts the recording area to the hotkey that was saved before you opened the editor.</td>
+          </tr>
+          <tr>
+            <td>Re-record</td>
+            <td>Clears the current recording and lets you start fresh without closing the modal.</td>
+          </tr>
+          <tr>
+            <td>Delete</td>
+            <td>Removes the hotkey entirely. The action will only be accessible from the panel, not via keyboard.</td>
+          </tr>
+          <tr>
+            <td>Double-tap toggle</td>
+            <td>
+              Available in chord mode (main trigger only). When enabled, the combination must be pressed
+              twice within the timeout to fire. Recommended to avoid accidental triggers.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        If the recorded combination conflicts with a known system shortcut (such as
+        <kbd>Ctrl</kbd>+<kbd>C</kbd>), an advisory warning is shown. You can still save &mdash; the
+        warning is informational only and does not block saving.
+      </div>
+
+      <h2>Editing Mouse Triggers</h2>
+      <p>
+        Click the mouse trigger slot on any action card in Settings to open the
+        <strong>Mouse Trigger Editor</strong>.
+      </p>
+
+      <div class="screenshot-placeholder">Mouse Trigger Editor Modal showing recording area</div>
+
+      <p>Inside the Mouse Trigger Editor:</p>
+      <ol>
+        <li>Click inside the <strong>recording area</strong> using the mouse button you want to assign. Hold <kbd>Ctrl</kbd>, <kbd>Alt</kbd>, or <kbd>Shift</kbd> while clicking to include modifier keys.</li>
+        <li>The captured trigger is displayed as key badges.</li>
+        <li>Click <strong>Save</strong> to confirm, or <strong>Cancel</strong> to discard.</li>
+      </ol>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reset to original</td>
+            <td>Reverts to the trigger that was saved before you opened the editor.</td>
+          </tr>
+          <tr>
+            <td>Delete</td>
+            <td>Removes the mouse trigger. The action will no longer fire on mouse button clicks.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="docs-tip">
+        Some gaming mice and peripheral software (Logitech G Hub, Razer Synapse, etc.) intercept X1 and
+        X2 buttons before they reach PasteSuiteAI. If your mouse trigger does not fire, check whether
+        your mouse software is consuming the button event.
+      </div>
+
+      <h2>Trigger Conflict Detection</h2>
+      <p>
+        PasteSuiteAI centrally checks for duplicate trigger assignments before saving. A conflict is
+        flagged when:
+      </p>
+      <ul>
+        <li>Two or more actions share the same hotkey or mouse trigger.</li>
+        <li>An action trigger conflicts with the <a href="prompt-library.html">Prompt Library</a> hotkey or mouse trigger.</li>
+        <li>An action trigger conflicts with the main app trigger.</li>
+      </ul>
+      <p>
+        When a conflict is detected, a warning is displayed in the editor identifying which other action
+        or feature uses the same trigger. You must resolve the conflict by changing or removing one of
+        the conflicting assignments before saving.
+      </p>
+
+      <h2>Auto-Copy Timing</h2>
+      <p>
+        When an action with <strong>Auto-Copy Before</strong> enabled fires via hotkey, the app
+        automatically captures the currently selected text before processing it. This involves a brief
+        pause to ensure the text is captured reliably across different applications.
+      </p>
+      <div class="docs-tip">
+        If you see "No text selected" errors when using hotkeys in specific applications, this is
+        usually because the application needs slightly more time to provide the selected text.
+        The app is tuned to handle most applications reliably, including slower ones like Excel.
+      </div>
+
+      <h2>Related</h2>
+      <div class="docs-grid">
+        <a class="docs-card" href="actions.html">
+          <strong>Actions</strong>
+          <span>Configure what each shortcut does and set per-action execution mode.</span>
+        </a>
+        <a class="docs-card" href="prompt-library.html">
+          <strong>Prompt Library</strong>
+          <span>Open the Prompt Library overlay with its own dedicated trigger.</span>
+        </a>
+        <a class="docs-card" href="settings.html">
+          <strong>Settings</strong>
+          <span>Overview of all Settings tabs and configuration options.</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text"></p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="docs-nav.js"></script>
+  <script src="../footer.js"></script>
+</body>
+</html>

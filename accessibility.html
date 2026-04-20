@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility &mdash; PasteSuiteAI</title>
+  <meta name="description" content="Accessibility statement for PasteSuiteAI. Our commitment to inclusive software.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f5f5f7;
+      --color-text-primary: #1d1d1f;
+      --color-text-secondary: #424245;
+      --color-text-tertiary: #6e6e73;
+      --color-accent: #0071e3;
+      --color-separator: #d2d2d7;
+      --color-nav-bg: rgba(251, 251, 253, 0.72);
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-width: 720px;
+      --nav-height: 52px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-bg-secondary: #1c1c1e;
+        --color-text-primary: #f5f5f7;
+        --color-text-secondary: #a1a1a6;
+        --color-text-tertiary: #86868b;
+        --color-separator: #38383a;
+        --color-nav-bg: rgba(22, 22, 23, 0.72);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-separator);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+    }
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav a:hover { color: var(--color-accent); }
+
+    /* ========== Content ========== */
+    .legal-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 22px 80px;
+    }
+
+    .legal-content h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .legal-content .subtitle {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-separator);
+    }
+
+    .legal-content ul li:last-child { border-bottom: none; }
+
+    .legal-content ul li strong {
+      color: var(--color-text-primary);
+    }
+
+    .legal-content .note {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-separator);
+      padding: 24px 22px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-text {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      letter-spacing: -0.01em;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html">&larr; Back to PasteSuiteAI</a>
+  </nav>
+
+  <main class="legal-content">
+    <h1>Accessibility</h1>
+    <p class="subtitle">Last updated: 18 April 2026</p>
+
+    <h2>Legal Status under the German Accessibility Reinforcement Act (BFSG)</h2>
+
+    <p>The German Accessibility Reinforcement Act (<em>Barrierefreiheitsst&auml;rkungsgesetz</em>, BFSG), in force since 28&nbsp;June&nbsp;2025, applies to specific categories of products and services listed in &sect;&nbsp;1(2) BFSG.</p>
+
+    <ul>
+      <li><strong>Product scope:</strong> PasteSuiteAI is a general-purpose desktop software application. It is not a hardware system, self-service terminal, consumer device for telecommunications or audiovisual media, or e-book reader. It therefore does not fall within the product categories listed in &sect;&nbsp;1(2) Nos.&nbsp;1&ndash;6 BFSG.</li>
+      <li><strong>Service scope:</strong> To the extent that any service offered by Keynaptic&nbsp;GmbH (e.g.&nbsp;the e-commerce functionality of this website, when activated) falls within the service categories of &sect;&nbsp;1(2) Nos.&nbsp;7&ndash;12 BFSG, Keynaptic&nbsp;GmbH is a micro-enterprise within the meaning of &sect;&nbsp;2 No.&nbsp;17 BFSG (fewer than ten employees and annual turnover or balance-sheet total not exceeding EUR&nbsp;2&nbsp;million). Pursuant to &sect;&nbsp;3(3) BFSG, micro-enterprises providing services are exempt from the obligations of the BFSG.</li>
+    </ul>
+
+    <p>Notwithstanding the legal exemption, we are committed to voluntarily improving accessibility as described below.</p>
+
+    <h2>Our Commitment</h2>
+
+    <p>Keynaptic GmbH is committed to making PasteSuiteAI accessible to all users. We strive to follow established accessibility standards and continuously improve the experience for people with disabilities.</p>
+
+    <h2>Current Accessibility Features</h2>
+
+    <ul>
+      <li><strong>Full keyboard control</strong> &mdash; All core features can be operated via configurable global hotkeys, without requiring a mouse.</li>
+      <li><strong>Dark mode support</strong> &mdash; The application and this website automatically adapt to your operating system&rsquo;s color scheme preference.</li>
+      <li><strong>Scalable interface</strong> &mdash; The application offers a UI scale setting (100%&ndash;300%) to enlarge all interface elements.</li>
+      <li><strong>Customizable colors</strong> &mdash; Background, text, and accent colors can be adjusted in Settings to improve readability and contrast.</li>
+      <li><strong>Adjustable transparency</strong> &mdash; Overlay windows support configurable opacity to accommodate different visual needs.</li>
+      <li><strong>No animations or flashing content</strong> &mdash; The application does not use animations, flashing, or blinking elements that could affect users with photosensitive conditions.</li>
+      <li><strong>Speech-to-text</strong> &mdash; Built-in audio transcription enables voice-driven workflows as an alternative to typing.</li>
+      <li><strong>System tray operation</strong> &mdash; The application runs from the system tray, minimizing screen clutter and supporting assistive technology workflows.</li>
+    </ul>
+
+    <h2>Standards</h2>
+
+    <p>We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA where applicable. As a native desktop application, not all web-specific criteria apply directly, but we use WCAG as our guiding framework for accessible design.</p>
+
+    <h2>Known Limitations</h2>
+
+    <p>We are aware of the following areas where accessibility can be improved:</p>
+
+    <ul>
+      <li><strong>Screen reader support</strong> &mdash; Some custom UI elements (overlays, popup windows) may not be fully accessible to screen readers. We are working to improve ARIA attributes and semantic markup.</li>
+      <li><strong>Keyboard focus indicators</strong> &mdash; Visual focus indicators in some parts of the settings interface could be more prominent.</li>
+      <li><strong>High contrast mode</strong> &mdash; While colors are customizable, the application does not yet have a dedicated high-contrast theme preset.</li>
+    </ul>
+
+    <h2>Third-Party Content</h2>
+
+    <p>PasteSuiteAI integrates with third-party AI providers whose output we do not control. Accessibility of AI-generated content (including formatting, language complexity, and structure) depends on the provider and prompt configuration.</p>
+
+    <h2>Feedback</h2>
+
+    <p>We welcome feedback on the accessibility of PasteSuiteAI. If you encounter barriers or have suggestions for improvement, please contact us:</p>
+
+    <p><strong>support@pastesuiteai.com</strong></p>
+
+    <p>We aim to respond to accessibility feedback within 5 business days and will work to address reported issues in future updates.</p>
+
+    <p class="note">See also: <a href="legal.html" style="color: var(--color-accent);">Licensing</a> &middot; <a href="privacy.html" style="color: var(--color-accent);">Privacy Policy</a> &middot; <a href="terms.html" style="color: var(--color-accent);">Terms of Service</a></p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text" data-trademark></p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="legal.html">Licensing</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="footer.js"></script>
+
+</body>
+</html>
