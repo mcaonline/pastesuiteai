@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refund Policy &mdash; PasteSuiteAI</title>
+  <meta name="description" content="Refund and cancellation policy for PasteSuiteAI Pro subscriptions sold via Paddle as Merchant of Record.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f5f5f7;
+      --color-text-primary: #1d1d1f;
+      --color-text-secondary: #424245;
+      --color-text-tertiary: #6e6e73;
+      --color-accent: #0071e3;
+      --color-separator: #d2d2d7;
+      --color-nav-bg: rgba(251, 251, 253, 0.72);
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-width: 720px;
+      --nav-height: 52px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-bg-secondary: #1c1c1e;
+        --color-text-primary: #f5f5f7;
+        --color-text-secondary: #a1a1a6;
+        --color-text-tertiary: #86868b;
+        --color-separator: #38383a;
+        --color-nav-bg: rgba(22, 22, 23, 0.72);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--color-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-separator);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+    }
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav a:hover { color: var(--color-accent); }
+
+    /* ========== Content ========== */
+    .legal-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 22px 80px;
+    }
+
+    .legal-content h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .legal-content .subtitle {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    .legal-content p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul, .legal-content ol {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ol {
+      counter-reset: item;
+    }
+
+    .legal-content ol li::before {
+      counter-increment: item;
+      content: counter(item) ".";
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-right: 8px;
+    }
+
+    .legal-content ul li, .legal-content ol li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-separator);
+    }
+
+    .legal-content ul li:last-child, .legal-content ol li:last-child { border-bottom: none; }
+
+    .legal-content ul li strong, .legal-content ol li strong {
+      color: var(--color-text-primary);
+    }
+
+    .legal-content .note {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+
+    .legal-content .highlight-box {
+      background: var(--color-bg-secondary);
+      border-left: 3px solid var(--color-accent);
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .legal-content .highlight-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    .legal-content a { color: var(--color-accent); text-decoration: none; }
+    .legal-content a:hover { text-decoration: underline; }
+
+    /* ========== Footer ========== */
+    .footer {
+      border-top: 1px solid var(--color-separator);
+      padding: 24px 22px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-text {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      letter-spacing: -0.01em;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html">&larr; Back to PasteSuiteAI</a>
+  </nav>
+
+  <main class="legal-content">
+    <h1>Refund &amp; Cancellation Policy</h1>
+    <p class="subtitle">Last updated: 20 April 2026</p>
+
+    <div class="highlight-box">
+      <p><strong>In short:</strong> PasteSuiteAI Pro is sold as an annual subscription by <strong>Paddle</strong> as Merchant of Record. Refunds and cancellations are processed by Paddle. Consumers in the EEA, UK, and Switzerland have a statutory <strong>14-day right of withdrawal</strong> for digital content, subject to the expiry rule for started downloads. Keynaptic supports additional goodwill refunds in clearly justified cases.</p>
+    </div>
+
+    <h2>1. Who Processes Your Refund</h2>
+
+    <p>Your purchase contract is concluded with <strong>Paddle.com Market Limited</strong> (or, for U.S. buyers, Paddle.com Inc.) as Merchant of Record, not with Keynaptic directly. Paddle therefore handles all payment matters, including refunds, cancellations, chargebacks, and invoices. Contact details for Paddle appear on your order confirmation and invoice. See <a href="terms.html#3">Terms &sect;&nbsp;3 (Merchant of Record)</a> for the full arrangement.</p>
+
+    <h2>2. Cancellation vs. Refund</h2>
+
+    <p>These are two different actions. Most users only need the first one:</p>
+
+    <ul>
+      <li><strong>Cancel auto-renewal</strong> &mdash; stops the next yearly charge. Your Pro license stays fully active until the end of the period you already paid for, then reverts to free features. Free of charge, no reason required, any time. Do this via the <strong>Paddle Buyer Portal</strong> (link is in your purchase confirmation email).</li>
+      <li><strong>Refund</strong> &mdash; returns money you already paid, subject to the rules below.</li>
+    </ul>
+
+    <h2>3. Statutory 14-Day Right of Withdrawal (EEA / UK / Switzerland Consumers)</h2>
+
+    <p>If you are a Consumer resident in the EEA, the United Kingdom, or Switzerland, you have a statutory right to withdraw from your purchase within <strong>fourteen (14) days</strong> of contract conclusion without giving any reason. To exercise it, contact the Merchant of Record named on your invoice with an unambiguous statement of withdrawal (Paddle provides a statutory model form; its use is optional).</p>
+
+    <p><strong>Important exception for digital content.</strong> The withdrawal right expires prematurely once download or license activation has commenced after you have expressly consented to that early start and acknowledged the loss of the withdrawal right. This consent is requested during checkout. Full wording: <a href="terms.html#15-3">Terms &sect;&nbsp;15.3 (Right of Withdrawal for Digital Content)</a>.</p>
+
+    <h2>4. Goodwill Refunds by Keynaptic</h2>
+
+    <p>Beyond the statutory rules above, Keynaptic will support a refund request forwarded to Paddle in the following situations, provided the request reaches us within a reasonable time after purchase:</p>
+
+    <ul>
+      <li><strong>Technical defect we cannot fix</strong> &mdash; the Software fails to run on a supported system configuration and we are unable to provide a working fix within a reasonable period.</li>
+      <li><strong>Duplicate purchase</strong> &mdash; the same license was purchased twice in error.</li>
+      <li><strong>Material change to the Terms you do not accept</strong> &mdash; see <a href="terms.html#13">Terms &sect;&nbsp;13 (Modifications)</a>; in this case a pro-rata refund applies for periods after the change would have taken effect.</li>
+    </ul>
+
+    <p>We do not refund based on dissatisfaction once the Software has been used beyond the statutory withdrawal period, since the full feature set is available during the free 7-day trial before any payment.</p>
+
+    <h2>5. What We Do Not Refund</h2>
+
+    <ul>
+      <li><strong>API charges</strong> billed by third-party providers (OpenAI, Anthropic, Google, etc.) to your own account &mdash; these are outside our control; see <a href="terms.html#4">Terms &sect;&nbsp;4 (Bring-Your-Own-API-Key)</a>.</li>
+      <li><strong>Costs resulting from user misconfiguration</strong> &mdash; action chains, loops, or prompt design that trigger excessive API calls on your provider account; see <a href="terms.html#5">Terms &sect;&nbsp;5 (User Responsibility)</a>.</li>
+      <li><strong>Partial-year refunds</strong> for a paid term after you have used the Software beyond the 14-day withdrawal window, unless one of the goodwill cases in Section&nbsp;4 applies.</li>
+    </ul>
+
+    <h2>6. How to Request a Refund</h2>
+
+    <ol>
+      <li><strong>Locate your invoice.</strong> Your Paddle order confirmation email contains a link to the Paddle Buyer Portal and the Paddle support contact.</li>
+      <li><strong>Open a refund request with Paddle</strong> via the Buyer Portal or by replying to the order confirmation email. Include your Paddle order ID and a brief reason.</li>
+      <li><strong>If the case falls under Section&nbsp;4 (goodwill)</strong> and Paddle asks you to coordinate with the software publisher, email <a href="mailto:support@pastesuiteai.com?subject=Refund%20request">support@pastesuiteai.com</a> with your Paddle order ID. We will confirm eligibility with Paddle and the refund will then be issued by Paddle to your original payment method.</li>
+    </ol>
+
+    <h2>7. Timeframe and Payout</h2>
+
+    <p>Once Paddle approves a refund, it is issued to your original payment method. Processing time depends on your bank or card network and is typically 5&ndash;10 business days. Paddle will email you a credit note.</p>
+
+    <h2>8. Contact</h2>
+
+    <p>For refund-related questions that are not about your payment (e.g.&nbsp;to discuss a goodwill case under Section&nbsp;4): <a href="mailto:support@pastesuiteai.com?subject=Refund%20request">support@pastesuiteai.com</a>. For the seller&rsquo;s address and formal notices, see <a href="impressum.html">Legal Notice</a>. Full contract terms: <a href="terms.html">Terms of Service</a>.</p>
+
+    <p class="note">This page summarises the refund-related provisions already set out in our Terms of Service. In case of any inconsistency, the Terms of Service prevail.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text" data-trademark></p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="legal.html">Licensing</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="impressum.html">Legal Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script src="footer.js"></script>
+
+</body>
+</html>
