@@ -59,7 +59,7 @@
             <td><strong>Licensed</strong></td>
             <td>As long as license is valid</td>
             <td>Unlimited</td>
-            <td>Offline verification. Key stored in OS keychain.</td>
+            <td>Key stored in OS keychain.</td>
           </tr>
         </tbody>
       </table>
@@ -155,7 +155,7 @@
 
       <p>Technical details about license verification:</p>
       <ul>
-        <li><strong>Offline verification.</strong> Keys are cryptographically signed and verified entirely locally. No internet connection is needed to activate or use a license.</li>
+        <li><strong>Online activation.</strong> Entering a key requires an internet connection so the key can be activated for your device. After activation, the signed key is cached locally and does not require a constant connection for day-to-day use.</li>
         <li><strong>Secure storage.</strong> The key is stored in your OS secure credential store. It is never written to disk as plain text.</li>
         <li><strong>Periodic re-verification.</strong> The app periodically re-verifies your license. If the key is missing or invalid, the app falls back to the free tier automatically.</li>
       </ul>

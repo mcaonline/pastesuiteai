@@ -227,7 +227,7 @@
       <li><strong>Usage data</strong> &mdash; Timestamps of AI actions for license enforcement. No content is recorded.</li>
       <li><strong>Application log</strong> &mdash; Diagnostic log for troubleshooting. Contains no user content or AI responses.</li>
       <li><strong>API keys</strong> &mdash; Stored in your operating system's secure credential store. Never in plaintext files.</li>
-      <li><strong>License key</strong> &mdash; Stored in your operating system's secure credential store. Verified offline via cryptographic signature.</li>
+      <li><strong>License key</strong> &mdash; Stored in your operating system's secure credential store. Signature verified locally; activation requires a one-time online check per device (see &ldquo;License Activation &amp; Device Binding&rdquo; below).</li>
     </ul>
 
     <h2>Data Sent to Third Parties</h2>
@@ -314,6 +314,27 @@
       <li><strong>Your role:</strong> When sharing is enabled, Keynaptic acts as controller for the phrase list submitted by you; legal basis is your consent under Art.&nbsp;6(1)(a) GDPR. You may withdraw consent at any time by turning the toggle off &mdash; this stops any further submission with immediate effect.</li>
       <li><strong>Retention:</strong> Submitted phrase lists are retained only as long as necessary to curate the built-in hallucination filter that ships with future builds.</li>
     </ul>
+
+    <h2>License Activation &amp; Device Binding</h2>
+
+    <p>When you enter a Pro license key in the application, PasteSuiteAI performs a one-time online activation with our licence service (hosted on Cloudflare Workers, EU region) in order to bind the key to your device and prevent key sharing.</p>
+
+    <p><strong>Data transmitted at activation:</strong></p>
+    <ul>
+      <li><strong>License key</strong> &mdash; for verification against our licence database.</li>
+      <li><strong>Device identifier</strong> &mdash; a stable hash derived from your system&rsquo;s hardware UUID (SMBIOS UUID on Windows). This hash is used solely to identify the device in the licence record; the raw UUID is not transmitted.</li>
+      <li><strong>Activation timestamp and application version.</strong></li>
+    </ul>
+
+    <p><strong>Why we do this:</strong> A Pro licence permits activation on up to <strong>6 devices per key</strong>. Binding the key to specific devices allows us to enforce this limit, detect large-scale key-sharing, and ensure a fair use of the Pro subscription. Re-installing PasteSuiteAI on a device you have already activated is idempotent and does not consume an additional slot.</p>
+
+    <p><strong>Legal basis:</strong> Art.&nbsp;6(1)(b) GDPR (performance of the licence contract) and Art.&nbsp;6(1)(f) GDPR (legitimate interest in preventing licence abuse and protecting the commercial viability of the Pro tier).</p>
+
+    <p><strong>Retention:</strong> The device identifier is retained for the duration of your licence. After your licence expires or is revoked, device records are deleted within 90 days, except where retention is required by German tax and commercial law in connection with the underlying subscription record (see the Paddle section below).</p>
+
+    <p><strong>No heartbeat, no ongoing tracking:</strong> After successful activation, the signed licence key is cached locally on your device. Day-to-day use of PasteSuiteAI does not require further contact with our licence service. There is no periodic &ldquo;phone-home&rdquo; of the device identifier.</p>
+
+    <p><strong>Your rights:</strong> You can view all devices activated under your licence and deactivate devices you no longer use via <strong>account.pastesuiteai.com</strong> (access via magic-link to the email address on record with Paddle), or by contacting <a href="mailto:support@pastesuiteai.com" style="color: var(--color-accent);">support@pastesuiteai.com</a>. Deactivation immediately frees the device slot.</p>
 
     <h2>License Purchase &amp; Subscription Management (Paddle)</h2>
 

@@ -281,11 +281,18 @@
     .price-card.featured .price-label { color: var(--color-accent); }
     .price-amount {
       font-size: 34px; font-weight: 700;
-      letter-spacing: -0.02em; margin-bottom: 6px;
+      letter-spacing: -0.02em; margin-bottom: 4px;
+      line-height: 1.15;
     }
-    .price-amount small {
-      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
-      letter-spacing: 0;
+    .price-meta {
+      font-size: 13px; font-weight: 400;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2px; line-height: 1.4;
+    }
+    .price-note {
+      font-size: 12px; color: var(--color-text-tertiary);
+      opacity: 0.75;
+      margin-bottom: 16px; line-height: 1.4;
     }
     .price-desc {
       font-size: 14px; color: var(--color-text-secondary);
@@ -359,6 +366,13 @@
       margin-bottom: 28px;
     }
     .download-cta .hero-meta { margin-top: 16px; }
+    .download-cta .hero-meta a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .download-cta .hero-meta a:hover { color: var(--color-accent-hover); text-decoration: underline; }
 
     /* ========== Footer ========== */
     .footer {
@@ -419,11 +433,8 @@
         Rewrite, translate, summarize, or transcribe with a single hotkey &mdash; in any application, without ever leaving your workflow. Your API keys stay in your OS credential store.
       </p>
       <div class="hero-actions">
-        <a href="#download" class="btn btn-primary btn-large">
-          Download for Windows
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M2.5 13.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <a href="mailto:support@pastesuiteai.com?subject=PasteSuiteAI%20Waitlist&amp;body=Hi%20PasteSuiteAI%20team%2C%0A%0AI%27m%20interested%20in%20PasteSuiteAI.%20Please%20add%20me%20to%20the%20waitlist%20and%20send%20me%20an%20email%20as%20soon%20as%20the%20product%20is%20available.%0A%0AThanks%21" class="btn btn-primary btn-large">
+          Join the Waiting List
         </a>
         <a href="docs/index.html" class="btn btn-secondary btn-large">Read the docs</a>
       </div>
@@ -594,7 +605,8 @@
       <div class="pricing-grid">
         <div class="price-card">
           <div class="price-label">Trial</div>
-          <div class="price-amount">Free <small>&middot; 7 days</small></div>
+          <div class="price-amount">Free</div>
+          <div class="price-meta">7 days</div>
           <p class="price-desc">Unlimited AI actions, every feature unlocked. No credit card.</p>
           <ul class="price-features">
             <li>All AI transforms</li>
@@ -607,7 +619,8 @@
 
         <div class="price-card">
           <div class="price-label">Free</div>
-          <div class="price-amount">&euro;0 <small>&middot; forever</small></div>
+          <div class="price-amount">&euro;0</div>
+          <div class="price-meta">forever</div>
           <p class="price-desc">For light use after your trial ends. Non-AI features stay fully unlocked.</p>
           <ul class="price-features">
             <li>15 AI actions per 24h</li>
@@ -620,11 +633,12 @@
 
         <div class="price-card featured">
           <div class="price-label">Pro</div>
-          <div class="price-amount">&euro;29 <small>&middot; per year &middot; auto-renews &middot; cancel anytime &middot; incl. VAT where applicable</small></div>
-          <p class="price-desc">Unlimited AI actions, annual subscription, offline activation. Cancel anytime via the Paddle Buyer Portal &mdash; your paid year stays active until its end.</p>
+          <div class="price-amount">&euro;29</div>
+          <div class="price-meta">per year &middot; auto-renews &middot; cancel anytime</div>
+          <div class="price-note">incl. VAT (DE: inkl. 19&#37; USt.)</div>
+          <p class="price-desc">Unlimited AI actions, annual subscription. Cancel anytime via the Paddle Buyer Portal &mdash; your paid year stays active until its end.</p>
           <ul class="price-features">
             <li>Unlimited AI actions</li>
-            <li>Offline license verification</li>
             <li>Priority email support</li>
           </ul>
           <a href="docs/licensing.html" class="btn btn-primary">Buy Pro</a>
@@ -652,7 +666,7 @@
 
         <details class="faq-item">
           <summary>Can I use it fully offline?</summary>
-          <p>Yes. Configure a local model via Ollama or any OpenAI-compatible endpoint, and use a local STT provider. Nothing leaves your machine. License verification is also offline &mdash; no phone-home on activation.</p>
+          <p>Yes. Configure a local model via Ollama or any OpenAI-compatible endpoint, and use a local STT provider. Nothing leaves your machine for AI requests.</p>
         </details>
 
         <details class="faq-item">
