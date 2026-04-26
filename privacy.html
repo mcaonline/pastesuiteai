@@ -315,26 +315,27 @@
       <li><strong>Retention:</strong> Submitted phrase lists are retained only as long as necessary to curate the built-in hallucination filter that ships with future builds.</li>
     </ul>
 
-    <h2>License Activation &amp; Device Binding</h2>
+    <h2 id="device-activation">License Activation &amp; Device Binding</h2>
 
-    <p>When you enter a Pro license key in the application, PasteSuiteAI performs a one-time online activation with our licence service (hosted on Cloudflare Workers, EU region) in order to bind the key to your device and prevent key sharing.</p>
+    <p>When you enter a Pro license key in the application, PasteSuiteAI performs a one-time online activation with our licence service (hosted on Cloudflare Workers, EU region) in order to bind the key to your computer. This step is required so that we can enforce the per-licence device cap; without it, a single key could be reused without limit.</p>
 
     <p><strong>Data transmitted at activation:</strong></p>
     <ul>
       <li><strong>License key</strong> &mdash; for verification against our licence database.</li>
-      <li><strong>Device identifier</strong> &mdash; a stable hash derived from your system&rsquo;s hardware UUID (SMBIOS UUID on Windows). This hash is used solely to identify the device in the licence record; the raw UUID is not transmitted.</li>
+      <li><strong>Device identifier</strong> &mdash; a pseudonymous SHA-256 hash of your system&rsquo;s hardware UUID (the SMBIOS UUID on Windows, a stable firmware-level identifier). The raw UUID is transmitted to our licence service over TLS solely for the purpose of computing this hash, and is discarded immediately afterwards; only the hash is persisted in our database. We do not transform or salt the identifier on your computer before transmission, because any client-side transformation would not survive an operating-system reinstallation and would force you to re-purchase a device slot every time you reinstall Windows.</li>
+      <li><strong>Optional hostname hint</strong> &mdash; the user-visible computer name (e.g.&nbsp;&ldquo;DESKTOP-ABC123&rdquo;) sent so that our support team can identify the right device when you contact us about an activation issue. Sent in plain text. We never transmit your username, your account name, or any file path.</li>
       <li><strong>Activation timestamp and application version.</strong></li>
     </ul>
 
-    <p><strong>Why we do this:</strong> A Pro licence permits activation on up to <strong>6 devices per key</strong>. Binding the key to specific devices allows us to enforce this limit, detect large-scale key-sharing, and ensure a fair use of the Pro subscription. Re-installing PasteSuiteAI on a device you have already activated is idempotent and does not consume an additional slot.</p>
+    <p><strong>No periodic phone-home:</strong> Once activation succeeds, the application does <em>not</em> send any further pings, heartbeats, or check-ins to our licence service. It runs entirely offline against the activation token issued at the initial activation, until the licence expires. <strong>No content of your work, no AI prompts, no transcripts, no clipboard data, and no usage statistics</strong> are ever sent to us.</p>
 
-    <p><strong>Legal basis:</strong> Art.&nbsp;6(1)(b) GDPR (performance of the licence contract) and Art.&nbsp;6(1)(f) GDPR (legitimate interest in preventing licence abuse and protecting the commercial viability of the Pro tier).</p>
+    <p><strong>Why we do this:</strong> A Pro licence permits activation on up to <strong>6 devices per key</strong> (Personal and Team licences); Site licences cover a larger pool that scales with the number of seats purchased. Binding each key to specific devices allows us to enforce these limits and to detect large-scale key-sharing. Re-installing PasteSuiteAI on a device you have already activated is idempotent and does not consume an additional device record.</p>
 
-    <p><strong>Retention:</strong> The device identifier is retained for the duration of your licence. After your licence expires or is revoked, device records are deleted within 90 days, except where retention is required by German tax and commercial law in connection with the underlying subscription record (see the Paddle section below).</p>
+    <p><strong>Legal basis:</strong> The primary basis for the device-binding processing is Art.&nbsp;6(1)(f) GDPR &mdash; our legitimate interest in protecting the commercial viability of the Pro tier and preventing licence abuse. Art.&nbsp;6(1)(b) GDPR (performance of the licence contract) additionally applies to the part of the processing that delivers the paid licence to you.</p>
 
-    <p><strong>No heartbeat, no ongoing tracking:</strong> After successful activation, the signed licence key is cached locally on your device. Day-to-day use of PasteSuiteAI does not require further contact with our licence service. There is no periodic &ldquo;phone-home&rdquo; of the device identifier.</p>
+    <p><strong>Retention:</strong> The device record is freed when the licence expires, when you deactivate the device from the app, or when our support team releases the slot at your request. The historical record of that activation (the device identifier, the timestamps, the hostname hint) is retained alongside the underlying purchase record for the duration of the legal record-keeping period required by German tax and commercial law (&sect;&nbsp;147 AO, &sect;&nbsp;257 HGB &mdash; up to 10 years), so that we can answer support and audit questions about historic activations on your account. You may at any time request earlier deletion of an inactive activation record under your Art.&nbsp;17 GDPR right to erasure by contacting <a href="mailto:support@pastesuiteai.com" style="color: var(--color-accent);">support@pastesuiteai.com</a>; we will honour the request unless we are legally obliged to retain the record under the rules cited above.</p>
 
-    <p><strong>Your rights:</strong> You can view all devices activated under your licence and deactivate devices you no longer use via <strong>account.pastesuiteai.com</strong> (access via magic-link to the email address on record with Paddle), or by contacting <a href="mailto:support@pastesuiteai.com" style="color: var(--color-accent);">support@pastesuiteai.com</a>. Deactivation immediately frees the device slot.</p>
+    <p><strong>Your rights:</strong> You can deactivate the device you are currently using directly from PasteSuiteAI at any time via Settings &rarr; License &rarr; &ldquo;Deactivate this device&rdquo;. Deactivation takes effect immediately and frees the device record. If you no longer have access to a device you previously activated (lost, stolen, or decommissioned hardware), please contact <a href="mailto:support@pastesuiteai.com" style="color: var(--color-accent);">support@pastesuiteai.com</a> and we will release the affected slot for you.</p>
 
     <h2>License Purchase &amp; Subscription Management (Paddle)</h2>
 
